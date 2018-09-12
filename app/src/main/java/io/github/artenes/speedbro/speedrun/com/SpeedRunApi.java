@@ -1,9 +1,13 @@
 package io.github.artenes.speedbro.speedrun.com;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -29,9 +33,12 @@ public class SpeedRunApi {
 
     }
 
-    public Call<PagedResponse<Run>> latestRuns() {
+    public List<LatestRun> getLatestRuns() throws IOException {
 
-        return endpoints.latestRuns();
+        Document document = Jsoup.connect(SpeedRunApiEndpoints.LATEST_RUNS).get();
+        LatestRunsHtmlParser parser = new LatestRunsHtmlParser();
+
+        return parser.parseLatestRuns(document);
 
     }
 

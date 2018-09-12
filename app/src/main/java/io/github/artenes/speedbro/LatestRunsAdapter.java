@@ -8,18 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.artenes.speedbro.speedrun.com.Run;
+import io.github.artenes.speedbro.speedrun.com.LatestRun;
 
 public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.LatestRunViewHolder>{
 
-    private List<Run> mRuns = new ArrayList<>(0);
+    private List<LatestRun> mRuns = new ArrayList<>(0);
 
-    public void setData(List<Run> runs) {
+    public void setData(List<LatestRun> runs) {
         if (runs != null) {
             mRuns = runs;
             notifyDataSetChanged();
@@ -60,12 +58,12 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
             time = itemView.findViewById(R.id.time);
         }
 
-        public void bind(Run run) {
+        public void bind(LatestRun run) {
             //Glide.with(itemView.getContext()).load(run.getGame().getData().getAssets().getCoverLarge()).into(cover);
-            gameTitle.setText(run.getGame().getData().getNames().getInternational());
-            category.setText(run.getCategory().getData().getName());
-            runner.setText(run.getPlayers().getData().get(0).getNames().getInternational());
-            time.setText(run.getTimes().getPrimary());
+            gameTitle.setText(run.getGameTitle());
+            category.setText(run.getCategory());
+            runner.setText(run.getRunner());
+            time.setText(run.getTime());
         }
 
     }

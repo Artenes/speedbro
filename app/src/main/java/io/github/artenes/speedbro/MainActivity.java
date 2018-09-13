@@ -1,11 +1,10 @@
 package io.github.artenes.speedbro;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -14,12 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.artenes.speedbro.speedrun.com.LatestRun;
-import io.github.artenes.speedbro.speedrun.com.PagedResponse;
-import io.github.artenes.speedbro.speedrun.com.Run;
 import io.github.artenes.speedbro.speedrun.com.SpeedRunApi;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar = findViewById(R.id.progressBar);
 
         mAdapter = new LatestRunsAdapter();
-        mLayoutManager = new LinearLayoutManager(this);
-
+        mLayoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.latest_runs_grid_columns));
 
         mLatestRuns.setLayoutManager(mLayoutManager);
         mLatestRuns.setAdapter(mAdapter);

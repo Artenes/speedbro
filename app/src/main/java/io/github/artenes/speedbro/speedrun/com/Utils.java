@@ -33,7 +33,7 @@ public class Utils {
      * @return the stripped string
      */
     public static String withoutStartingSlash(String value) {
-        return value.substring(1, value.length() - 1);
+        return value.substring(1, value.length());
     }
 
     /**
@@ -44,6 +44,18 @@ public class Utils {
      */
     public static String asAbsolutePath(String relativeUri) {
         return SpeedRunApiEndpoints.BASE_URL + withoutStartingSlash(relativeUri);
+    }
+
+    /**
+     * Get the avatar of a runner
+     *
+     * @param runner the runner username
+     * @return the absolute path to its avatar. This just assumes the runner
+     * has an avatar in this uri, this does not guarantee if the runner
+     * has really an avatar or not
+     */
+    public static String runnerAvatar(String runner) {
+        return SpeedRunApiEndpoints.BASE_URL + "themes/user/" + runner + "/image.png";
     }
 
 }

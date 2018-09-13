@@ -25,6 +25,19 @@ public class LatestRun {
     private String countryIcon;
     private String runner;
     private String runnerDisplayName;
+    private String runnerIcon;
+
+    public boolean hasRunnerId() {
+        return runnerId != null && !runnerId.isEmpty();
+    }
+
+    public boolean hasRunner() {
+        return runner != null && !runner.isEmpty();
+    }
+
+    public boolean hasPositionIcon() {
+        return positionIcon != null && !positionIcon.isEmpty();
+    }
 
     public String getId() {
         return id;
@@ -78,6 +91,10 @@ public class LatestRun {
         return runnerDisplayName;
     }
 
+    public String getRunnerIcon() {
+        return runnerIcon;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -128,6 +145,10 @@ public class LatestRun {
 
     public void setRunnerDisplayName(String runnerDisplayName) {
         this.runnerDisplayName = runnerDisplayName;
+    }
+
+    public void setRunnerIcon(String runnerIcon) {
+        this.runnerIcon = runnerIcon;
     }
 
 }

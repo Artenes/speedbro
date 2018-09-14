@@ -15,15 +15,21 @@ import java.util.List;
 
 import io.github.artenes.speedbro.speedrun.com.LatestRun;
 
-public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.LatestRunViewHolder>{
+/**
+ * Displays a list of latest runs
+ */
+public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.LatestRunViewHolder> {
 
     private List<LatestRun> mRuns = new ArrayList<>(0);
 
-    public void setData(List<LatestRun> runs) {
-        if (runs != null) {
-            mRuns = runs;
-            notifyDataSetChanged();
-        }
+    /**
+     * Sets the list of latest runs
+     *
+     * @param runs the list of latest runs
+     */
+    public void setData(@NonNull List<LatestRun> runs) {
+        mRuns = runs;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,7 +41,8 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
 
     @Override
     public void onBindViewHolder(@NonNull LatestRunViewHolder holder, int position) {
-        holder.bind(mRuns.get(position));
+        LatestRun latestRun = mRuns.get(position);
+        holder.bind(latestRun);
     }
 
     @Override
@@ -43,29 +50,32 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
         return mRuns.size();
     }
 
+    /**
+     * View holder for a latest run
+     */
     public class LatestRunViewHolder extends RecyclerView.ViewHolder {
 
-        private final ImageView cover;
         private final ImageView runnerIcon;
+        private final TextView runner;
         private final ImageView countryIcon;
-        private final ImageView placementIcon;
+        private final ImageView gameCover;
         private final TextView gameTitle;
         private final TextView category;
-        private final TextView runner;
+        private final ImageView positionIcon;
+        private final TextView position;
         private final TextView time;
-        private final TextView placement;
 
         public LatestRunViewHolder(View itemView) {
             super(itemView);
-            cover = itemView.findViewById(R.id.cover);
+            runnerIcon = itemView.findViewById(R.id.runner_icon);
+            runner = itemView.findViewById(R.id.runner);
+            countryIcon = itemView.findViewById(R.id.country_icon);
+            gameCover = itemView.findViewById(R.id.cover);
             gameTitle = itemView.findViewById(R.id.game_title);
             category = itemView.findViewById(R.id.category);
-            runner = itemView.findViewById(R.id.runner);
+            positionIcon = itemView.findViewById(R.id.position_icon);
+            position = itemView.findViewById(R.id.position);
             time = itemView.findViewById(R.id.time);
-            placement = itemView.findViewById(R.id.placement);
-            runnerIcon = itemView.findViewById(R.id.runner_icon);
-            countryIcon = itemView.findViewById(R.id.country_icon);
-            placementIcon = itemView.findViewById(R.id.placement_icon);
         }
 
         public void bind(LatestRun run) {
@@ -73,25 +83,32 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
             category.setText(run.getCategory());
             runner.setText(run.getRunner());
             time.setText(run.getTime());
-            placement.setText(run.getPosition());
+            position.setText(run.getPosition());
 
-            Picasso.get().load(run.getGameCover()).into(cover);
+            Picasso picasso = Picasso.get();
+
+            //load the game cover
+            picasso.load(run.getGameCover())
+                    .placeholder(R.drawable.placeholder)
+                    .into(gameCover);
 
             //if there is a runner available (it is not a guest), load its icon and country
             if (run.hasRunnerId()) {
-                Picasso.get().load(run.getRunnerIcon()).error(R.drawable.default_runner).into(runnerIcon);
-                Picasso.get().load(run.getCountryIcon()).into(countryIcon);
+                picasso.load(run.getCountryIcon()).into(countryIcon);
+                picasso.load(run.getRunnerIcon())
+                        .placeholder(R.drawable.default_runner)
+                        .into(runnerIcon);
             } else {
                 //otherwise just load the placeholder icon
-                Picasso.get().load(R.drawable.default_runner).into(runnerIcon);
+                picasso.load(R.drawable.default_runner).into(runnerIcon);
             }
 
-            //if there is the icon for the position/placement, just load it
+            //if there is the icon for the position, just load it
             if (run.hasPositionIcon()) {
-                Picasso.get().load(run.getPositionIcon()).into(placementIcon);
+                picasso.load(run.getPositionIcon()).into(positionIcon);
             } else {
                 //otherwise be gone with it
-                placementIcon.setVisibility(View.GONE);
+                positionIcon.setVisibility(View.GONE);
             }
         }
 

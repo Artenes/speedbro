@@ -65,17 +65,21 @@ public class LatestRunsHtmlParser {
                     run.setGameCover(gameCover);
                     run.setCategory(runRow.select("td:nth-child(1) a").text());
                     run.setPosition(runRow.select("td:nth-child(2)").text());
-                    run.setPositionIcon(SpeedRunApiEndpoints.BASE_URL + runRow.select("td:nth-child(2) img").attr("src"));
+
                     run.setRunnerDisplayName(runRow.select("td:nth-child(3) a span.username").html());
                     run.setRunnerIcon(Utils.runnerAvatar(run.getRunnerId()));
                     run.setCountry(runRow.select("td:nth-child(3) a img.flagicon").attr("title").trim());
-                    run.setCountryIcon(SpeedRunApiEndpoints.BASE_URL + runRow.select("td:nth-child(3) a img.flagicon").attr("src"));
+                    run.setCountryIcon(Utils.asAbsolutePath(runRow.select("td:nth-child(3) a img.flagicon").attr("src")));
                     run.setTime(runRow.select("td:nth-child(4)").text());
 
                     //if the runner is just a guest, it does not have a link to its profile
                     run.setRunner(runRow.select("td:nth-child(3) a span.username").text());
                     if (!run.hasRunner()) {
                         run.setRunner(runRow.select("td:nth-child(3)").text());
+                    }
+
+                    if (!runRow.select("td:nth-child(2) img").attr("src").isEmpty()) {
+                        run.setPositionIcon(Utils.asAbsolutePath(runRow.select("td:nth-child(2) img").attr("src")));
                     }
 
                     latestRuns.add(run);

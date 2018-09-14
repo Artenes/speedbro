@@ -7,15 +7,17 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv_contents"
+        cardPreventCornerOverlap="true"
+        cardUseCompatPadding="true"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_margin="10dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="4dp"
-        cardUseCompatPadding="true"
-        cardPreventCornerOverlap="true"
+        android:clickable="true"
         android:focusable="true"
-        android:clickable="true">
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/colorPrimaryLight"
+        app:cardCornerRadius="4dp"
+        app:contentPadding="2dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -78,7 +80,7 @@
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textSize="@dimen/caption"
-                app:layout_constraintBottom_toTopOf="@+id/placement"
+                app:layout_constraintBottom_toTopOf="@+id/position"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/game_title"
@@ -113,11 +115,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/placement"
+                app:layout_constraintTop_toBottomOf="@+id/position"
                 tools:text="1h 35m 30s" />
 
             <TextView
-                android:id="@+id/placement"
+                android:id="@+id/position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -128,7 +130,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/time"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/placement_icon"
+                app:layout_constraintStart_toEndOf="@+id/position_icon"
                 app:layout_constraintTop_toBottomOf="@+id/category"
                 tools:text="77th" />
 
@@ -149,7 +151,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/flag_icon"
                 android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintStart_toEndOf="@+id/runner"
@@ -157,18 +158,18 @@
                 app:srcCompat="@android:drawable/ic_lock_lock" />
 
             <ImageView
-                android:id="@+id/placement_icon"
+                android:id="@+id/position_icon"
                 android:layout_width="@dimen/position_icon"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/placement"
-                app:layout_constraintEnd_toStartOf="@+id/placement"
+                app:layout_constraintBottom_toBottomOf="@+id/position"
+                app:layout_constraintEnd_toStartOf="@+id/position"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toEndOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="@+id/placement"
+                app:layout_constraintTop_toTopOf="@+id/position"
                 app:srcCompat="@android:drawable/presence_away" />
 
         </android.support.constraint.ConstraintLayout>

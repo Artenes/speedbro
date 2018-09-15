@@ -1,4 +1,4 @@
-package io.github.artenes.speedbro;
+package io.github.artenes.speedbro.utils;
 
 /**
  * Common dependencies used across the application

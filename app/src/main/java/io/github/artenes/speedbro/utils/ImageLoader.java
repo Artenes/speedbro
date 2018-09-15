@@ -1,4 +1,4 @@
-package io.github.artenes.speedbro;
+package io.github.artenes.speedbro.utils;
 
 import android.support.annotation.NonNull;
 import android.view.View;

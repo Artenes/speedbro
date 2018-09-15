@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import io.github.artenes.speedbro.utils.ImageLoader;
+
 @RunWith(MockitoJUnitRunner.class)
 public class ImageLoaderTest {
 

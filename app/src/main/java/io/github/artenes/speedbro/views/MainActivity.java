@@ -1,4 +1,4 @@
-package io.github.artenes.speedbro;
+package io.github.artenes.speedbro.views;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import io.github.artenes.speedbro.utils.Dependencies;
+import io.github.artenes.speedbro.R;
 import io.github.artenes.speedbro.models.LatestRunsState;
 import io.github.artenes.speedbro.models.LatestRunsViewModel;
 

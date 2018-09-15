@@ -39,6 +39,10 @@ public class LatestRun {
         return positionIcon != null && !positionIcon.isEmpty();
     }
 
+    public boolean hasCountryIcon() {
+        return countryIcon != null && !countryIcon.isEmpty();
+    }
+
     public String getId() {
         return id;
     }

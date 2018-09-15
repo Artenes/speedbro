@@ -68,13 +68,14 @@ public class LatestRunsHtmlParserTest {
     }
 
     @Test
-    public void parseARunWithRunnerThatHasNoUser() {
+    public void parseARunWithRunnerThatHasNoUserOrCountry() {
         Document document = Jsoup.parse("<table><tr class=\"height-minimal\"><td class=\"top center gamecover\" rowspan=\"3\"><a href=\"/sk\"><img class=\"cover-tall-64 border\" src=\"/themes/sk/cover-128.png\" alt=\"\"></a></td><td colspan=\"100%\" class=\"gamename\"><a href=\"/sk\">Spiral Knights</a></td></tr><tr class=\"height-minimal linked\" data-target=\"/sk/run/mk9gw85z\" title=\"Assembly was pretty messy with the Quicksilvers in the last arena, along with one major mistake in Workshop. Twins pulling through to keep the run alive.\"><td class=\"center-sm\"><a href=\"/sk/Ironclaw_Munitions_Factory#Solo\">Ironclaw Munitions Factory: Solo - Elite</a><span class=\"hidden-sm hidden-md hidden-lg\"> &nbsp; 8<small>m </small>09<small>s</small></span></td><td class=\"nobr center hidden-xs\"><img class=\"trophy\" src=\"/themes/sk/1st.png\" alt=\"\">1st</td><td class=\"center hidden-xs\">Tenka</td><td class=\"center hidden-xs\">8<small>m </small>09<small>s</small></td></tr><tr><td class='filler'></td></tr></table>");
 
         List<LatestRun> latestRuns = parser.parseLatestRuns(document);
         LatestRun latestRun = latestRuns.get(0);
 
         assertFalse(latestRun.hasRunnerId());
+        assertTrue(latestRun.getRunnerIcon().isEmpty());
         assertTrue(latestRun.getCountry().isEmpty());
         assertTrue(latestRun.getCountryIcon().isEmpty());
     }

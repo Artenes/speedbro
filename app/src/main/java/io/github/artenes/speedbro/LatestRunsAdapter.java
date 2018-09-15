@@ -92,22 +92,22 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
                     .placeholder(R.drawable.placeholder)
                     .into(gameCover);
 
-            //if there is a runner available (it is not a guest), load its icon and country
-            if (run.hasRunnerId()) {
+            //load the runner icon
+            picasso.load(run.getRunnerIcon())
+                    .placeholder(R.drawable.default_runner)
+                    .into(runnerIcon);
+
+            //load the country icon if available
+            if (run.hasCountryIcon()) {
                 picasso.load(run.getCountryIcon()).into(countryIcon);
-                picasso.load(run.getRunnerIcon())
-                        .placeholder(R.drawable.default_runner)
-                        .into(runnerIcon);
             } else {
-                //otherwise just load the placeholder icon
-                picasso.load(R.drawable.default_runner).into(runnerIcon);
+                countryIcon.setVisibility(View.GONE);
             }
 
-            //if there is the icon for the position, just load it
+            //load the position icon
             if (run.hasPositionIcon()) {
                 picasso.load(run.getPositionIcon()).into(positionIcon);
             } else {
-                //otherwise be gone with it
                 positionIcon.setVisibility(View.GONE);
             }
         }

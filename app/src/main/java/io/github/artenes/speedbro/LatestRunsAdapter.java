@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.artenes.speedbro.speedrun.com.LatestRun;
+import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
 
 /**
  * Displays a list of latest runs
@@ -81,7 +81,7 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
         public void bind(LatestRun run) {
             gameTitle.setText(run.getGameTitle());
             category.setText(run.getCategory());
-            runner.setText(run.getRunner());
+            runner.setText(run.getRunnerName());
             time.setText(run.getTime());
             position.setText(run.getPosition());
 

@@ -1,4 +1,4 @@
-package io.github.artenes.speedbro.speedrun.com;
+package io.github.artenes.speedbro.speedrun.com.models;
 
 /**
  * A run that was recently submitted to the website
@@ -23,7 +23,7 @@ public class LatestRun {
     private String positionIcon;
     private String country;
     private String countryIcon;
-    private String runner;
+    private String runnerName;
     private String runnerDisplayName;
     private String runnerIcon;
 
@@ -31,8 +31,8 @@ public class LatestRun {
         return runnerId != null && !runnerId.isEmpty();
     }
 
-    public boolean hasRunner() {
-        return runner != null && !runner.isEmpty();
+    public boolean hasRunnerName() {
+        return runnerName != null && !runnerName.isEmpty();
     }
 
     public boolean hasPositionIcon() {
@@ -83,8 +83,8 @@ public class LatestRun {
         return countryIcon;
     }
 
-    public String getRunner() {
-        return runner;
+    public String getRunnerName() {
+        return runnerName;
     }
 
     public String getRunnerDisplayName() {
@@ -139,8 +139,8 @@ public class LatestRun {
         this.countryIcon = countryIcon;
     }
 
-    public void setRunner(String runner) {
-        this.runner = runner;
+    public void setRunnerName(String runnerName) {
+        this.runnerName = runnerName;
     }
 
     public void setRunnerDisplayName(String runnerDisplayName) {

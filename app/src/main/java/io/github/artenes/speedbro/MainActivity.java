@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar = findViewById(R.id.progressBar);
         mErrorMessage = findViewById(R.id.error_message);
 
-        mAdapter = new LatestRunsAdapter();
+        mAdapter = new LatestRunsAdapter(Dependencies.getImageLoader());
         mLayoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.latest_runs_grid_columns));
 
         mLatestRuns.setLayoutManager(mLayoutManager);

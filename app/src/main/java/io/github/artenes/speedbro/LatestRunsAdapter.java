@@ -20,7 +20,12 @@ import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
  */
 public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.LatestRunViewHolder> {
 
+    private final ImageLoader mImageLoader;
     private List<LatestRun> mRuns = new ArrayList<>(0);
+
+    public LatestRunsAdapter(ImageLoader imageLoader) {
+        mImageLoader = imageLoader;
+    }
 
     /**
      * Sets the list of latest runs
@@ -85,31 +90,17 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
             time.setText(run.getTime());
             position.setText(run.getPosition());
 
-            Picasso picasso = Picasso.get();
-
             //load the game cover
-            picasso.load(run.getGameCover())
-                    .placeholder(R.drawable.placeholder)
-                    .into(gameCover);
+            mImageLoader.load(run.getGameCover(), R.drawable.placeholder, gameCover);
 
             //load the runner icon
-            picasso.load(run.getRunnerIcon())
-                    .placeholder(R.drawable.default_runner)
-                    .into(runnerIcon);
+            mImageLoader.load(run.getRunnerIcon(), R.drawable.default_runner, runnerIcon);
 
             //load the country icon if available
-            if (run.hasCountryIcon()) {
-                picasso.load(run.getCountryIcon()).into(countryIcon);
-            } else {
-                countryIcon.setVisibility(View.GONE);
-            }
+            mImageLoader.load(run.getCountryIcon(), countryIcon);
 
-            //load the position icon
-            if (run.hasPositionIcon()) {
-                picasso.load(run.getPositionIcon()).into(positionIcon);
-            } else {
-                positionIcon.setVisibility(View.GONE);
-            }
+            //load the position icon if available
+            mImageLoader.load(run.getPositionIcon(), positionIcon);
         }
 
     }

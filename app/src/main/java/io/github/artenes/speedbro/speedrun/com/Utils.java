@@ -42,4 +42,39 @@ public class Utils {
         return value.substring(1, value.length());
     }
 
+    /**
+     * Get the first word of a sentence
+     *
+     * @param sentence the sentence
+     * @return the first word if one is available
+     */
+    public static String getFirstWordOfSentence(String sentence) {
+        if (sentence.isEmpty()) {
+            return sentence;
+        }
+        if (!sentence.contains(" ")) {
+            return sentence;
+        }
+        String[] words = sentence.split(" ");
+        if (words.length == 0) {
+            return sentence;
+        }
+        return words[0];
+    }
+
+    /**
+     * Parse the time in the API format (PT34H56M12S - PT=primary time, H=hour, M=minute, S=seconds)
+     * @param time the time to parse
+     * @return the parsed time (34h56m12s)
+     */
+    public static String parseTime(String time) {
+        if (time.startsWith("PT")) {
+            //strip the PT from the beginning and put all letteres in lower case
+            return time
+                    .toLowerCase()
+                    .substring(2, time.length());
+        }
+        return time;
+    }
+
 }

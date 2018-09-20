@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 import io.github.artenes.speedbro.models.LatestRunsState;
+import io.github.artenes.speedbro.models.State;
 import io.github.artenes.speedbro.speedrun.com.RunsRepository;
 import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
 
@@ -16,10 +17,10 @@ import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
  */
 public class LoadLatestRunsTask extends AsyncTask<Void, Void, LatestRunsState> {
 
-    private final MutableLiveData<LatestRunsState> mState;
+    private final MutableLiveData<State> mState;
     private final RunsRepository mRepository;
 
-    public LoadLatestRunsTask(MutableLiveData<LatestRunsState> state) {
+    public LoadLatestRunsTask(MutableLiveData<State> state) {
         mState = state;
         mRepository = new RunsRepository();
     }

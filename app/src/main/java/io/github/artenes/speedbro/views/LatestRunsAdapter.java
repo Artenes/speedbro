@@ -1,6 +1,7 @@
 package io.github.artenes.speedbro.views;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.artenes.speedbro.utils.ImageLoader;
 import io.github.artenes.speedbro.R;
 import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
+import io.github.artenes.speedbro.utils.ImageLoader;
 
 /**
  * Displays a list of latest runs
@@ -21,10 +22,12 @@ import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
 public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.LatestRunViewHolder> {
 
     private final ImageLoader mImageLoader;
+    private final OnRunClickListener mOnRunClickListener;
     private List<LatestRun> mRuns = new ArrayList<>(0);
 
-    public LatestRunsAdapter(ImageLoader imageLoader) {
+    LatestRunsAdapter(ImageLoader imageLoader, OnRunClickListener runClickListener) {
         mImageLoader = imageLoader;
+        mOnRunClickListener = runClickListener;
     }
 
     /**
@@ -58,51 +61,87 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
     /**
      * View holder for a latest run
      */
-    public class LatestRunViewHolder extends RecyclerView.ViewHolder {
+    public class LatestRunViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final ImageView runnerIcon;
-        private final TextView runner;
-        private final ImageView countryIcon;
-        private final ImageView gameCover;
-        private final TextView gameTitle;
-        private final TextView category;
-        private final ImageView positionIcon;
-        private final TextView position;
-        private final TextView time;
+        private final ImageView mRunnerIcon;
+        private final TextView mRunner;
+        private final ImageView mCountryIcon;
+        private final ImageView mGameCover;
+        private final TextView mGameTitle;
+        private final TextView mCategory;
+        private final ImageView mPositionIcon;
+        private final TextView mRankPosition;
+        private final TextView mTime;
+        private final CardView mCardView;
 
-        public LatestRunViewHolder(View itemView) {
+        LatestRunViewHolder(View itemView) {
             super(itemView);
-            runnerIcon = itemView.findViewById(R.id.runner_icon);
-            runner = itemView.findViewById(R.id.runner);
-            countryIcon = itemView.findViewById(R.id.country_icon);
-            gameCover = itemView.findViewById(R.id.cover);
-            gameTitle = itemView.findViewById(R.id.game_title);
-            category = itemView.findViewById(R.id.category);
-            positionIcon = itemView.findViewById(R.id.position_icon);
-            position = itemView.findViewById(R.id.position);
-            time = itemView.findViewById(R.id.time);
+            mRunnerIcon = itemView.findViewById(R.id.runner_icon);
+            mRunner = itemView.findViewById(R.id.runner);
+            mCountryIcon = itemView.findViewById(R.id.country_icon);
+            mGameCover = itemView.findViewById(R.id.cover);
+            mGameTitle = itemView.findViewById(R.id.game_title);
+            mCategory = itemView.findViewById(R.id.category);
+            mPositionIcon = itemView.findViewById(R.id.position_icon);
+            mRankPosition = itemView.findViewById(R.id.position);
+            mTime = itemView.findViewById(R.id.time);
+            mCardView = itemView.findViewById(R.id.cv_contents);
+
+            mCardView.setOnClickListener(this);
+            mRunnerIcon.setOnClickListener(this);
+            mRunner.setOnClickListener(this);
+            mCountryIcon.setOnClickListener(this);
+            mGameCover.setOnClickListener(this);
+            mGameTitle.setOnClickListener(this);
+            mCategory.setOnClickListener(this);
+            mPositionIcon.setOnClickListener(this);
+            mRankPosition.setOnClickListener(this);
+            mTime.setOnClickListener(this);
         }
 
-        public void bind(LatestRun run) {
-            gameTitle.setText(run.getGameTitle());
-            category.setText(run.getCategory());
-            runner.setText(run.getRunnerName());
-            time.setText(run.getTime());
-            position.setText(run.getPosition());
+        void bind(LatestRun run) {
+            mGameTitle.setText(run.getGameTitle());
+            mCategory.setText(run.getCategory());
+            mRunner.setText(run.getRunnerName());
+            mTime.setText(run.getTime());
+            mRankPosition.setText(run.getPosition());
 
             //load the game cover
-            mImageLoader.load(run.getGameCover(), R.drawable.placeholder, gameCover);
+            mImageLoader.load(run.getGameCover(), R.drawable.placeholder, mGameCover);
 
             //load the runner icon
-            mImageLoader.load(run.getRunnerIcon(), R.drawable.default_runner, runnerIcon);
+            mImageLoader.load(run.getRunnerIcon(), R.drawable.default_runner, mRunnerIcon);
 
             //load the country icon if available
-            mImageLoader.load(run.getCountryIcon(), countryIcon);
+            mImageLoader.load(run.getCountryIcon(), mCountryIcon);
 
             //load the position icon if available
-            mImageLoader.load(run.getPositionIcon(), positionIcon);
+            mImageLoader.load(run.getPositionIcon(), mPositionIcon);
         }
 
+        @Override
+        public void onClick(View view) {
+            LatestRun run = mRuns.get(getAdapterPosition());
+
+            if (isRunnerView(view)) {
+                mOnRunClickListener.onRunnerClick(run.getRunnerId());
+                return;
+            }
+
+            mOnRunClickListener.onRunClick(run.getGameId(), run.getId());
+        }
+
+        private boolean isRunnerView(View view) {
+            int id = view.getId();
+            return id == R.id.runner || id == R.id.country_icon || id == R.id.runner_icon;
+        }
+
+    }
+
+    public interface OnRunClickListener {
+        void onRunClick(String gameId, String runId);
+
+        void onRunnerClick(String id);
     }
 
 }

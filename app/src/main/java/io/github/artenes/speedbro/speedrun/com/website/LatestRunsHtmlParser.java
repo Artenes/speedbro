@@ -29,7 +29,6 @@ public class LatestRunsHtmlParser {
     public List<LatestRun> parseLatestRuns(Document document) {
 
         //we assume that the given page contains only one table that contains the list of latest runs
-        //checkout SpeedRunApiEndpoints::LATEST_RUNS
         Elements rows = document.select("table tbody tr");
 
         //the list that will hold the found runs

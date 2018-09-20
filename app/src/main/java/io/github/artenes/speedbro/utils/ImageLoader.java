@@ -59,7 +59,14 @@ public class ImageLoader {
     public static class PicassoLoader implements Loader {
         @Override
         public void load(@NonNull String uri, int placeholder, @NonNull ImageView imageView) {
-            RequestCreator requestCreator = Picasso.get().load(uri);
+            RequestCreator requestCreator;
+            if (!uri.isEmpty()) {
+                requestCreator = Picasso.get().load(uri);
+            } else if (placeholder != NO_IMAGE){
+                requestCreator = Picasso.get().load(placeholder);
+            } else {
+                return;
+            }
             if (placeholder != NO_IMAGE) {
                 requestCreator.placeholder(placeholder);
             }

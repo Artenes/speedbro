@@ -5,43 +5,41 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import io.github.artenes.speedbro.speedrun.com.Contract;
-import io.github.artenes.speedbro.speedrun.com.api.SpeedRunApiEndpoints;
 import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
+import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.speedrun.com.website.LatestRunsHtmlParser;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import io.github.artenes.speedbro.speedrun.com.website.RunHtmlParser;
 
+/**
+ * The repository of runs
+ */
 public class RunsRepository {
 
-    private final OkHttpClient httpClient;
-    private final Retrofit retrofit;
-    private final SpeedRunApiEndpoints endpoints;
-
-    public RunsRepository() {
-
-        httpClient = new OkHttpClient.Builder()
-                .readTimeout(120, TimeUnit.SECONDS)
-                .connectTimeout(120, TimeUnit.SECONDS).build();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(Contract.AUTHORITY)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient)
-                .build();
-
-        endpoints = retrofit.create(SpeedRunApiEndpoints.class);
-
-    }
-
+    /**
+     * Get the latest runs
+     *
+     * @return the latest runs from the website
+     * @throws IOException if connection error occurs
+     */
     public List<LatestRun> getLatestRuns() throws IOException {
         Document document = Jsoup.connect(Contract.LATEST_RUNS).get();
         LatestRunsHtmlParser parser = new LatestRunsHtmlParser();
-
         return parser.parseLatestRuns(document);
+    }
+
+    /**
+     * Get a run
+     *
+     * @param gameId the game id
+     * @param runId  the run id
+     * @return the Run
+     * @throws IOException if connection error occurs
+     */
+    public Run getRun(String gameId, String runId) throws IOException {
+        Document document = Jsoup.connect(Contract.runUrl(gameId, runId)).get();
+        RunHtmlParser parser = new RunHtmlParser();
+        return parser.parse(document);
     }
 
 }

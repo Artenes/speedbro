@@ -2,19 +2,20 @@ package io.github.artenes.speedbro.views;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
-import io.github.artenes.speedbro.utils.Dependencies;
 import io.github.artenes.speedbro.R;
 import io.github.artenes.speedbro.models.LatestRunsState;
 import io.github.artenes.speedbro.models.LatestRunsViewModel;
+import io.github.artenes.speedbro.models.State;
+import io.github.artenes.speedbro.utils.Dependencies;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity implements LatestRunsAdapter.OnRunClickListener {
 
     private RecyclerView mLatestRuns;
     private LatestRunsAdapter mAdapter;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar = findViewById(R.id.progressBar);
         mErrorMessage = findViewById(R.id.error_message);
 
-        mAdapter = new LatestRunsAdapter(Dependencies.getImageLoader());
+        mAdapter = new LatestRunsAdapter(Dependencies.getImageLoader(), this);
         mLayoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.latest_runs_grid_columns));
 
         mLatestRuns.setLayoutManager(mLayoutManager);
@@ -49,14 +50,17 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param state the state to render
      */
-    public void render(LatestRunsState state) {
-        if (state.isLoading()) {
+    @Override
+    public void render(State state) {
+        LatestRunsState latestRunsState = (LatestRunsState) state;
+
+        if (latestRunsState.isLoading()) {
             mProgressBar.setVisibility(View.VISIBLE);
             mErrorMessage.setVisibility(View.GONE);
             return;
         }
 
-        if (state.hasError()) {
+        if (latestRunsState.hasError()) {
             mErrorMessage.setVisibility(View.VISIBLE);
             mProgressBar.setVisibility(View.GONE);
             mLatestRuns.setVisibility(View.GONE);
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         mLatestRuns.setVisibility(View.VISIBLE);
         mProgressBar.setVisibility(View.GONE);
         mErrorMessage.setVisibility(View.GONE);
-        mAdapter.setData(state.getRuns());
+        mAdapter.setData(latestRunsState.getRuns());
     }
 
     /**
@@ -79,6 +83,16 @@ public class MainActivity extends AppCompatActivity {
         //this starts the load, which will trigger
         //the rendering of the view when finished
         mViewModel.load();
+    }
+
+    @Override
+    public void onRunClick(String gameId, String runId) {
+        RunActivity.start(this, gameId, runId);
+    }
+
+    @Override
+    public void onRunnerClick(String id) {
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
     }
 
 }

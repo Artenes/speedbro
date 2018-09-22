@@ -12,7 +12,7 @@ public class Contract {
     public static final String LATEST_RUNS = AUTHORITY + "ajax_latestleaderboard.php?amount=40";
 
     /**
-     * Get a relative uri as an absolute path to eh website
+     * Get a relative uri as an absolute path to the website
      *
      * @param relativeUri the relative uri
      * @return the absolute path
@@ -22,6 +22,33 @@ public class Contract {
             return relativeUri;
         }
         return AUTHORITY + Utils.withoutStartingSlash(relativeUri);
+    }
+
+    /**
+     * Get the absolute url to a runner
+     *
+     * @param id the id of the runner (its username)
+     * @return the absolute path to the runner
+     */
+    public static String runnerUrl(@NonNull String id) {
+        if (id.isEmpty()) {
+            return id;
+        }
+        return AUTHORITY + "user/" + id;
+    }
+
+    /**
+     * Get the url to fetch a runner's runs
+     * The id can be found in the runner's page
+     *
+     * @param integerId the id of the runner (not its username)
+     * @return the url to fetch the runner's runs
+     */
+    public static String runnerRunsUrl(@NonNull String integerId) {
+        if (integerId.isEmpty()) {
+            return integerId;
+        }
+        return AUTHORITY + "ajax_userleaderboard.php?user=" + integerId;
     }
 
     /**

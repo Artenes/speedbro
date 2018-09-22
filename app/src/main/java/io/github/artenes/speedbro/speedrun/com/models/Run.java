@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Run {
 
+    private final String id;
     private final Game game;
     private final Video video;
     private final String category;
@@ -19,6 +20,7 @@ public class Run {
     private final String commentary;
 
     private Run(Builder builder) {
+        this.id = builder.id;
         this.game = builder.game;
         this.video = builder.video;
         this.category = builder.category;
@@ -26,6 +28,10 @@ public class Run {
         this.runners = builder.runners;
         this.placement = builder.placement;
         this.commentary = builder.commentary;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Game getGame() {
@@ -61,6 +67,7 @@ public class Run {
     }
 
     public static final class Builder {
+        private String id = "";
         private Game game = Game.Builder.aGame().build();
         private Video video = new Video("");
         private String category = "";
@@ -74,6 +81,11 @@ public class Run {
 
         public static Builder aRun() {
             return new Builder();
+        }
+
+        public Builder withId(@NonNull String id) {
+            this.id = id;
+            return this;
         }
 
         public Builder withGame(@NonNull Game game) {

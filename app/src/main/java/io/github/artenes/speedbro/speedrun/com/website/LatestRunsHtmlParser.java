@@ -20,6 +20,8 @@ import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
  */
 public class LatestRunsHtmlParser {
 
+    private static final int AMOUNT_OF_DATA_FOR_LATEST_RUNS = 4;
+
     /**
      * Parse the runs from the given document.
      *
@@ -60,6 +62,9 @@ public class LatestRunsHtmlParser {
                 for (int index = 1; index < runElements.size(); index++) {
                     Element runRow = runElements.get(index);
 
+                    int amountOfTableData = runRow.select("td").size();
+                    String runTimeIndex = amountOfTableData > AMOUNT_OF_DATA_FOR_LATEST_RUNS ? "3" : "4";
+
                     LatestRun run = new LatestRun();
                     run.setId(Utils.lastSegmentOfUri(runRow.attr("data-target")));
                     run.setGameId(gameId);
@@ -73,7 +78,7 @@ public class LatestRunsHtmlParser {
                     run.setRunnerIcon(Contract.runnerAvatar(run.getRunnerId()));
                     run.setCountry(runRow.select("td:nth-child(3) a img.flagicon").attr("title").trim());
                     run.setCountryIcon(Contract.asAbsolutePath(runRow.select("td:nth-child(3) a img.flagicon").attr("src")));
-                    run.setTime(runRow.select("td:nth-child(4)").text());
+                    run.setTime(runRow.select("td:nth-child(" + runTimeIndex + ")").text());
 
                     //if the runner is just a guest, it does not have a link to its profile
                     run.setRunnerName(runRow.select("td:nth-child(3) a span.username").text());
@@ -111,7 +116,7 @@ public class LatestRunsHtmlParser {
 
         //actually the second check might be not so good for the run (this is just a generic class)
         //but it does not contain any id or class name that identifies that row as a run one.
-        return row.selectFirst("td.gamecover") != null || row.selectFirst("td.nobr.center.hidden-xs") != null;
+        return row.selectFirst("td.gamecover") != null || row.selectFirst("td.nobr.hidden-xs") != null;
 
     }
 

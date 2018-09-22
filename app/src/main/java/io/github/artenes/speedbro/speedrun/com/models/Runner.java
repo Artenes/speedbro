@@ -2,6 +2,9 @@ package io.github.artenes.speedbro.speedrun.com.models;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A runner of a game
  */
@@ -12,6 +15,8 @@ public class Runner {
     private final String flag;
     private final String country;
     private final String icon;
+    private final List<SocialMedia> socialMedias;
+    private final List<Run> runs;
 
     private Runner(Builder builder) {
         this.id = builder.id;
@@ -19,6 +24,8 @@ public class Runner {
         this.flag = builder.flag;
         this.country = builder.country;
         this.icon = builder.icon;
+        this.socialMedias = builder.socialMedias;
+        this.runs = builder.runs;
     }
 
     public String getId() {
@@ -41,12 +48,22 @@ public class Runner {
         return icon;
     }
 
+    public List<SocialMedia> getSocialMedias() {
+        return socialMedias;
+    }
+
+    public List<Run> getRuns() {
+        return runs;
+    }
+
     public static final class Builder {
         private String id = "";
         private String name = "";
         private String flag = "";
         private String country = "";
         private String icon = "";
+        private List<SocialMedia> socialMedias = new ArrayList<>();
+        private List<Run> runs = new ArrayList<>();
 
         private Builder() {
         }
@@ -77,6 +94,16 @@ public class Runner {
 
         public Builder withIcon(@NonNull String icon) {
             this.icon = icon;
+            return this;
+        }
+
+        public Builder withSocialMedia(@NonNull List<SocialMedia> socialMedias) {
+            this.socialMedias = socialMedias;
+            return this;
+        }
+
+        public Builder withRuns(@NonNull List<Run> runs) {
+            this.runs = runs;
             return this;
         }
 

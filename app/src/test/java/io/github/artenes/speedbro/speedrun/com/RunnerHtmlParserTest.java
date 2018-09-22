@@ -112,4 +112,29 @@ public class RunnerHtmlParserTest {
         assertEquals(0, emptyRunner.getRuns().size());
     }
 
+    @Test
+    public void extractRunnerDetailsEvenIfTheUserHasNoImage() throws IOException {
+        File file = TestUtils.getFile(this, "runner_without_image.html");
+        Document document = Jsoup.parse(file, "UTF-8");
+        Runner runner = parser.parse(document);
+
+        assertEquals("SolidSpiderZnake", runner.getName());
+        assertEquals("", runner.getIcon());
+        assertEquals("https://www.speedrun.com/images/flags/sa.png", runner.getFlag());
+        assertEquals("Saudi Arabia", runner.getCountry());
+    }
+
+    @Test
+    public void extractRunnerDetailsThatHasOnlyTheName() throws IOException {
+        File file = TestUtils.getFile(this, "runner_with_just_the_name.html");
+        Document document = Jsoup.parse(file, "UTF-8");
+        Runner runner = parser.parse(document);
+
+        assertEquals("SolidSpiderZnake", runner.getName());
+        assertEquals("", runner.getIcon());
+        assertEquals("", runner.getFlag());
+        assertEquals("", runner.getCountry());
+        assertEquals(0, runner.getSocialMedias().size());
+    }
+
 }

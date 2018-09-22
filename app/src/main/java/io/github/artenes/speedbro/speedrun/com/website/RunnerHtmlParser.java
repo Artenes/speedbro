@@ -67,10 +67,10 @@ public class RunnerHtmlParser implements Parser<Runner> {
 
         //finally return the runner
         return Runner.Builder.aRunner()
-                .withName(document.select("div.userinfo p:nth-child(1) span").text())
-                .withIcon(Contract.asAbsolutePath(document.select("div.userinfo p:nth-child(2) img").attr("src")))
-                .withFlag(Contract.asAbsolutePath(document.select("div.userinfo p:nth-child(3) a img").attr("src")))
-                .withCountry(document.select("div.userinfo p:nth-child(3) a").text())
+                .withName(document.select("div.userinfo p span.username").text())
+                .withIcon(Contract.asAbsolutePath(document.select("div.userinfo p img.userpicture").attr("src")))
+                .withFlag(Contract.asAbsolutePath(document.select("div.userinfo p a img.flagicon").attr("src")))
+                .withCountry(document.select("div.userinfo p a img.flagicon").attr("title").trim())
                 .withSocialMedia(socialMedias)
                 .withRuns(runs)
                 .build();

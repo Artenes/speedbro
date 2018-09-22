@@ -8,40 +8,37 @@ import io.github.artenes.speedbro.speedrun.com.models.Run;
  * Since this is an immutable object, the state can only be changed
  * by calling the static methods.
  */
-public class RunState implements State {
+public class RunState extends State {
 
-    private final boolean isLoading;
-    private final boolean hasError;
-    private final Run run;
+    private boolean isLoadingRun = false;
+    private boolean hasErrorOnRun = false;
+    private Run run = null;
 
-    public static RunState displayError() {
-        return new RunState(false, true, Run.Builder.aRun().build());
+    public boolean isLoadingRun() {
+        return isLoadingRun;
     }
 
-    public static RunState displayLoading() {
-        return new RunState(true, false, Run.Builder.aRun().build());
+    public RunState setLoadingRun(boolean loadingRun) {
+        isLoadingRun = loadingRun;
+        return this;
     }
 
-    public static RunState displayRun(Run run) {
-        return new RunState(false, false, run);
+    public boolean hasErrorOnRun() {
+        return hasErrorOnRun;
     }
 
-    private RunState(boolean isLoading, boolean hasError, Run run) {
-        this.isLoading = isLoading;
-        this.hasError = hasError;
-        this.run = run;
-    }
-
-    public boolean isLoading() {
-        return isLoading;
-    }
-
-    public boolean hasError() {
-        return hasError;
+    public RunState setErrorOnRun(boolean hasErrorOnRun) {
+        this.hasErrorOnRun = hasErrorOnRun;
+        return this;
     }
 
     public Run getRun() {
         return run;
+    }
+
+    public RunState setRun(Run run) {
+        this.run = run;
+        return this;
     }
 
 }

@@ -4,22 +4,33 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+
+import io.github.artenes.speedbro.BuildConfig;
 import io.github.artenes.speedbro.R;
 import io.github.artenes.speedbro.models.RunState;
 import io.github.artenes.speedbro.models.RunViewModel;
 import io.github.artenes.speedbro.models.RunViewModelFactory;
 import io.github.artenes.speedbro.models.State;
+import io.github.artenes.speedbro.speedrun.com.models.Run;
+import io.github.artenes.speedbro.speedrun.com.models.Video;
 import io.github.artenes.speedbro.utils.Dependencies;
 
 /**
  * Display a run
  */
-public class RunActivity extends BaseActivity {
+public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitializedListener, View.OnClickListener {
 
     private static final String EXTRA_RUN_ID = "run_id";
     private static final String EXTRA_GAME_ID = "game_id";
@@ -28,8 +39,8 @@ public class RunActivity extends BaseActivity {
      * Start this activity
      *
      * @param context the context to start the activity
-     * @param gameId the id of the game
-     * @param runId the id of the run
+     * @param gameId  the id of the game
+     * @param runId   the id of the run
      */
     public static void start(Context context, String gameId, String runId) {
         Intent intent = new Intent(context, RunActivity.class);
@@ -41,6 +52,10 @@ public class RunActivity extends BaseActivity {
     private ProgressBar mProgressBar;
     private RecyclerView mContainer;
     private RunDetailsAdapter mAdapter;
+    private TextView mTextVideoStatus;
+    private YouTubePlayerSupportFragment mYoutubePlayerFragment;
+
+    private RunViewModel mRunViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,31 +76,89 @@ public class RunActivity extends BaseActivity {
         mContainer = findViewById(R.id.container);
         mContainer.setLayoutManager(mLayoutManager);
         mContainer.setAdapter(mAdapter);
+        mTextVideoStatus = findViewById(R.id.video_status);
+        mYoutubePlayerFragment = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_player);
 
         RunViewModelFactory factory = new RunViewModelFactory(gameId, runId);
-        RunViewModel mViewModel = ViewModelProviders.of(this, factory).get(RunViewModel.class);
-        mViewModel.getState().observe(this, this::render);
+        mRunViewModel = ViewModelProviders.of(this, factory).get(RunViewModel.class);
+        mRunViewModel.getState().observe(this, this::render);
+        mRunViewModel.loadRun();
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
     public void render(State state) {
         RunState runState = (RunState) state;
 
-        if (runState.isLoading()) {
+        if (runState.isLoadingRun()) {
             mProgressBar.setVisibility(View.VISIBLE);
-            mContainer.setVisibility(View.GONE);
+            mContainer.setVisibility(View.INVISIBLE);
             return;
         }
 
-        if (runState.hasError()) {
-            mContainer.setVisibility(View.GONE);
+        if (runState.hasErrorOnRun()) {
+            mContainer.setVisibility(View.INVISIBLE);
             mProgressBar.setVisibility(View.GONE);
             return;
         }
 
-        mAdapter.setData(runState.getRun());
+        Run run = runState.getRun();
+        mAdapter.setData(run);
         mContainer.setVisibility(View.VISIBLE);
         mProgressBar.setVisibility(View.GONE);
+
+        Video video = run.getVideo();
+
+        if (video.isFromYoutube()) {
+            mYoutubePlayerFragment.initialize(BuildConfig.SPEEDBRO_YOUTUBE_API_KEY, this);
+            return;
+        }
+
+        //if it is not from youtube, hide the player and show the text message
+        getSupportFragmentManager().beginTransaction().hide(mYoutubePlayerFragment).commit();
+        mTextVideoStatus.setVisibility(View.VISIBLE);
+
+        //show the message accordingly if the video is from twitch or not
+        if (video.isFromTwitch()) {
+            mTextVideoStatus.setText(getString(R.string.tap_to_watch_video));
+            mTextVideoStatus.setOnClickListener(this);
+        } else {
+            mTextVideoStatus.setText(getString(R.string.no_video_available));
+            mTextVideoStatus.setOnClickListener(null);
+        }
+
+    }
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+        mRunViewModel.loadYoutubeVideo(youTubePlayer);
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+        //@TODO display error message
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.video_status) {
+            mRunViewModel.loadTwitchVideo(this);
+        }
     }
 
 }

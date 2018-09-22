@@ -38,7 +38,7 @@ public class Video {
             isFromTwitch = false;
         } else if (url.host().contains("twitch")) {
             String videoId = url.queryParameter("video");
-            id = videoId == null ? "" : videoId;
+            id = videoId == null || videoId.isEmpty() ? "" : videoId.substring(1);
             isFromTwitch = true;
             isFromYoutube = false;
         } else {
@@ -58,6 +58,30 @@ public class Video {
 
     public boolean isFromTwitch() {
         return isFromTwitch;
+    }
+
+    /**
+     * This is the uri to use in the browser
+     *
+     * @return the full uri to the video
+     */
+    public String getTwitchHttpUri() {
+        if (id.isEmpty()) {
+            return id;
+        }
+        return "https://www.twitch.tv/videos/" + id;
+    }
+
+    /**
+     * This is the uri to use between applications
+     *
+     * @return the full uri to the video
+     */
+    public String getTwitchUrl() {
+        if (id.isEmpty()) {
+            return id;
+        }
+        return "twitch://video/" + id;
     }
 
 }

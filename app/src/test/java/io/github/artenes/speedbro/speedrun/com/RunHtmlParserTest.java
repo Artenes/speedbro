@@ -96,7 +96,7 @@ public class RunHtmlParserTest {
     public void extractVideoFromTwitch() throws IOException {
         Run run = parser.parse(Jsoup.parse(TestUtils.getFile(this, "run_with_twitch_video.html"), "UTF-8"));
         assertTrue(run.getVideo().isFromTwitch());
-        assertEquals("v312235878", run.getVideo().getId());
+        assertEquals("312235878", run.getVideo().getId());
     }
 
 }

@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity implements LatestRunsAdapter.OnRu
 
     @Override
     public void onRunnerClick(String id) {
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
     }
 
 }

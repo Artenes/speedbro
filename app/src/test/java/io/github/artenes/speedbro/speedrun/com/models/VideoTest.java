@@ -19,7 +19,7 @@ public class VideoTest {
     public void parseTwitchUrl() {
         Video video = new Video("https://player.twitch.tv/?video=v311439528&autoplay=false&time=0");
         assertTrue(video.isFromTwitch());
-        assertEquals("v311439528", video.getId());
+        assertEquals("311439528", video.getId());
     }
 
     @Test
@@ -34,6 +34,13 @@ public class VideoTest {
     public void idIsEmptyStringWhenTwitchUrlIsInvalid() {
         //do not has video query parameter
         Video video = new Video("https://player.twitch.tv/?autoplay=false&time=0");
+        assertTrue(video.isFromTwitch());
+        assertEquals("", video.getId());
+    }
+
+    @Test
+    public void twitchVideoIdIsOneCharacterLong() {
+        Video video = new Video("https://player.twitch.tv/?video=3&autoplay=false&time=0");
         assertTrue(video.isFromTwitch());
         assertEquals("", video.getId());
     }

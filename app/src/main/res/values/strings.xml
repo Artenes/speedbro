@@ -4,4 +4,8 @@
     <string name="something_went_wrong">Something went wrong</string>
     <string name="run_title">%s in %s</string>
     <string name="game">Game</string>
+    <string name="no_video">No video available</string>
+    <string name="error_loading_video">Error loading video</string>
+    <string name="tap_to_watch_video">Tap to watch video on Twitch</string>
+    <string name="no_video_available">No video available</string>
 </resources>

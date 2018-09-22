@@ -11,7 +11,7 @@ import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
  * Since this is an immutable object, the state can only be changed
  * by calling the static methods.
  */
-public class LatestRunsState implements State {
+public class LatestRunsState extends State {
 
     private final boolean isLoading;
     private final boolean hasError;

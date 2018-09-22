@@ -32,7 +32,7 @@ public class RunsRepository {
      * @return the latest runs from the website
      * @throws IOException if connection error occurs
      */
-    public List<LatestRun> getLatestRuns() throws IOException {
+    public List<Run> getLatestRuns() throws IOException {
         Document document = Jsoup.connect(Contract.LATEST_RUNS).get();
         LatestRunsHtmlParser parser = new LatestRunsHtmlParser();
         return parser.parseLatestRuns(document);

@@ -66,6 +66,13 @@ public class Run {
         return commentary;
     }
 
+    public Runner getFirstRunner() {
+        if (runners.isEmpty()) {
+            return Runner.Builder.aRunner().build();
+        }
+        return runners.get(0);
+    }
+
     public static final class Builder {
         private String id = "";
         private Game game = Game.Builder.aGame().build();

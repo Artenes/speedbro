@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.artenes.speedbro.R;
-import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
+import io.github.artenes.speedbro.speedrun.com.models.Run;
+import io.github.artenes.speedbro.speedrun.com.models.Runner;
 import io.github.artenes.speedbro.utils.ImageLoader;
 
 /**
@@ -23,7 +24,7 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
 
     private final ImageLoader mImageLoader;
     private final OnRunClickListener mOnRunClickListener;
-    private List<LatestRun> mRuns = new ArrayList<>(0);
+    private List<Run> mRuns = new ArrayList<>(0);
 
     LatestRunsAdapter(ImageLoader imageLoader, OnRunClickListener runClickListener) {
         mImageLoader = imageLoader;
@@ -35,7 +36,7 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
      *
      * @param runs the list of latest runs
      */
-    public void setData(@NonNull List<LatestRun> runs) {
+    public void setData(@NonNull List<Run> runs) {
         mRuns = runs;
         notifyDataSetChanged();
     }
@@ -49,7 +50,7 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
 
     @Override
     public void onBindViewHolder(@NonNull LatestRunViewHolder holder, int position) {
-        LatestRun latestRun = mRuns.get(position);
+        Run latestRun = mRuns.get(position);
         holder.bind(latestRun);
     }
 
@@ -99,36 +100,38 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
             mTime.setOnClickListener(this);
         }
 
-        void bind(LatestRun run) {
-            mGameTitle.setText(run.getGameTitle());
+        void bind(Run run) {
+            Runner runner = run.getFirstRunner();
+
+            mGameTitle.setText(run.getGame().getTitle());
             mCategory.setText(run.getCategory());
-            mRunner.setText(run.getRunnerName());
+            mRunner.setText(runner.getName());
             mTime.setText(run.getTime());
-            mRankPosition.setText(run.getPosition());
+            mRankPosition.setText(run.getPlacement().getPlace());
 
             //load the game cover
-            mImageLoader.load(run.getGameCover(), R.drawable.placeholder, mGameCover);
+            mImageLoader.load(run.getGame().getCover(), R.drawable.placeholder, mGameCover);
 
             //load the runner icon
-            mImageLoader.load(run.getRunnerIcon(), R.drawable.default_runner, mRunnerIcon);
+            mImageLoader.load(runner.getIcon(), R.drawable.default_runner, mRunnerIcon);
 
             //load the country icon if available
-            mImageLoader.load(run.getCountryIcon(), mCountryIcon);
+            mImageLoader.load(runner.getFlag(), mCountryIcon);
 
             //load the position icon if available
-            mImageLoader.load(run.getPositionIcon(), mPositionIcon);
+            mImageLoader.load(run.getPlacement().getIcon(), mPositionIcon);
         }
 
         @Override
         public void onClick(View view) {
-            LatestRun run = mRuns.get(getAdapterPosition());
+            Run run = mRuns.get(getAdapterPosition());
 
             if (isRunnerView(view)) {
-                mOnRunClickListener.onRunnerClick(run.getRunnerId());
+                mOnRunClickListener.onRunnerClick(run.getFirstRunner().getId());
                 return;
             }
 
-            mOnRunClickListener.onRunClick(run.getGameId(), run.getId());
+            mOnRunClickListener.onRunClick(run.getGame().getId(), run.getId());
         }
 
         private boolean isRunnerView(View view) {

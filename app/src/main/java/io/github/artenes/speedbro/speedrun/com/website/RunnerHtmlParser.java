@@ -40,30 +40,7 @@ public class RunnerHtmlParser implements Parser<Runner> {
         }
 
         //get all the runs
-        //@TODO parseLatestRuns will be refactored so there will be no necessity to iterate over it
-        List<Run> runs = new ArrayList<>();
-        List<LatestRun> rawRuns = runParser.parseLatestRuns(document);
-        for (LatestRun latestRun : rawRuns) {
-
-            Game game = Game.Builder.aGame()
-                    .withId(latestRun.getGameId())
-                    .withTitle(latestRun.getGameTitle())
-                    .withCover(latestRun.getGameCover())
-                    .build();
-
-            Placement placement = Placement.Builder.aPlacement()
-                    .withIcon(latestRun.getPositionIcon())
-                    .withPlace(latestRun.getPosition())
-                    .build();
-
-            runs.add(Run.Builder.aRun()
-                    .withId(latestRun.getId())
-                    .withCategory(latestRun.getCategory())
-                    .withTime(latestRun.getTime())
-                    .withGame(game)
-                    .withPlacement(placement)
-                    .build());
-        }
+        List<Run> runs = runParser.parseLatestRuns(document);
 
         //finally return the runner
         return Runner.Builder.aRunner()

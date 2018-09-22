@@ -5,11 +5,15 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.github.artenes.speedbro.speedrun.com.Contract;
 import io.github.artenes.speedbro.speedrun.com.Utils;
-import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
+import io.github.artenes.speedbro.speedrun.com.models.Game;
+import io.github.artenes.speedbro.speedrun.com.models.Placement;
+import io.github.artenes.speedbro.speedrun.com.models.Run;
+import io.github.artenes.speedbro.speedrun.com.models.Runner;
 
 /**
  * A parser that gets an HTML page with the latest runs available
@@ -28,13 +32,13 @@ public class LatestRunsHtmlParser {
      * @param document the document with the element of the HTML page
      * @return the list of runs, if any was found
      */
-    public List<LatestRun> parseLatestRuns(Document document) {
+    public List<Run> parseLatestRuns(Document document) {
 
         //we assume that the given page contains only one table that contains the list of latest runs
         Elements rows = document.select("table tbody tr");
 
         //the list that will hold the found runs
-        List<LatestRun> latestRuns = new ArrayList<>();
+        List<Run> latestRuns = new ArrayList<>();
 
         //the runs are organized in a table
         //each row represent either the game or the run of that game
@@ -53,10 +57,14 @@ public class LatestRunsHtmlParser {
                     continue;
                 }
 
+                Element gameRow = runElements.get(0);
+
                 //we first get the game details because one game can have multiple runs in this table
-                String gameTitle = runElements.get(0).selectFirst("td:nth-child(2) a").text();
-                String gameId = Utils.withoutStartingSlash(runElements.get(0).selectFirst("td:nth-child(2) a").attr("href"));
-                String gameCover = Contract.asAbsolutePath(runElements.get(0).selectFirst("td:nth-child(1) a img").attr("src"));
+                Game game = Game.Builder.aGame()
+                        .withId(Utils.withoutStartingSlash(gameRow.select("td:nth-child(2) a").attr("href")))
+                        .withTitle(gameRow.select("td:nth-child(2) a").text())
+                        .withCover(Contract.asAbsolutePath(gameRow.select("td:nth-child(1) a img").attr("src")))
+                        .build();
 
                 //then for the next rows, until we reach the "filler" one, we have the runs for the game
                 for (int index = 1; index < runElements.size(); index++) {
@@ -65,26 +73,29 @@ public class LatestRunsHtmlParser {
                     int amountOfTableData = runRow.select("td").size();
                     String runTimeIndex = amountOfTableData > AMOUNT_OF_DATA_FOR_LATEST_RUNS ? "3" : "4";
 
-                    LatestRun run = new LatestRun();
-                    run.setId(Utils.lastSegmentOfUri(runRow.attr("data-target")));
-                    run.setGameId(gameId);
-                    run.setRunnerId(Utils.lastSegmentOfUri(runRow.select("td:nth-child(3) a").attr("href")));
-                    run.setGameTitle(gameTitle);
-                    run.setGameCover(gameCover);
-                    run.setCategory(runRow.select("td:nth-child(1) a").text());
-                    run.setPosition(runRow.select("td:nth-child(2)").text());
-                    run.setPositionIcon(Contract.asAbsolutePath(runRow.select("td:nth-child(2) img").attr("src")));
-                    run.setRunnerDisplayName(runRow.select("td:nth-child(3) a span.username").html());
-                    run.setRunnerIcon(Contract.runnerAvatar(run.getRunnerId()));
-                    run.setCountry(runRow.select("td:nth-child(3) a img.flagicon").attr("title").trim());
-                    run.setCountryIcon(Contract.asAbsolutePath(runRow.select("td:nth-child(3) a img.flagicon").attr("src")));
-                    run.setTime(runRow.select("td:nth-child(" + runTimeIndex + ")").text());
+                    Placement placement = Placement.Builder.aPlacement()
+                            .withPlace(runRow.select("td:nth-child(2)").text())
+                            .withIcon(Contract.asAbsolutePath(runRow.select("td:nth-child(2) img").attr("src")))
+                            .build();
 
-                    //if the runner is just a guest, it does not have a link to its profile
-                    run.setRunnerName(runRow.select("td:nth-child(3) a span.username").text());
-                    if (!run.hasRunnerName()) {
-                        run.setRunnerName(runRow.select("td:nth-child(3)").text());
-                    }
+                    String runnerId = Utils.lastSegmentOfUri(runRow.select("td:nth-child(3) a").attr("href"));
+                    Runner runner = Runner.Builder.aRunner()
+                            .withId(runnerId)
+                            .withName(runRow.select("td:nth-child(3)").text())
+                            .withIcon(Contract.runnerAvatar(runnerId))
+                            .withCountry(runRow.select("td:nth-child(3) a img.flagicon").attr("title").trim())
+                            .withFlag(Contract.asAbsolutePath(runRow.select("td:nth-child(3) a img.flagicon").attr("src")))
+                            .build();
+
+                    //noinspection ArraysAsListWithZeroOrOneArgument
+                    Run run = Run.Builder.aRun()
+                            .withId(Utils.lastSegmentOfUri(runRow.attr("data-target")))
+                            .withCategory(runRow.select("td:nth-child(1) a").text())
+                            .withTime(runRow.select("td:nth-child(" + runTimeIndex + ")").text())
+                            .withGame(game)
+                            .withPlacement(placement)
+                            .withRunners(Arrays.asList(runner))
+                            .build();
 
                     latestRuns.add(run);
                 }

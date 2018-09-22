@@ -10,6 +10,7 @@ import io.github.artenes.speedbro.models.LatestRunsState;
 import io.github.artenes.speedbro.models.State;
 import io.github.artenes.speedbro.speedrun.com.RunsRepository;
 import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
+import io.github.artenes.speedbro.speedrun.com.models.Run;
 
 /**
  * Loads a list of latest runs in the background
@@ -33,7 +34,7 @@ public class LoadLatestRunsTask extends AsyncTask<Void, Void, LatestRunsState> {
     @Override
     protected LatestRunsState doInBackground(Void... voids) {
         try {
-            List<LatestRun> latestRuns = mRepository.getLatestRuns();
+            List<Run> latestRuns = mRepository.getLatestRuns();
             return LatestRunsState.displayRuns(latestRuns);
         } catch (IOException exception) {
             return LatestRunsState.displayError();

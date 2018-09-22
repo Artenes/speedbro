@@ -3,7 +3,7 @@ package io.github.artenes.speedbro.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
+import io.github.artenes.speedbro.speedrun.com.models.Run;
 
 /**
  * The state of the latest runs view.
@@ -15,21 +15,21 @@ public class LatestRunsState extends State {
 
     private final boolean isLoading;
     private final boolean hasError;
-    private final List<LatestRun> runs;
+    private final List<Run> runs;
 
     public static LatestRunsState displayError() {
-        return new LatestRunsState(false, true, new ArrayList<LatestRun>());
+        return new LatestRunsState(false, true, new ArrayList<Run>());
     }
 
     public static LatestRunsState displayLoading() {
-        return new LatestRunsState(true, false, new ArrayList<LatestRun>());
+        return new LatestRunsState(true, false, new ArrayList<Run>());
     }
 
-    public static LatestRunsState displayRuns(List<LatestRun> runs) {
+    public static LatestRunsState displayRuns(List<Run> runs) {
         return new LatestRunsState(false, false, runs);
     }
 
-    public LatestRunsState(boolean isLoading, boolean hasError, List<LatestRun> runs) {
+    public LatestRunsState(boolean isLoading, boolean hasError, List<Run> runs) {
         this.isLoading = isLoading;
         this.hasError = hasError;
         this.runs = runs;
@@ -43,7 +43,7 @@ public class LatestRunsState extends State {
         return hasError;
     }
 
-    public List<LatestRun> getRuns() {
+    public List<Run> getRuns() {
         return runs;
     }
 

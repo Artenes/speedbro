@@ -16,15 +16,18 @@ import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.speedrun.com.models.Runner;
 
 /**
- * A parser that gets an HTML page with the latest runs available
- * at the homepage of the website and creates a list of POJOs
+ * A parser that gets an HTML page with runs and creates a list of POJOs
  * with the info of these runs. We had to scrap the website for these
  * because the endpoint to return the latest runs was taking
  * up to 20 seconds to respond (2018-09-11).
  */
-public class LatestRunsHtmlParser {
+public class RunsHtmlParser implements Parser<List<Run>> {
 
-    private static final int AMOUNT_OF_DATA_FOR_LATEST_RUNS = 4;
+    private final Source sourceOfDocument;
+
+    public RunsHtmlParser(Source sourceOfDocument) {
+        this.sourceOfDocument = sourceOfDocument;
+    }
 
     /**
      * Parse the runs from the given document.
@@ -32,7 +35,8 @@ public class LatestRunsHtmlParser {
      * @param document the document with the element of the HTML page
      * @return the list of runs, if any was found
      */
-    public List<Run> parseLatestRuns(Document document) {
+    @Override
+    public List<Run> parse(Document document) {
 
         //we assume that the given page contains only one table that contains the list of latest runs
         Elements rows = document.select("table tbody tr");
@@ -70,22 +74,27 @@ public class LatestRunsHtmlParser {
                 for (int index = 1; index < runElements.size(); index++) {
                     Element runRow = runElements.get(index);
 
-                    int amountOfTableData = runRow.select("td").size();
-                    String runTimeIndex = amountOfTableData > AMOUNT_OF_DATA_FOR_LATEST_RUNS ? "3" : "4";
+                    //this checks if the table has data from the homepage or not
+                    String runTimeIndex = sourceOfDocument == Source.HOME_PAGE ? "4" : "3";
 
                     Placement placement = Placement.Builder.aPlacement()
                             .withPlace(runRow.select("td:nth-child(2)").text())
                             .withIcon(Contract.asAbsolutePath(runRow.select("td:nth-child(2) img").attr("src")))
                             .build();
 
-                    String runnerId = Utils.lastSegmentOfUri(runRow.select("td:nth-child(3) a").attr("href"));
-                    Runner runner = Runner.Builder.aRunner()
-                            .withId(runnerId)
-                            .withName(runRow.select("td:nth-child(3)").text())
-                            .withIcon(Contract.runnerAvatar(runnerId))
-                            .withCountry(runRow.select("td:nth-child(3) a img.flagicon").attr("title").trim())
-                            .withFlag(Contract.asAbsolutePath(runRow.select("td:nth-child(3) a img.flagicon").attr("src")))
-                            .build();
+                    Runner runner;
+                    if (sourceOfDocument == Source.HOME_PAGE) {
+                        String runnerId = Utils.lastSegmentOfUri(runRow.select("td:nth-child(3) a").attr("href"));
+                        runner = Runner.Builder.aRunner()
+                                .withId(runnerId)
+                                .withName(runRow.select("td:nth-child(3)").text())
+                                .withIcon(Contract.runnerAvatar(runnerId))
+                                .withCountry(runRow.select("td:nth-child(3) a img.flagicon").attr("title").trim())
+                                .withFlag(Contract.asAbsolutePath(runRow.select("td:nth-child(3) a img.flagicon").attr("src")))
+                                .build();
+                    } else {
+                        runner = Runner.Builder.aRunner().build();
+                    }
 
                     //noinspection ArraysAsListWithZeroOrOneArgument
                     Run run = Run.Builder.aRun()
@@ -128,6 +137,19 @@ public class LatestRunsHtmlParser {
         //actually the second check might be not so good for the run (this is just a generic class)
         //but it does not contain any id or class name that identifies that row as a run one.
         return row.selectFirst("td.gamecover") != null || row.selectFirst("td.nobr.hidden-xs") != null;
+
+    }
+
+    /**
+     * Various parts of the website display a list of runs
+     * and each one of them display them in a different manner
+     * so we have to indicate to the parser which logic to use to parse the data
+     */
+    public enum Source {
+
+        HOME_PAGE,
+        RUNNER,
+        CATEGORIES
 
     }
 

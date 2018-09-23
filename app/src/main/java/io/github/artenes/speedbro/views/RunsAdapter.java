@@ -1,6 +1,7 @@
 package io.github.artenes.speedbro.views;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.Guideline;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,13 +21,13 @@ import io.github.artenes.speedbro.utils.ImageLoader;
 /**
  * Displays a list of latest runs
  */
-public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.LatestRunViewHolder> {
+public class RunsAdapter extends RecyclerView.Adapter<RunsAdapter.LatestRunViewHolder> {
 
     private final ImageLoader mImageLoader;
     private final OnRunClickListener mOnRunClickListener;
     private List<Run> mRuns = new ArrayList<>(0);
 
-    LatestRunsAdapter(ImageLoader imageLoader, OnRunClickListener runClickListener) {
+    RunsAdapter(ImageLoader imageLoader, OnRunClickListener runClickListener) {
         mImageLoader = imageLoader;
         mOnRunClickListener = runClickListener;
     }
@@ -74,6 +75,7 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
         private final TextView mRankPosition;
         private final TextView mTime;
         private final CardView mCardView;
+        private final Guideline mTopGuideline;
 
         LatestRunViewHolder(View itemView) {
             super(itemView);
@@ -87,6 +89,7 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
             mRankPosition = itemView.findViewById(R.id.position);
             mTime = itemView.findViewById(R.id.time);
             mCardView = itemView.findViewById(R.id.cv_contents);
+            mTopGuideline = itemView.findViewById(R.id.top_guideline);
 
             mCardView.setOnClickListener(this);
             mRunnerIcon.setOnClickListener(this);
@@ -120,6 +123,17 @@ public class LatestRunsAdapter extends RecyclerView.Adapter<LatestRunsAdapter.La
 
             //load the position icon if available
             mImageLoader.load(run.getPlacement().getIcon(), mPositionIcon);
+
+            if (!runner.getId().isEmpty()) {
+                mRunnerIcon.setVisibility(View.VISIBLE);
+                mRunner.setVisibility(View.VISIBLE);
+                mTopGuideline.setGuidelinePercent(0.15f);
+            } else {
+                mRunnerIcon.setVisibility(View.GONE);
+                mRunner.setVisibility(View.GONE);
+                mTopGuideline.setGuidelinePercent(0);
+            }
+
         }
 
         @Override

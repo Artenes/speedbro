@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import io.github.artenes.speedbro.R;
 import io.github.artenes.speedbro.models.LatestRunsState;
@@ -15,10 +14,10 @@ import io.github.artenes.speedbro.models.LatestRunsViewModel;
 import io.github.artenes.speedbro.models.State;
 import io.github.artenes.speedbro.utils.Dependencies;
 
-public class MainActivity extends BaseActivity implements LatestRunsAdapter.OnRunClickListener {
+public class MainActivity extends BaseActivity implements RunsAdapter.OnRunClickListener {
 
     private RecyclerView mLatestRuns;
-    private LatestRunsAdapter mAdapter;
+    private RunsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ProgressBar mProgressBar;
     private LinearLayout mErrorMessage;
@@ -34,7 +33,7 @@ public class MainActivity extends BaseActivity implements LatestRunsAdapter.OnRu
         mProgressBar = findViewById(R.id.progressBar);
         mErrorMessage = findViewById(R.id.error_message);
 
-        mAdapter = new LatestRunsAdapter(Dependencies.getImageLoader(), this);
+        mAdapter = new RunsAdapter(Dependencies.getImageLoader(), this);
         mLayoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.latest_runs_grid_columns));
 
         mLatestRuns.setLayoutManager(mLayoutManager);
@@ -92,7 +91,7 @@ public class MainActivity extends BaseActivity implements LatestRunsAdapter.OnRu
 
     @Override
     public void onRunnerClick(String id) {
-        //Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        RunnerActivity.start(id, this);
     }
 
 }

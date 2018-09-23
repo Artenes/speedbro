@@ -1,7 +1,9 @@
 package io.github.artenes.speedbro.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 
 /**
  * Utility class for the application
@@ -18,6 +20,20 @@ public class Utils {
      */
     public static boolean isTwitchInstalled(Context context) {
         return isPackageInstalled(TWITCH_APP_PACKAGE, context);
+    }
+
+    /**
+     * Start an Intent to an action view
+     *
+     * @param uri     the uri to view
+     * @param context the current context
+     */
+    public static void startViewIntent(String uri, Context context) {
+        Uri uriContent = Uri.parse(uri);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uriContent);
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(intent);
+        }
     }
 
     /**

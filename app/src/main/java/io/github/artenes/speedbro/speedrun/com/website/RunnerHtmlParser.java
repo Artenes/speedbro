@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.artenes.speedbro.speedrun.com.Contract;
-import io.github.artenes.speedbro.speedrun.com.models.Game;
-import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
-import io.github.artenes.speedbro.speedrun.com.models.Placement;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.speedrun.com.models.Runner;
 import io.github.artenes.speedbro.speedrun.com.models.SocialMedia;
@@ -20,10 +17,10 @@ import io.github.artenes.speedbro.speedrun.com.models.SocialMedia;
  */
 public class RunnerHtmlParser implements Parser<Runner> {
 
-    private final LatestRunsHtmlParser runParser;
+    private final RunsHtmlParser runParser;
 
     public RunnerHtmlParser() {
-        runParser = new LatestRunsHtmlParser();
+        runParser = new RunsHtmlParser(RunsHtmlParser.Source.RUNNER);
     }
 
     @Override
@@ -40,7 +37,7 @@ public class RunnerHtmlParser implements Parser<Runner> {
         }
 
         //get all the runs
-        List<Run> runs = runParser.parseLatestRuns(document);
+        List<Run> runs = runParser.parse(document);
 
         //finally return the runner
         return Runner.Builder.aRunner()

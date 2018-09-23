@@ -6,12 +6,11 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 import java.util.List;
 
-import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.speedrun.com.models.Runner;
 import io.github.artenes.speedbro.speedrun.com.website.DocumentBuilder;
 import io.github.artenes.speedbro.speedrun.com.website.DocumentFetcher;
-import io.github.artenes.speedbro.speedrun.com.website.LatestRunsHtmlParser;
+import io.github.artenes.speedbro.speedrun.com.website.RunsHtmlParser;
 import io.github.artenes.speedbro.speedrun.com.website.RunHtmlParser;
 import io.github.artenes.speedbro.speedrun.com.website.RunnerHtmlParser;
 
@@ -34,8 +33,8 @@ public class RunsRepository {
      */
     public List<Run> getLatestRuns() throws IOException {
         Document document = Jsoup.connect(Contract.LATEST_RUNS).get();
-        LatestRunsHtmlParser parser = new LatestRunsHtmlParser();
-        return parser.parseLatestRuns(document);
+        RunsHtmlParser parser = new RunsHtmlParser(RunsHtmlParser.Source.HOME_PAGE);
+        return parser.parse(document);
     }
 
     /**

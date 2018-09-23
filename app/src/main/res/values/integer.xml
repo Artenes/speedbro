@@ -2,5 +2,7 @@
 <resources>
 
     <integer name="latest_runs_grid_columns">1</integer>
+    <integer name="runner_runs_grid_columns">1</integer>
+    <integer name="runner_social_links_grid_columns">4</integer>
 
 </resources>

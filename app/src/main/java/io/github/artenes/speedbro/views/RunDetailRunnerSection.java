@@ -1,5 +1,6 @@
 package io.github.artenes.speedbro.views;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +19,11 @@ import io.github.artenes.speedbro.utils.ImageLoader;
 public class RunDetailRunnerSection implements ScreenSection {
 
     private final ImageLoader imageLoader;
+    private final OnRunnerClickListener runnerClickListener;
 
-    RunDetailRunnerSection(ImageLoader imageLoader) {
+    public RunDetailRunnerSection(ImageLoader imageLoader, OnRunnerClickListener runnerClickListener) {
         this.imageLoader = imageLoader;
+        this.runnerClickListener = runnerClickListener;
     }
 
     @Override
@@ -35,7 +38,7 @@ public class RunDetailRunnerSection implements ScreenSection {
         ((RunnerViewHolder) viewHolder).bind(run);
     }
 
-    public class RunnerViewHolder extends RecyclerView.ViewHolder {
+    public class RunnerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final ImageView mRunnerIcon;
         private final TextView mRunnerName;
         private final ImageView mFlag;
@@ -52,14 +55,30 @@ public class RunDetailRunnerSection implements ScreenSection {
         }
 
         void bind(Run run) {
-            Runner runner = run.getRunners().get(0);
+            Runner runner = run.getFirstRunner();
+            mPlacement.setText(run.getPlacement().getPlace());
+            imageLoader.load(run.getPlacement().getIcon(), mPlacementIcon);
+
             imageLoader.load(runner.getIcon(), R.drawable.default_runner, mRunnerIcon);
             mRunnerName.setText(runner.getName());
             imageLoader.load(runner.getFlag(), mFlag);
-            mPlacement.setText(run.getPlacement().getPlace());
-            imageLoader.load(run.getPlacement().getIcon(), mPlacementIcon);
+
+            if (!runner.getId().isEmpty()) {
+                mRunnerIcon.setOnClickListener(this);
+                mRunnerName.setOnClickListener(this);
+                mFlag.setOnClickListener(this);
+            }
         }
 
+        @Override
+        public void onClick(View v) {
+            runnerClickListener.onRunnerClick(itemView.getContext());
+        }
+
+    }
+
+    public interface OnRunnerClickListener {
+        void onRunnerClick(Context context);
     }
 
 }

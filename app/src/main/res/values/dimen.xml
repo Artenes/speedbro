@@ -7,7 +7,9 @@
 
     <dimen name="runner_icon">30dp</dimen>
     <dimen name="runner_icon_big">40dp</dimen>
+    <dimen name="social_icon">35dp</dimen>
     <dimen name="flag_icon">10dp</dimen>
+    <dimen name="flag_big_icon">25dp</dimen>
     <dimen name="placement_icon">20dp</dimen>
 
     <dimen name="default_padding">15dp</dimen>

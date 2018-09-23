@@ -1,5 +1,6 @@
 package io.github.artenes.speedbro.views;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import io.github.artenes.speedbro.utils.ImageLoader;
  * so it becomes easier to manage each one individually or to add
  * new ones in the future
  */
-public class RunDetailsAdapter extends RecyclerView.Adapter {
+public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetailRunnerSection.OnRunnerClickListener {
 
     private final ImageLoader mImageLoader;
     private Run mRun;
@@ -31,7 +32,7 @@ public class RunDetailsAdapter extends RecyclerView.Adapter {
 
         mSections.clear();
         mSections.add(new RunDetailTitleSection());
-        mSections.add(new RunDetailRunnerSection(mImageLoader));
+        mSections.add(new RunDetailRunnerSection(mImageLoader, this));
 
         if (run.hasCommentary()) {
             mSections.add(new RunDetailCommentSection());
@@ -69,6 +70,11 @@ public class RunDetailsAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return mSections.size();
+    }
+
+    @Override
+    public void onRunnerClick(Context context) {
+        RunnerActivity.start(mRun.getFirstRunner().getId(), context);
     }
 
 }

@@ -105,6 +105,12 @@ public class RunnerHtmlParserTest {
     }
 
     @Test
+    public void doNotExtractRunnerNameFromRunsList() {
+        Run run = runner.getRuns().get(0);
+        assertEquals("", run.getFirstRunner().getName());
+    }
+
+    @Test
     public void extractNothingFromEmptyDocument() {
         Runner emptyRunner = parser.parse(Jsoup.parse(""));
         assertEquals("", emptyRunner.getName());

@@ -33,7 +33,7 @@
                 app:layout_constraintGuide_percent="0.40" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/guideline3"
+                android:id="@+id/top_guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -50,7 +50,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline3" />
+                app:layout_constraintTop_toTopOf="@+id/top_guideline" />
 
             <TextView
                 android:id="@+id/game_title"
@@ -67,7 +67,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="@+id/guideline3"
+                app:layout_constraintTop_toTopOf="@+id/top_guideline"
                 app:layout_constraintVertical_chainStyle="spread" />
 
             <TextView
@@ -95,7 +95,7 @@
                 android:layout_marginTop="8dp"
                 android:text="TextView"
                 android:textSize="@dimen/caption"
-                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintBottom_toTopOf="@+id/top_guideline"
                 app:layout_constraintStart_toEndOf="@+id/runner_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="tompano" />
@@ -141,7 +141,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintBottom_toTopOf="@+id/top_guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@mipmap/ic_launcher_round" />
@@ -152,7 +152,7 @@
                 android:layout_height="@dimen/flag_icon"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintBottom_toTopOf="@+id/top_guideline"
                 app:layout_constraintStart_toEndOf="@+id/runner"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_lock_lock" />

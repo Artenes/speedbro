@@ -41,7 +41,7 @@ public class LoadRunTask extends AsyncTask<String, Void, Void> {
             String gameId = ids[0];
             String runId = ids[1];
             Run run = mRepository.getRun(gameId, runId);
-            mState.setRun(run);
+            mState.setRun(run).setErrorOnRun(false);
         } catch (IOException exception) {
             mState.setErrorOnRun(true);
         }

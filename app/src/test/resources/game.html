@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<!--
+                  _
+                 | |
+ __ ___ ___ ___ _| |_ _ _ _ _ _   ___ __  _ _ _
+/ _|   Y _ Y _ Y   | '_| | | ' | /  _/  \| ' ' \
+\__\ | | __/ __/ | | | | | | | |_| || () | | | |
+|__/ __|___|___|___|_| \_,_|_|_|_\___\__/|_|_|_|
+   |_|
+
+-->
+<html class="hidden">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Super Mario 64 - Leaderboard - speedrun.com</title>
+    <meta name="description" content="Speedrunning leaderboards, resources, forums, and more!">
+    <meta name="csrftoken" content="">
+
+    <!-- Begin twitter card -->
+    <meta name="twitter:card" content="summary"/>
+    <!--<meta name="twitter:site" content="@speedruncom" />-->
+    <meta name="twitter:title" content="speedrun.com"/>
+    <meta name="twitter:description" content="Super Mario 64 - Leaderboard"/>
+    <meta name="twitter:image" content="http://www.speedrun.com/themes/sm64/TwitterCard.png"/>
+    <!-- End twitter card -->
+
+    <link href="/assets/css/vendor-speedruncom.min.css?v=4340b7e5" rel="stylesheet">
+    <link href="/assets/theme.php?theme=sm64&amp;v=b9c759465c80c207" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel="stylesheet">
+    <!--<link rel="icon" href="/themes/sm64/favicon.png?v=50163e7d">-->
+    <link rel="icon" href="/themes/Default/1st.png">
+
+    <!--[if lte IE 9]>
+    <script src="/assets/js/html5shiv.min.js?v=31097bd3"></script>
+    <![endif]-->
+
+    <script src="/assets/js/vendor-speedruncom.min.js?v=ffb78518"></script>
+    <script src="/assets/js/app-speedruncom.min.js?v=eae7f5d6"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <script>
+		document.documentElement.className += ' js';
+
+		var loadinggif = "<img class=\"loadingicon\" src=\"\/images\/loading.png?v=d8f9632f\" alt=\"Loading...\">";
+		var dateformat = {
+			relative: true,
+			dates: "Y-m-d",
+			times: "H:i",
+			long: "Y-m-d, H:i",
+		};
+
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-46440602-1', 'www.speedrun.com');
+		ga('send', 'pageview');
+
+		var bgscroll = 0;
+		var fgscroll = 0;
+
+    </script>
+
+    <script>
+		var script = document.createElement('script');
+		var tstamp = new Date();
+		script.id = 'factorem';
+		script.src = '//cdm.cursecdn.com/js/speedrun/cdmfactorem_min.js?sec=home&misc=' + tstamp.getTime();
+		script.async = false;
+		script.type='text/javascript';
+		document.head.appendChild(script);
+
+    </script>
+</head>
+<body>
+
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container navbar-top">
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+    </div><!-- /.container -->
+    <div class="container navbar-bottom">
+        <div class="navbar-header visible-lg">
+            <a class="navbar-brand" href="/">
+                <img class="logo" src="/themes/sm64/logo.png?v=a307789b" alt="speedrun.com">
+            </a>
+        </div>
+        <ul class="nav navbar-nav navbar-left" id="navbar-left">
+            <li class="visible-md"><a href="/">Home</a></li>
+            <li class="visible-md visible-lg"><a href="/games">Games</a></li>
+            <li class="visible-md visible-lg"><a href="/streams">Streams</a></li>
+            <!--<li class="hidden-xs hidden-sm"><a href="/resources">Resources</a></li>-->
+            <li class="visible-md visible-lg"><a href="/forum">Forums</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><span
+                        class="visible-md visible-lg">More <span class="caret"></span></span><span
+                        class="glyphicon glyphicon-menu-hamburger visible-xs visible-sm"></span></a>
+                <ul class="dropdown-menu">
+                    <li class="visible-xs visible-sm"><a href="/"><span
+                            class="glyphicon glyphicon-home"></span>Home</a></li>
+                    <li class="visible-xs visible-sm"><a href="/games"><i class="fa fa-gamepad"></i>Games</a>
+                    </li>
+                    <li class="visible-xs visible-sm"><a href="/streams"><i
+                            class="fa fa-twitch"></i>Streams</a></li>
+                    <li class="visible-xs visible-sm"><a href="/forum"><i
+                            class="fa fa-comments"></i>Forums</a></li>
+                    <li role="separator" class="visible-xs visible-sm divider"></li>
+                    <li><a href="http://www.speedrunslive.com/races" target="_blank"><i
+                            class='fa fa-flag-checkered menu-icon'></i>Races &nbsp;<small>
+                        <small class='text-muted'>SpeedRunsLive</small>
+                    </small>
+                    </a></li>
+                    <li><a href="/resources"><span class="glyphicon glyphicon-link"></span>Resources</a>
+                    </li>
+                    <li><a href="/podcasts"><i class="fa fa-podcast"></i>Podcasts</a></li>
+                    <li><a href="/users"><i class="fa fa-users"></i>Users</a></li>
+                    <li><a href="/about"><span
+                            class="glyphicon glyphicon-info-sign"></span>About</a></li>
+                    <li><a href="/statistics"><span class="glyphicon glyphicon-stats"></span>Statistics</a>
+                    </li>
+                    <li><a href="/changelog"><span class="glyphicon glyphicon-list"></span>Changelog</a>
+                    </li>
+                    <li><a target="_blank" href="https://github.com/speedruncom/api"><i
+                            class="fa fa-cogs"></i>API</a></li>
+                    <li><a href="/promotion"><i class="fa fa-file-image-o"></i>Promotion</a></li>
+                    <li><a href="/help"><i class="fa fa-at"></i>Help / Contact</a></li>
+                    <li><a href="/donate?ref=navbar"><i class="fa fa-paypal"></i>Donate</a></li>
+                    <li><a target="_blank" href="https://www.patreon.com/speedruncom"><span
+                            class="icomoon icon-patreon"></span>Patreon</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Social</li>
+                    <li><a href="https://www.twitter.com/speedruncom" target="_blank"><i
+                            class="fa fa-twitter"></i>Twitter</a></li>
+                    <li><a href="https://www.facebook.com/speedruncom" target="_blank"><i
+                            class="fa fa-facebook"></i>Facebook</a></li>
+                    <li><a href="https://discord.gg/0h6sul1ZwHVpXJmK" target="_blank"><span
+                            class="icomoon icon-discord"></span>Discord</a></li>
+                </ul>
+            </li>
+            <li class="dropdown visible-xs">
+                <a href="#" class="dropdown-toggle search-button-xs" data-toggle="dropdown"
+                   role="button"><span class="glyphicon glyphicon-search"></span></a>
+                <ul class="dropdown-menu" id="search-results-xs">
+                    <li>
+                        <form class="navbar-form" onsubmit="return false;">
+                            <input type="text" id="search-xs"
+                                   class="form-control search searchbar-xs"
+                                   placeholder="Search for games, users, etc...">
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-left" id="navbar-search">
+            <li class="hidden-xs" id="navitem-search">
+                <form class="navbar-form" onsubmit="return false;">
+                    <input type="text" id="search-sm" class="form-control search searchbar-sm"
+                           placeholder="Search for games, users, etc...">
+                </form>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" id="navbar-right">
+            <li class="nobr longer visible-xs"><a></a></li>
+            <li class="nobr"><a href="#login" data-toggle="modal">Log in</a></li>
+            <li class="nobr longer"><a href="#signup" data-toggle="modal">Sign up</a></li>
+        </ul>
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="modal fade formatting-help" id="login" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="loginform" method="post" action="/ajax_login.php"
+                  class="ajaxpost form-horizontal" data-target="loginmessage">
+                <div class="modal-header">
+                    <h3>Log in</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="username0" class="col-sm-3 control-label">Username:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="username0" name="username"
+                                   placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-3 control-label">Password:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="password"
+                                   name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <span id="loginmessage">&nbsp;</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">Log in</button>
+                    <a class="btn btn-default" href="/resetpassword">Forgot password</a> <a
+                        class="btn btn-default" data-dismiss="modal">Cancel</a>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="signup" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="signupform" method="post" action="/ajax_signup.php"
+                  class="ajaxpost form-horizontal" data-target="signupmessage">
+                <div class="modal-header">
+                    <h3>Sign up</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="username1" class="col-sm-3 control-label">Username</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="username1" name="username"
+                                   placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-3 control-label">E-mail:</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="email" name="email"
+                                   placeholder="you@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmemail" class="col-sm-3 control-label">Confirm
+                            e-mail:</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="confirmemail"
+                                   name="confirmemail" placeholder="you@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <div class="g-recaptcha"
+                                 data-sitekey="6LdYGyIUAAAAAB7r52DVOeJZKyfuaEpIjwgDCnH8"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <span id="signupmessage">&nbsp;</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">Sign up</button>
+                    <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="language-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Languages (Beta)
+            </div>
+            <div class="modal-body">
+                <p>Hi!</p>
+                <p>Because you're a donator, you can have early access to our in-progress language
+                    system. There's still a lot for us to do, but we thought you might want to try
+                    it out!</p>
+                <p>For more info, <a href="/The_Site/thread/t9e2t/1#il0ji" target="_blank">check out
+                    this thread</a>.
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='container main' id="maincontainer">
+
+    <div class="">
+        <div class="panel centered curse curse-01 curse-wide" data-position="01" data-ad="">
+            <div class="panel-heading">
+                Advertisement &nbsp;<small class="text-muted">(Log in to hide)</small>
+            </div>
+            <div class="panel-body center padding-0">
+                <div class="curse-ad-zone" id='cdm-zone-01'></div>
+            </div>
+        </div>
+    </div>
+
+    <div class='row'>
+
+        <div class="col-md-3 sidebar-widened" id="sidebar">
+
+
+            <div class="panel panel-body sidebar">
+                <h5><a href="/sm64">Super Mario 64</a></h5>
+                <p><img class="cover-tall-128 border" src="/themes/sm64/cover-256.png" alt=""></p>
+                <small><p><a href="/mario">Super Mario series</a></p>
+                    <p><a href="/games#year=1996">1996</a></p>
+                    <p><a href="/games#platform=N64">N64</a>, <a
+                            href="/games#platform=WiiVC">WiiVC</a>, <a
+                            href="/games#platform=WiiUVC">WiiUVC</a></p></small>
+
+
+                <ul class="nav" id="sidebarlinks">
+                    <li><a href="/sm64/full_game">Full-game Leaderboard</a></li><!--
+		<li><a class="sidebarlink" href="/sm64#120_Star"><small>120 Star</small></a></li><li><a class="sidebarlink" href="/sm64#70_Star"><small>70 Star</small></a></li><li><a class="sidebarlink" href="/sm64#16_Star"><small>16 Star</small></a></li><li><a class="sidebarlink" href="/sm64#1_Star"><small>1 Star</small></a></li><li><a class="sidebarlink" href="/sm64#0_Star"><small>0 Star</small></a></li>
+		-->
+                    <li><a href="#" data-toggle="collapse" data-target="#ils" data-parent="#sidebar"
+                           class="collapsed">
+                        Level Leaderboard <span class="caret"></span></a>
+                        <div class="collapse" id="ils">
+                            <ul class="nav">
+                                <li><a href="/sm64/individual_levels">
+                                    <small>View all</small>
+                                </a></li>
+                                <li><a href="/sm64/Bob-omb_Battlefield">
+                                    <small>Bob-omb Battlefield</small>
+                                </a></li>
+                                <li><a href="/sm64/Whomps_Fortress">
+                                    <small>Whomp&#039;s Fortress</small>
+                                </a></li>
+                                <li><a href="/sm64/Jolly_Roger_Bay">
+                                    <small>Jolly Roger Bay</small>
+                                </a></li>
+                                <li><a href="/sm64/Cool_Cool_Mountain">
+                                    <small>Cool, Cool Mountain</small>
+                                </a></li>
+                                <li><a href="/sm64/Big_Boos_Haunt">
+                                    <small>Big Boo&#039;s Haunt</small>
+                                </a></li>
+                                <li><a href="/sm64/Hazy_Maze_Cave">
+                                    <small>Hazy Maze Cave</small>
+                                </a></li>
+                                <li><a href="/sm64/Lethal_Lava_Land">
+                                    <small>Lethal Lava Land</small>
+                                </a></li>
+                                <li><a href="/sm64/Shifting_Sand_Land">
+                                    <small>Shifting Sand Land</small>
+                                </a></li>
+                                <li><a href="/sm64/Dire_Dire_Docks">
+                                    <small>Dire Dire Docks</small>
+                                </a></li>
+                                <li><a href="/sm64/Snowmans_Land">
+                                    <small>Snowman&#039;s Land</small>
+                                </a></li>
+                                <li><a href="/sm64/Wet-Dry_World">
+                                    <small>Wet-Dry World</small>
+                                </a></li>
+                                <li><a href="/sm64/Tall_Tall_Mountain">
+                                    <small>Tall, Tall Mountain</small>
+                                </a></li>
+                                <li><a href="/sm64/Tiny_Huge_Island">
+                                    <small>Tiny Huge Island</small>
+                                </a></li>
+                                <li><a href="/sm64/Tick_Tock_Clock">
+                                    <small>Tick Tock Clock</small>
+                                </a></li>
+                                <li><a href="/sm64/Rainbow_Ride">
+                                    <small>Rainbow Ride</small>
+                                </a></li>
+                                <li><a href="/sm64/Secret_Stars">
+                                    <small>Secret Stars</small>
+                                </a></li>
+                                <li><a href="/sm64/Bowser_Stages">
+                                    <small>Bowser Stages</small>
+                                </a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="/sm64/guides">Guides</a></li>
+                    <li><a href="https://discord.gg/0Si1OtnB7Ylmwkwr" target="_blank">Discord</a>
+                    </li>
+                    <li><a class="ui-link" href="/sm64/streams">Streams</a></li>
+                    <li><a href="/sm64/resources">Resources</a></li>
+                    <li><a href="/sm64/forum">Forum</a></li>
+                    <li><a href="/sm64/gamestats">Statistics</a></li>
+                </ul>
+                <p class="margin-none margin-top-30">
+                    <small class="text-muted">
+                <p>
+                    Moderated by:<br><a class='nobr nounderline' href='/user/GothicLogic'><img
+                        class='usericon' src='/images/icons/supermod.png' title='Super Mod'
+                        alt='Super Mod'><span
+                        class='blackoutline username color4'>GothicLogic</span></a>, <a
+                        class='nobr nounderline' href='/user/Taggo'><img class='usericon'
+                                                                         src='/images/icons/mod.png'
+                                                                         title='Mod' alt='Mod'><span
+                        class='blackoutline username color1'>Taggo</span></a>, <a
+                        class='nobr nounderline' href='/user/Alaris_Villain'><img class='usericon'
+                                                                                  src='/images/icons/supermod.png'
+                                                                                  title='Super Mod'
+                                                                                  alt='Super Mod'><span
+                        class='blackoutline username color4'>Alaris_Villain</span></a>, <a
+                        class='nobr nounderline' href='/user/toastrider91'><img class='usericon'
+                                                                                src='/images/icons/supermod.png'
+                                                                                title='Super Mod'
+                                                                                alt='Super Mod'><span
+                        class='blackoutline username color7'>toastrider91</span></a>, <a
+                        class='nobr nounderline' href='/user/pete'><img class='usericon'
+                                                                        src='/images/icons/mod.png'
+                                                                        title='Mod' alt='Mod'><img
+                        class='usericon' src='/themes/user/pete/icon.png' title="Donated $5" alt=''><span
+                        class='blackoutline username color1'><span
+                        style="color:#ee4444">p</span><span style="color:#eb5453">e</span><span
+                        style="color:#e96462">t</span><span
+                        style="color:#e77471">e</span></span></a>, <a class='nobr nounderline'
+                                                                      href='/user/ohaithereman'><img
+                        class='usericon' src='/images/icons/supermod.png' title='Super Mod'
+                        alt='Super Mod'><img class='usericon'
+                                             src='/themes/user/ohaithereman/icon.png'
+                                             title="Donated $5" alt=''><span
+                        class='blackoutline username color1'><span
+                        style="color:#ee4444">o</span><span style="color:#de4e53">h</span><span
+                        style="color:#cf5962">a</span><span style="color:#bf6472">i</span><span
+                        style="color:#b06f81">t</span><span style="color:#a07a91">h</span><span
+                        style="color:#9184a0">e</span><span style="color:#818fb0">r</span><span
+                        style="color:#729abf">e</span><span style="color:#62a5cf">m</span><span
+                        style="color:#53b0de">a</span><span
+                        style="color:#44bbee">n</span></span></a>, <a class='nobr nounderline'
+                                                                      href='/user/FrostyZako'><img
+                        class='usericon' src='/images/icons/mod.png' title='Mod' alt='Mod'><span
+                        class='blackoutline username color6'>FrostyZako</span></a>, <a
+                        class='nobr nounderline' href='/user/steveobroil'><img class='usericon'
+                                                                               src='/images/icons/mod.png'
+                                                                               title='Mod'
+                                                                               alt='Mod'><span
+                        class='blackoutline username color8'>steveobroil</span></a>, <a
+                        class='nobr nounderline' href='/user/Lyfey'><img class='usericon'
+                                                                         src='/images/icons/mod.png'
+                                                                         title='Mod' alt='Mod'><span
+                        class='blackoutline username color7'>Lyfey</span></a>, <a
+                        class='nobr nounderline' href='/user/Xarflon'><img class='usericon'
+                                                                           src='/images/icons/mod.png'
+                                                                           title='Mod'
+                                                                           alt='Mod'><img
+                        class='usericon' src='/themes/user/Xarflon/icon.png' title="Donated $5"
+                        alt=''><span class='blackoutline username color7'><span
+                        style="color:#6666ee">X</span><span style="color:#6074ee">a</span><span
+                        style="color:#5a82ee">r</span><span style="color:#5590ee">f</span><span
+                        style="color:#4f9eee">l</span><span style="color:#49acee">o</span><span
+                        style="color:#44bbee">n</span></span></a>, <a class='nobr nounderline'
+                                                                      href='/user/mrKerij'><img
+                        class='usericon' src='/images/icons/mod.png' title='Mod' alt='Mod'><img
+                        class='usericon' src='/themes/user/mrKerij/icon.png' title="Donated $5"
+                        alt=''><span class='blackoutline username color8'><span
+                        style="color:#c279e5">m</span><span style="color:#c083dd">r</span><span
+                        style="color:#be8ed6">K</span><span style="color:#bd98ce">e</span><span
+                        style="color:#bba3c7">r</span><span style="color:#b9adbf">i</span><span
+                        style="color:#b8b8b8">j</span></span></a>, <a class='nobr nounderline'
+                                                                      href='/user/atmpas'><img
+                        class='usericon' src='/images/icons/mod.png' title='Mod' alt='Mod'><span
+                        class='blackoutline username color7'>atmpas</span></a>, <a
+                        class='nobr nounderline' href='/user/Crabshack'><img class='usericon'
+                                                                             src='/images/icons/mod.png'
+                                                                             title='Mod'
+                                                                             alt='Mod'><span
+                        class='blackoutline username color2'>Crabshack</span></a></p></small></p>
+            </div>
+
+
+            <div class="">
+                <div class="panel centered curse curse-02 curse-square" data-position="02"
+                     data-ad="">
+                    <div class="panel-heading">
+                        Advertisement &nbsp;<small class="text-muted">(Log in to hide)</small>
+                    </div>
+                    <div class="panel-body center padding-0">
+                        <div class="curse-ad-zone" id='cdm-zone-02'></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-9 main-widened" id="main">
+            <div class="maincontent">
+                <script type="text/javascript">
+	var cats = {"2409":"120_Star","2410":"70_Star","2414":"16_Star","2415":"1_Star","2416":"0_Star"};
+
+	function getCategoryIDFromUrl(url) {
+		for (var id in cats) {
+			if (cats[id] === url) {
+				return id;
+			}
+		}
+	}
+
+	function getCategoryUrlFromID(id) {
+		return encodeURIComponent(cats[id]);
+	}
+
+	function leaderboardChange() {
+		$('#leaderboarddiv').html("\t\t<div class=\"loadingbox\"><img class=\"loadingicon\" src=\"\/images\/loading.png?v=d8f9632f\" alt=\"Loading...\"><\/div>\n");
+
+		updateLeaderboard(true);
+	}
+
+	function leaderboardLoad() {
+		if (window.location.hash) {
+			var hash  = forgivingUrlDecode(window.location.hash.replace('#', ''));
+			var parts = hash.split(',');
+
+			if (parts.length > 0) {
+				$('#category').val(getCategoryIDFromUrl(parts[0]));
+			}
+		}
+
+		updateLeaderboard(false);
+	}
+
+	function updateLeaderboard(updateHash) {
+		var category = parseInt($('#category').val());
+
+		if (updateHash) {
+			window.location.replace('#' + getCategoryUrlFromID(category));
+		}
+
+		// Highlight the selected category.
+		activateCategory(category);
+
+		// Only show the variables relevant for the selected category.
+		switchVariables(category);
+
+		// Highlight the selected subcategory values.
+		activateValues();
+
+		// Get the actual leaderboard.
+		ajax_get($('#leaderboardform'), 'leaderboarddiv');
+
+		// Update the submit run button to link directly to the selected category.
+		if ($('#submitrun')) {
+			$('#submitrun').attr('href', '/sm64/editrun#' + getCategoryUrlFromID(category));
+		}
+	}
+
+	function activateCategory(category) {
+		// Remove the active class from all elements in the category navigations.
+		$('.category').removeClass('active');
+		$('#miscellaneous').removeClass('active');
+
+		// Highlight the selected category.
+		$('#category' + category).addClass('active');
+		$('#category' + category).parent().parent().addClass('active');
+	}
+
+	function activateValues() {
+		// Remove the active class from all elements in the values navigation.
+		$('.valuesnav').find('.active').removeClass('active');
+
+		// Highlight the selected value for each subcategory variable.
+		$('input.variable').each(function() {
+			var varID = parseInt(this.id.replace('variable', ''));
+			$('#varnav' + varID).find('li#value' + this.value).toggleClass('active');
+		});
+	}
+
+	function switchVariables(category) {
+		// Hide/show the right variables based for the category.
+		// Note that this affects all variables, subcategory or not.
+		$('.variable').each(function() {
+			var catvalue = parseInt($(this).data('cat'));
+			$(this).toggle(catvalue === -1 || catvalue === category);
+		});
+	}
+
+	$(document).ready(function() {
+
+		$('.filteroption').click(function() {
+			$(this).parent().parent().children().removeClass('active');
+			$(this).parent().addClass('active');
+		});
+
+	});
+
+                </script>
+
+                <ul class="nav nav-tabs">
+                    <li id="category2409" class='category'>
+                        <a href="javascript:;"
+                           onclick="$('#category').val(2409); leaderboardChange();">120 Star</a>
+                    </li>
+                    <li id="category2410" class='category'>
+                        <a href="javascript:;"
+                           onclick="$('#category').val(2410); leaderboardChange();">70 Star</a>
+                    </li>
+                    <li id="category2414" class='category'>
+                        <a href="javascript:;"
+                           onclick="$('#category').val(2414); leaderboardChange();">16 Star</a>
+                    </li>
+                    <li id="category2415" class='category'>
+                        <a href="javascript:;"
+                           onclick="$('#category').val(2415); leaderboardChange();">1 Star</a>
+                    </li>
+                    <li id="category2416" class='category'>
+                        <a href="javascript:;"
+                           onclick="$('#category').val(2416); leaderboardChange();">0 Star</a>
+                    </li>
+
+                </ul>
+
+
+                <div class="panel panel-body panel-tabbed">
+                    <div class='row'>
+                        <div class='col-xs-7'>
+                            <section class="table-display valuesnav">
+                                <ul class="nav nav-pills variable" id="varnav5138" data-cat="-1">
+                                    <li id="value16457" role="presentation"><a href="javascript:;"
+                                                                               onclick="$('#variable5138').val(16457); leaderboardChange();">N64</a>
+                                    </li>
+                                    <li id="value16458" role="presentation"><a href="javascript:;"
+                                                                               onclick="$('#variable5138').val(16458); leaderboardChange();">VC</a>
+                                    </li>
+                                    <li id="value16459" role="presentation"><a href="javascript:;"
+                                                                               onclick="$('#variable5138').val(16459); leaderboardChange();">EMU</a>
+                                    </li>
+                                </ul>
+                            </section>
+                        </div>
+                        <div class='col-xs-5 right'>
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown">
+                                    Filter <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu"
+                                    aria-labelledby="dropdownMenu">
+
+                                    <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="javascript:">Regions</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="active"><a href="javascript:"
+                                                                  class="filteroption"
+                                                                  onclick="$('#region').val(0);leaderboardChange();">Any
+                                                region</a></li>
+                                            <li><a href="javascript:" class="filteroption"
+                                                   onclick="$('#region').val(1);leaderboardChange();">USA
+                                                / NTSC</a></li>
+                                            <li><a href="javascript:" class="filteroption"
+                                                   onclick="$('#region').val(2);leaderboardChange();">EUR
+                                                / PAL</a></li>
+                                            <li><a href="javascript:" class="filteroption"
+                                                   onclick="$('#region').val(3);leaderboardChange();">JPN
+                                                / NTSC</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="javascript:">Platforms</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="active"><a href="javascript:"
+                                                                  class="filteroption"
+                                                                  onclick="$('#platform').val(0);leaderboardChange();">Any
+                                                platform</a></li>
+                                            <li><a href="javascript:" class="filteroption"
+                                                   onclick="$('#platform').val(3);leaderboardChange();">Nintendo
+                                                64</a></li>
+                                            <li><a href="javascript:" class="filteroption"
+                                                   onclick="$('#platform').val(5);leaderboardChange();">Wii
+                                                Virtual Console</a></li>
+                                            <li><a href="javascript:" class="filteroption"
+                                                   onclick="$('#platform').val(57);leaderboardChange();">Wii
+                                                U Virtual Console</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="javascript:">Verified</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="active"><a href="javascript:"
+                                                                  class="filteroption"
+                                                                  onclick="$('#variable19022').val(0);leaderboardChange();">Any</a>
+                                            </li>
+                                            <li><a href="javascript:" class="filteroption"
+                                                   onclick="$('#variable19022').val('62529');leaderboardChange();">Yes</a>
+                                            </li>
+                                            <li><a href="javascript:" class="filteroption"
+                                                   onclick="$('#variable19022').val('62530');leaderboardChange();">No</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="javascript:">Emulators</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="active"><a href="javascript:"
+                                                                  class="filteroption"
+                                                                  onclick="$('#emulator').val(2);leaderboardChange();">Shown</a>
+                                            </li>
+                                            <li><a href="javascript:" class="filteroption"
+                                                   onclick="$('#emulator').val(0);leaderboardChange();">Hidden</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="javascript:">Videos</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="active"><a href="javascript:"
+                                                                  class="filteroption"
+                                                                  onclick="$('#video').val(0);leaderboardChange();">With
+                                                or without</a></li>
+                                            <li><a href="javascript:" class="filteroption"
+                                                   onclick="$('#video').val(1);leaderboardChange();">With
+                                                only</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="javascript:">Obsoleted runs</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="active"><a href="javascript:"
+                                                                  class="filteroption"
+                                                                  onclick="$('#obsolete').val(0);leaderboardChange();">Hidden</a>
+                                            </li>
+                                            <li><a href="javascript:" class="filteroption"
+                                                   onclick="$('#obsolete').val(1);leaderboardChange();">Shown</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <a href='#rules' data-toggle='modal' class='btn btn-default'>View
+                                rules</a>
+                            <a href="/sm64/editrun" class="btn btn-default" id="submitrun">Submit
+                                run</a>
+                        </div>
+                    </div>
+
+                    <form id="leaderboardform" method="GET" action="/ajax_leaderboard.php">
+                        <input type="hidden" name="game" value="sm64">
+                        <input type="hidden" name="verified" value="1">
+                        <input type="hidden" name="category" id="category" value="2409">
+
+                        <input type="hidden" name="region" id="region">
+
+                        <input type="hidden" name="platform" id="platform">
+
+                        <input type="hidden" class="variable" id="variable5138" name="variable5138"
+                               value="16457">
+                        <span class="variable" data-cat="-1">
+				<input type="hidden" id="variable19022" name="variable19022">
+				<script type="text/javascript">$('#variable19022').val();</script>
+			</span>
+
+                        <input type="hidden" id="loadtimes" name="loadtimes"
+                               onchange="leaderboardChange();" value="0">
+
+                        <input value="2" type="hidden" name="emulator" id="emulator">
+
+                        <input type="hidden" name="video" id="video">
+                        <input type="hidden" name="obsolete" id="obsolete">
+
+                    </form>
+
+                    <div id="leaderboarddiv" class="margin-top-30">
+                        <div class="loadingbox"><img class="loadingicon"
+                                                     src="/images/loading.png?v=d8f9632f"
+                                                     alt="Loading..."></div>
+                    </div>
+                    <script>leaderboardLoad();</script>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+
+            <div class=" visible-xs visible-sm">
+                <div class="panel centered curse curse-06 curse-square" data-position="06"
+                     data-ad="">
+                    <div class="panel-heading">
+                        Advertisement &nbsp;<small class="text-muted">(Log in to hide)</small>
+                    </div>
+                    <div class="panel-body center padding-0">
+                        <div class="curse-ad-zone" id='cdm-zone-06'></div>
+                    </div>
+                </div>
+            </div>
+            <div class="visible-md visible-lg">
+                <div class="panel centered curse curse-04 curse-wide" data-position="04" data-ad="">
+                    <div class="panel-heading">
+                        Advertisement &nbsp;<small class="text-muted">(Log in to hide)</small>
+                    </div>
+                    <div class="panel-body center padding-0">
+                        <div class="curse-ad-zone" id='cdm-zone-04'></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    &copy; 2018
+    &middot; <a rel="license" href="/about"><img
+        alt="Creative Commons Attribution-NonCommercial 4.0 International"
+        title="Creative Commons Attribution-NonCommercial 4.0 International"
+        src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png"/></a>
+</footer>
+
+<footer id="foreground"></footer>
+
+<!-- Begin comScore -->
+<script>
+	var _comscore = _comscore || [];
+	_comscore.push({ c1: "2", c2: "6035118" });
+	(function() {
+		var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+		s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+		el.parentNode.insertBefore(s, el);
+	})();
+
+</script>
+<noscript>
+    <img src="http://b.scorecardresearch.com/p?c1=2&amp;c2=6035118&amp;cv=2.0&amp;cj=1"/>
+</noscript>
+<!-- End comScore -->
+
+<script src="/assets/js/ads.js"></script>
+
+<!-- Nielsen Online SiteCensus -->
+<div><img
+        src="//secure-us.imrworldwide.com/cgi-bin/m?ci=us-603339h&amp;cg=0&amp;cc=1&amp;ts=noscript"
+        width="1" height="1" alt=""/></div>
+<!-- End Nielsen Online SiteCensus -->
+
+<div class="device-xs visible-xs"></div>
+<div class="device-sm visible-sm"></div>
+<div class="device-md visible-md"></div>
+<div class="device-lg visible-lg"></div>
+<div id='cdm-zone-end'></div>
+</body>
+</html>

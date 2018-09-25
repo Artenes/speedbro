@@ -20,6 +20,12 @@ import io.github.artenes.speedbro.speedrun.com.models.Video;
  */
 public class RunHtmlParser {
 
+    private GameHtmlParser gameParser;
+
+    public RunHtmlParser() {
+        gameParser = new GameHtmlParser();
+    }
+
     /**
      * Parse a run from the given document
      *
@@ -29,13 +35,7 @@ public class RunHtmlParser {
     public Run parse(Document document) {
 
         //search for the game info
-        Game game = Game.Builder.aGame()
-                .withId(Utils.lastSegmentOfUri(document.select("h5 a").attr("href")))
-                .withTitle(document.select("h5").text())
-                .withCover(Contract.asAbsolutePath(document.select("div#sidebar div.sidebar p img").attr("src")))
-                .withYear(document.select("div#sidebar small p:nth-child(1)").text())
-                .withPlatforms(document.select("div#sidebar small p:nth-child(2)").text())
-                .build();
+        Game game = gameParser.parse(document);
 
         //search for the video info
         String videoUrl = document.select("iframe").attr("src");

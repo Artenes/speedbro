@@ -2,6 +2,9 @@ package io.github.artenes.speedbro.speedrun.com.models;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A game
  */
@@ -12,6 +15,7 @@ public class Game {
     private final String cover;
     private final String year;
     private final String platforms;
+    private final List<Category> categories;
 
     private Game(Builder builder) {
         this.id = builder.id;
@@ -19,6 +23,7 @@ public class Game {
         this.cover = builder.cover;
         this.year = builder.year;
         this.platforms = builder.platforms;
+        this.categories = builder.categories;
     }
 
     public String getId() {
@@ -41,12 +46,21 @@ public class Game {
         return platforms;
     }
 
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public static Builder build() {
+        return Game.Builder.aGame();
+    }
+
     public static final class Builder {
         private String id = "";
         private String title = "";
         private String cover = "";
         private String year = "";
         private String platforms = "";
+        private List<Category> categories = new ArrayList<>();
 
         private Builder() {
         }
@@ -77,6 +91,11 @@ public class Game {
 
         public Builder withPlatforms(@NonNull String platforms) {
             this.platforms = platforms;
+            return this;
+        }
+
+        public Builder withCategories(@NonNull List<Category> categories) {
+            this.categories = categories;
             return this;
         }
 

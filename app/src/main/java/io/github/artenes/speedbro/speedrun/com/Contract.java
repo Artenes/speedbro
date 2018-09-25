@@ -91,4 +91,18 @@ public class Contract {
         return AUTHORITY + gameId + "/run/" + runId;
     }
 
+    /**
+     * Get the url for a leader board
+     *
+     * @param gameId the id of the game
+     * @param categoryId the id of the category
+     * @return the absolute path for the leader board
+     */
+    public static String leaderBoardUrl(@NonNull String gameId, @NonNull String categoryId) {
+        if (gameId.isEmpty() || categoryId.isEmpty()) {
+            return "";
+        }
+        return AUTHORITY + "ajax_leaderboard.php?game="+gameId+"&category="+categoryId;
+    }
+
 }

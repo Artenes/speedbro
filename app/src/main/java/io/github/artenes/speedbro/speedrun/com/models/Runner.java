@@ -56,6 +56,10 @@ public class Runner {
         return runs;
     }
 
+    public static Builder build() {
+        return Runner.Builder.aRunner();
+    }
+
     public static final class Builder {
         private String id = "";
         private String name = "";

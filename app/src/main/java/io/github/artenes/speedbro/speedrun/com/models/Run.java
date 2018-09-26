@@ -15,9 +15,12 @@ public class Run {
     private final Video video;
     private final String category;
     private final String time;
+    private final String inGameTime;
     private final List<Runner> runners;
     private final Placement placement;
     private final String commentary;
+    private final Platform platform;
+    private final String date;
 
     private Run(Builder builder) {
         this.id = builder.id;
@@ -25,9 +28,12 @@ public class Run {
         this.video = builder.video;
         this.category = builder.category;
         this.time = builder.time;
+        this.inGameTime = builder.inGameTime;
         this.runners = builder.runners;
         this.placement = builder.placement;
         this.commentary = builder.commentary;
+        this.platform = builder.platform;
+        this.date = builder.date;
     }
 
     public String getId() {
@@ -66,11 +72,27 @@ public class Run {
         return commentary;
     }
 
+    public String getInGameTime() {
+        return inGameTime;
+    }
+
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
     public Runner getFirstRunner() {
         if (runners.isEmpty()) {
             return Runner.Builder.aRunner().build();
         }
         return runners.get(0);
+    }
+
+    public static Builder build() {
+        return Run.Builder.aRun();
     }
 
     public static final class Builder {
@@ -82,6 +104,9 @@ public class Run {
         private List<Runner> runners = new ArrayList<>();
         private Placement placement = Placement.Builder.aPlacement().build();
         private String commentary = "";
+        private String inGameTime = "";
+        private Platform platform = new Platform("", "", "");
+        private String date = "";
 
         private Builder() {
         }
@@ -127,6 +152,21 @@ public class Run {
 
         public Builder withCommentary(@NonNull String commentary) {
             this.commentary = commentary;
+            return this;
+        }
+
+        public Builder withInGameTime(@NonNull String inGameTime) {
+            this.inGameTime = inGameTime;
+            return this;
+        }
+
+        public Builder withPlatform(@NonNull Platform platform) {
+            this.platform = platform;
+            return this;
+        }
+
+        public Builder withDate(@NonNull String date) {
+            this.date = date;
             return this;
         }
 

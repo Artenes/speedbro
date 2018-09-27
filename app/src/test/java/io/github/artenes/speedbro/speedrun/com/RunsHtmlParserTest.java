@@ -140,6 +140,19 @@ public class RunsHtmlParserTest {
     }
 
     @Test
+    public void extractFromRunThatCameFromCategoryWithLoadTimes() throws IOException {
+        Document document = TestUtils.getDocument(this, "run_from_category_with_load_times.html");
+        RunsHtmlParser parser = new RunsHtmlParser(RunsHtmlParser.Source.CATEGORIES);
+        List<Run> runs = parser.parse(document);
+
+        assertEquals(95, runs.size());
+
+        Run depCow = runs.get(0);
+        assertEquals("50m 57s", depCow.getTime());
+        assertEquals("42m 47s", depCow.getInGameTime());
+    }
+
+    @Test
     public void extractNothingFromEmptyTable() {
         Document document = Jsoup.parse("<html><body><table><tbody><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr></tbody></table></body></html>");
         RunsHtmlParser parser = new RunsHtmlParser(RunsHtmlParser.Source.CATEGORIES);

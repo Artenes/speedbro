@@ -60,12 +60,12 @@ public class CategoryRunsHtmlParser implements Parser<List<Run>> {
                 continue;
             }
 
-            if (title.text().equalsIgnoreCase("Real time") || title.text().equalsIgnoreCase("time")) {
+            if (title.text().equalsIgnoreCase("Real time") || title.text().equalsIgnoreCase("time") || title.text().equalsIgnoreCase("Time with loads")) {
                 realTimeIndex = String.valueOf(currentIndex);
                 continue;
             }
 
-            if (title.text().equalsIgnoreCase("In-game time")) {
+            if (title.text().equalsIgnoreCase("In-game time") || title.text().equalsIgnoreCase("Time without loads")) {
                 inGameTimeIndex = String.valueOf(currentIndex);
                 continue;
             }

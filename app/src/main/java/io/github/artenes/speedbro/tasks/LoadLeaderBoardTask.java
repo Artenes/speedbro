@@ -1,16 +1,17 @@
 package io.github.artenes.speedbro.tasks;
 
 import java.io.IOException;
+import java.util.List;
 
 import io.github.artenes.speedbro.models.DataState;
-import io.github.artenes.speedbro.speedrun.com.models.Game;
+import io.github.artenes.speedbro.speedrun.com.models.Run;
 
 /**
- * Task to load the data of a game
+ * Task to load the data of a runner
  */
-public class LoadGameTask extends LoadDataTask<Game> {
+public class LoadLeaderBoardTask extends LoadDataTask<List<Run>> {
 
-    public LoadGameTask(DataState<Game> state) {
+    public LoadLeaderBoardTask(DataState<List<Run>> state) {
         super(state);
     }
 
@@ -21,11 +22,11 @@ public class LoadGameTask extends LoadDataTask<Game> {
             return;
         }
 
-        String gameId = ids[0];
+        String url = ids[0];
 
         try {
-            Game game = mRepository.getGameWithoutLeaderBoards(gameId);
-            mState.setData(game).setHasError(false);
+            List<Run> runs = mRepository.getLeaderBoardDirectly(url);
+            mState.setData(runs).setHasError(false);
         } catch (IOException exception) {
             mState.setHasError(true);
         }

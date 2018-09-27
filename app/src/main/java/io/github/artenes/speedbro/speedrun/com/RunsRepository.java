@@ -73,9 +73,22 @@ public class RunsRepository {
      * @return the found game
      * @throws IOException if connection error occurs
      */
-    public Game getGameWithtouLeaderboards(String id) throws IOException {
+    public Game getGameWithoutLeaderBoards(String id) throws IOException {
         Document document = Jsoup.connect(Contract.gameUrl(id)).get();
         GameHtmlParser parser = new GameHtmlParser();
+        return parser.parse(document);
+    }
+
+    /**
+     * Get a leader board from the given url
+     *
+     * @param url the url with the leader board
+     * @return the list of runs from the leader board
+     * @throws IOException if connection error occurs
+     */
+    public List<Run> getLeaderBoardDirectly(String url) throws IOException {
+        Document document = Jsoup.connect(url).get();
+        RunsHtmlParser parser = new RunsHtmlParser(RunsHtmlParser.Source.CATEGORIES);
         return parser.parse(document);
     }
 

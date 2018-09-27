@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.artenes.speedbro.speedrun.com.models.Game;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.utils.ImageLoader;
 
@@ -17,7 +18,7 @@ import io.github.artenes.speedbro.utils.ImageLoader;
  * so it becomes easier to manage each one individually or to add
  * new ones in the future
  */
-public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetailRunnerSection.OnRunnerClickListener {
+public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetailRunnerSection.OnRunnerClickListener, RunDetailGameSection.OnGameClickedListener {
 
     private final ImageLoader mImageLoader;
     private Run mRun;
@@ -38,7 +39,7 @@ public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetail
             mSections.add(new RunDetailCommentSection());
         }
 
-        mSections.add(new RunDetailGameSection(mImageLoader));
+        mSections.add(new RunDetailGameSection(mImageLoader, this));
 
         notifyDataSetChanged();
     }
@@ -75,6 +76,11 @@ public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetail
     @Override
     public void onRunnerClick(Context context) {
         RunnerActivity.start(mRun.getFirstRunner().getId(), context);
+    }
+
+    @Override
+    public void onGameClicked(Context context) {
+        GameActivity.start(context, mRun.getGame().getId());
     }
 
 }

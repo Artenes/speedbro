@@ -1,5 +1,6 @@
 package io.github.artenes.speedbro.views;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +18,11 @@ import io.github.artenes.speedbro.utils.ImageLoader;
 public class RunDetailGameSection implements ScreenSection {
 
     private final ImageLoader imageLoader;
+    private final OnGameClickedListener gameClickedListener;
 
-    RunDetailGameSection(ImageLoader imageLoader) {
+    RunDetailGameSection(ImageLoader imageLoader, OnGameClickedListener gameClickedListener) {
         this.imageLoader = imageLoader;
+        this.gameClickedListener = gameClickedListener;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class RunDetailGameSection implements ScreenSection {
         ((GameViewHolder) viewHolder).bind(run);
     }
 
-    public class GameViewHolder extends RecyclerView.ViewHolder {
+    public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView mGameCover;
         private final TextView mGameTitle;
@@ -48,7 +51,19 @@ public class RunDetailGameSection implements ScreenSection {
         void bind(Run run) {
             imageLoader.load(run.getGame().getCover(), R.drawable.placeholder, mGameCover);
             mGameTitle.setText(run.getGame().getTitle());
+            mGameCover.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            gameClickedListener.onGameClicked(itemView.getContext());
+        }
+
+    }
+
+    public interface OnGameClickedListener {
+
+        void onGameClicked(Context context);
 
     }
 

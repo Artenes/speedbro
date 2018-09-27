@@ -130,8 +130,4 @@ public class RunnerActivity extends BaseActivity implements RunsAdapter.OnRunCli
         //do nothing since we are already displaying the runner
     }
 
-    public void onUpNavigationPressed(View view) {
-        finish();
-    }
-
 }

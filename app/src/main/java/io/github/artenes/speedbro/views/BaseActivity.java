@@ -105,6 +105,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         onTryAgain();
     }
 
+    /**
+     * Method that can be available through the view
+     * that is called when a fake up navigation button is pressed
+     *
+     * @param view the view that is pressed
+     */
+    public void onUpNavigationPressed(View view) {
+        finish();
+    }
+
     private boolean areViewsInitialized() {
         return mContainer != null && mErrorMessage != null && mProgressBar != null;
     }

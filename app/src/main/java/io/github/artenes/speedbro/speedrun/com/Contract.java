@@ -105,4 +105,17 @@ public class Contract {
         return AUTHORITY + "ajax_leaderboard.php?game="+gameId+"&category="+categoryId;
     }
 
+    /**
+     * Get the url for a game
+     *
+     * @param id the id of the game (its abbreviation)
+     * @return the absolute path for the game
+     */
+    public static String gameUrl(@NonNull String id) {
+        if (id.isEmpty()) {
+            return id;
+        }
+        return AUTHORITY + id;
+    }
+
 }

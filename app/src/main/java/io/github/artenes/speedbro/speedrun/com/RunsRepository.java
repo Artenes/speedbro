@@ -6,10 +6,12 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 import java.util.List;
 
+import io.github.artenes.speedbro.speedrun.com.models.Game;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.speedrun.com.models.Runner;
 import io.github.artenes.speedbro.speedrun.com.website.DocumentBuilder;
 import io.github.artenes.speedbro.speedrun.com.website.DocumentFetcher;
+import io.github.artenes.speedbro.speedrun.com.website.GameHtmlParser;
 import io.github.artenes.speedbro.speedrun.com.website.RunsHtmlParser;
 import io.github.artenes.speedbro.speedrun.com.website.RunHtmlParser;
 import io.github.artenes.speedbro.speedrun.com.website.RunnerHtmlParser;
@@ -61,6 +63,19 @@ public class RunsRepository {
     public Runner getRunner(String id) throws IOException {
         Document document = builder.buildRunnerDocument(id);
         RunnerHtmlParser parser = new RunnerHtmlParser();
+        return parser.parse(document);
+    }
+
+    /**
+     * Get a game
+     *
+     * @param id the id of the game (its abbreviation)
+     * @return the found game
+     * @throws IOException if connection error occurs
+     */
+    public Game getGameWithtouLeaderboards(String id) throws IOException {
+        Document document = Jsoup.connect(Contract.gameUrl(id)).get();
+        GameHtmlParser parser = new GameHtmlParser();
         return parser.parse(document);
     }
 

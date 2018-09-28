@@ -3,5 +3,6 @@
 
     <integer name="latest_runs_grid_columns">2</integer>
     <integer name="runner_runs_grid_columns">1</integer>
+    <integer name="category_runs_grid_columns">1</integer>
 
 </resources>

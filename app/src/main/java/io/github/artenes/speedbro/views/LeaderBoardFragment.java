@@ -53,7 +53,7 @@ public class LeaderBoardFragment extends BaseFragment implements LeaderBoardRuns
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), getActivity().getResources().getInteger(R.integer.latest_runs_grid_columns));
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), getActivity().getResources().getInteger(R.integer.category_runs_grid_columns));
         mAdapter = new LeaderBoardRunsAdapter(Dependencies.getImageLoader(), this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);

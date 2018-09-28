@@ -1,6 +1,7 @@
 package io.github.artenes.speedbro.speedrun.com;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * The contract of the website: authority, endpoints, urls, etc.
@@ -94,15 +95,20 @@ public class Contract {
     /**
      * Get the url for a leader board
      *
-     * @param gameId the id of the game
+     * @param gameId     the id of the game
      * @param categoryId the id of the category
+     * @param arguments  additional optional arguments for the url (e.g. arg1=val1&arg2=val2)
      * @return the absolute path for the leader board
      */
-    public static String leaderBoardUrl(@NonNull String gameId, @NonNull String categoryId) {
+    public static String leaderBoardUrl(@NonNull String gameId, @NonNull String categoryId, @Nullable String arguments) {
         if (gameId.isEmpty() || categoryId.isEmpty()) {
             return "";
         }
-        return AUTHORITY + "ajax_leaderboard.php?game="+gameId+"&category="+categoryId;
+        String url = AUTHORITY + "ajax_leaderboard.php?game=" + gameId + "&category=" + categoryId;
+        if (arguments != null && !arguments.isEmpty()) {
+            url += "&" + arguments;
+        }
+        return url;
     }
 
     /**

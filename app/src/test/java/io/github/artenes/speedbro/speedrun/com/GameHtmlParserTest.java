@@ -41,19 +41,19 @@ public class GameHtmlParserTest {
     @Test
     public void extractGameCategories() {
         assertEquals("120 Star", fullGame.getCategories().get(0).getName());
-        assertEquals("https://www.speedrun.com/ajax_leaderboard.php?game=sm64&category=2409", fullGame.getCategories().get(0).getUrl());
+        assertEquals("https://www.speedrun.com/ajax_leaderboard.php?game=sm64&category=2409&verified=1&variable5138=16457&loadtimes=0&emulator=2", fullGame.getCategories().get(0).getUrl());
 
         assertEquals("70 Star", fullGame.getCategories().get(1).getName());
-        assertEquals("https://www.speedrun.com/ajax_leaderboard.php?game=sm64&category=2410", fullGame.getCategories().get(1).getUrl());
+        assertEquals("https://www.speedrun.com/ajax_leaderboard.php?game=sm64&category=2410&verified=1&variable5138=16457&loadtimes=0&emulator=2", fullGame.getCategories().get(1).getUrl());
 
         assertEquals("16 Star", fullGame.getCategories().get(2).getName());
-        assertEquals("https://www.speedrun.com/ajax_leaderboard.php?game=sm64&category=2414", fullGame.getCategories().get(2).getUrl());
+        assertEquals("https://www.speedrun.com/ajax_leaderboard.php?game=sm64&category=2414&verified=1&variable5138=16457&loadtimes=0&emulator=2", fullGame.getCategories().get(2).getUrl());
 
         assertEquals("1 Star", fullGame.getCategories().get(3).getName());
-        assertEquals("https://www.speedrun.com/ajax_leaderboard.php?game=sm64&category=2415", fullGame.getCategories().get(3).getUrl());
+        assertEquals("https://www.speedrun.com/ajax_leaderboard.php?game=sm64&category=2415&verified=1&variable5138=16457&loadtimes=0&emulator=2", fullGame.getCategories().get(3).getUrl());
 
         assertEquals("0 Star", fullGame.getCategories().get(4).getName());
-        assertEquals("https://www.speedrun.com/ajax_leaderboard.php?game=sm64&category=2416", fullGame.getCategories().get(4).getUrl());
+        assertEquals("https://www.speedrun.com/ajax_leaderboard.php?game=sm64&category=2416&verified=1&variable5138=16457&loadtimes=0&emulator=2", fullGame.getCategories().get(4).getUrl());
     }
 
     @Test

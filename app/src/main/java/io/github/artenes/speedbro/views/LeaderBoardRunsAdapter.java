@@ -89,7 +89,7 @@ public class LeaderBoardRunsAdapter extends RecyclerView.Adapter<LeaderBoardRuns
             Runner runner = run.getFirstRunner();
 
             mRunner.setText(runner.getName());
-            mTime.setText(run.getTime());
+            mTime.setText(run.getTime().isEmpty() ? run.getInGameTime() : run.getTime());
             mRankPosition.setText(run.getPlacement().getPlace());
 
             //load the country icon if available

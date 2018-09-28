@@ -122,6 +122,7 @@ public class RunsAdapter extends RecyclerView.Adapter<RunsAdapter.LatestRunViewH
             mImageLoader.load(runner.getFlag(), mCountryIcon);
 
             //load the position icon if available
+            mPositionIcon.setVisibility(View.VISIBLE);
             mImageLoader.load(run.getPlacement().getIcon(), mPositionIcon);
 
             if (!runner.getId().isEmpty()) {

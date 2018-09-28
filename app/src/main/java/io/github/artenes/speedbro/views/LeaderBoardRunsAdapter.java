@@ -66,7 +66,13 @@ public class LeaderBoardRunsAdapter extends RecyclerView.Adapter<LeaderBoardRuns
         private final ImageView mPositionIcon;
         private final TextView mRankPosition;
         private final TextView mTime;
+        private final TextView mInGameTime;
+        private final TextView mPlatform;
+        private final ImageView mPlatformFlag;
+        private final TextView mDate;
         private final CardView mCardView;
+        private final TextView mTimeLabel;
+        private final TextView mInGameTimeLabel;
 
         RunViewHolder(View itemView) {
             super(itemView);
@@ -75,6 +81,12 @@ public class LeaderBoardRunsAdapter extends RecyclerView.Adapter<LeaderBoardRuns
             mPositionIcon = itemView.findViewById(R.id.position_icon);
             mRankPosition = itemView.findViewById(R.id.position);
             mTime = itemView.findViewById(R.id.time);
+            mInGameTime = itemView.findViewById(R.id.game_time);
+            mPlatform = itemView.findViewById(R.id.platform);
+            mPlatformFlag = itemView.findViewById(R.id.region_flag);
+            mDate = itemView.findViewById(R.id.date);
+            mTimeLabel = itemView.findViewById(R.id.realtime_label);
+            mInGameTimeLabel = itemView.findViewById(R.id.ingametime_label);
             mCardView = itemView.findViewById(R.id.cv_contents);
 
             mCardView.setOnClickListener(this);
@@ -89,14 +101,36 @@ public class LeaderBoardRunsAdapter extends RecyclerView.Adapter<LeaderBoardRuns
             Runner runner = run.getFirstRunner();
 
             mRunner.setText(runner.getName());
-            mTime.setText(run.getTime().isEmpty() ? run.getInGameTime() : run.getTime());
             mRankPosition.setText(run.getPlacement().getPlace());
+            mPlatform.setText(run.getPlatform().getName());
+            mDate.setText(run.getDate());
+
+            if (!run.getTime().isEmpty()) {
+                mTime.setVisibility(View.VISIBLE);
+                mTimeLabel.setVisibility(View.VISIBLE);
+                mTime.setText(run.getTime());
+            } else {
+                mTime.setVisibility(View.GONE);
+                mTimeLabel.setVisibility(View.GONE);
+            }
+
+            if (!run.getInGameTime().isEmpty()) {
+                mInGameTime.setVisibility(View.VISIBLE);
+                mInGameTimeLabel.setVisibility(View.VISIBLE);
+                mInGameTime.setText(run.getInGameTime());
+            } else {
+                mInGameTime.setVisibility(View.GONE);
+                mInGameTimeLabel.setVisibility(View.GONE);
+            }
 
             //load the country icon if available
             mImageLoader.load(runner.getFlag(), mCountryIcon);
 
             //load the position icon if available
             mImageLoader.load(run.getPlacement().getIcon(), mPositionIcon);
+
+            //load the platform flag if available
+            mImageLoader.load(run.getPlatform().getFlag(), mPlatformFlag);
 
             if (!runner.getId().isEmpty()) {
                 mRunner.setVisibility(View.VISIBLE);

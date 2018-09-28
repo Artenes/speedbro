@@ -9,4 +9,6 @@
     <string name="tap_to_watch_video">Tap to watch video on Twitch</string>
     <string name="no_video_available">No video available</string>
     <string name="runs">Runs</string>
+    <string name="real_time">Real Time</string>
+    <string name="game_time">In-game Time</string>
 </resources>

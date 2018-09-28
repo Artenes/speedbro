@@ -10,6 +10,7 @@ import java.util.List;
 
 import io.github.artenes.speedbro.speedrun.com.Contract;
 import io.github.artenes.speedbro.speedrun.com.Utils;
+import io.github.artenes.speedbro.speedrun.com.models.Game;
 import io.github.artenes.speedbro.speedrun.com.models.Placement;
 import io.github.artenes.speedbro.speedrun.com.models.Platform;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
@@ -93,6 +94,11 @@ public class CategoryRunsHtmlParser implements Parser<List<Run>> {
             //prepare the run to receive the data
             Run.Builder currentRun = Run.build();
             currentRun.withId(Utils.lastSegmentOfUri(runRow.attr("data-target")));
+            //add the id of the game so we know from where this run came
+            currentRun.withGame(Game.build()
+                    .withId(Utils.firstSegmentOfUri(runRow.attr("data-target")))
+                    .build()
+            );
 
             //if the index is different from the invalid one, it means the index
             //was found and that we have to extract data from this column

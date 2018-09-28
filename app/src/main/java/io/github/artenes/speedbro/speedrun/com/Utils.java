@@ -26,6 +26,28 @@ public class Utils {
     }
 
     /**
+     * Get the first segment of an uri separated by /
+     *
+     * @param uri the uri to get the segment from
+     * @return the first segment of the uri if it is not empty
+     */
+    public static String firstSegmentOfUri(String uri) {
+        if (uri.isEmpty()) {
+            return uri;
+        }
+
+        String cleanUri = withoutStartingSlash(uri);
+
+        String[] segments = cleanUri.split("/");
+
+        if (segments.length == 0) {
+            return "";
+        }
+
+        return segments[0];
+    }
+
+    /**
      * Get a string without its first character, which in this
      * case is used primarily to remove a forward slash from relative paths
      *

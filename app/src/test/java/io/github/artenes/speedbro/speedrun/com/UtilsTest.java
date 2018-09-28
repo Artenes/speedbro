@@ -2,8 +2,6 @@ package io.github.artenes.speedbro.speedrun.com;
 
 import org.junit.Test;
 
-import okhttp3.internal.Util;
-
 import static org.junit.Assert.assertEquals;
 
 public class UtilsTest {
@@ -11,6 +9,7 @@ public class UtilsTest {
     @Test
     public void returnEmptySegmentWhenUriIsEmpty() {
         assertEquals("", Utils.lastSegmentOfUri(""));
+        assertEquals("", Utils.firstSegmentOfUri(""));
     }
 
     @Test
@@ -67,6 +66,13 @@ public class UtilsTest {
     public void returnSameSentenceWhereThereAreOnlySpaces() {
         assertEquals(" ", Utils.getFirstWordOfSentence(" "));
         assertEquals("   ", Utils.getFirstWordOfSentence("   "));
+    }
+
+    @Test
+    public void returnFirstSegmentOfUri() {
+        assertEquals("my", Utils.firstSegmentOfUri("/my/uri"));
+        assertEquals("my", Utils.firstSegmentOfUri("my/uri"));
+        assertEquals("uri", Utils.firstSegmentOfUri("/uri"));
     }
 
 }

@@ -27,7 +27,7 @@ public class RunnerActivity extends BaseActivity implements RunsAdapter.OnRunCli
 
     private static final String EXTRA_RUNNER_ID = "extra_runner_id";
 
-    public static void start(@NonNull String runnerId, Context context) {
+    public static void start(@NonNull Context context, @NonNull String runnerId) {
         //it is possible for a runner id to be empty
         if (runnerId.isEmpty()) {
             return;

@@ -75,7 +75,7 @@ public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetail
 
     @Override
     public void onRunnerClick(Context context) {
-        RunnerActivity.start(mRun.getFirstRunner().getId(), context);
+        RunnerActivity.start(context, mRun.getFirstRunner().getId());
     }
 
     @Override

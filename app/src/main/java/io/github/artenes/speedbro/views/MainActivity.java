@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -28,6 +29,8 @@ public class MainActivity extends BaseActivity implements RunsAdapter.OnRunClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setSupportActionBar(findViewById(R.id.toolbar));
 
         mLatestRuns = findViewById(R.id.latest_runs);
         mProgressBar = findViewById(R.id.progressBar);
@@ -91,7 +94,14 @@ public class MainActivity extends BaseActivity implements RunsAdapter.OnRunClick
 
     @Override
     public void onRunnerClick(String id) {
-        RunnerActivity.start(id, this);
+        RunnerActivity.start(this, id);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        setupSearchAction(menu);
+        return true;
     }
 
 }

@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
  */
 public class Contract {
 
-    private static final String AUTHORITY = "https://www.speedrun.com/";
+    public static final String AUTHORITY = "https://www.speedrun.com/";
     public static final String BASE_API_URL = AUTHORITY + "api/v1/";
     public static final String LATEST_RUNS = AUTHORITY + "ajax_latestleaderboard.php?amount=40";
 

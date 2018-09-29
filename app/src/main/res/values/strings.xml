@@ -12,4 +12,7 @@
     <string name="real_time">Real Time</string>
     <string name="game_time">In-game Time</string>
     <string name="nothing_here">Nothing here</string>
+    <string name="search_game_users">Search for games or users</string>
+    <string name="action_search">Search</string>
+    <string name="searching_by">Searching by: %s</string>
 </resources>

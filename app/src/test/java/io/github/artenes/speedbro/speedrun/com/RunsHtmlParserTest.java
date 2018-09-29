@@ -22,10 +22,12 @@ import static org.junit.Assert.assertTrue;
 public class RunsHtmlParserTest {
 
     private RunsHtmlParser parser;
+    private RunsHtmlParser categoryParser;
 
     @Before
     public void setUp() {
         parser = new RunsHtmlParser(RunsHtmlParser.Source.HOME_PAGE);
+        categoryParser = new RunsHtmlParser(RunsHtmlParser.Source.CATEGORIES);
     }
 
     @Test
@@ -97,8 +99,7 @@ public class RunsHtmlParserTest {
     @Test
     public void extractFromRunThatCameFromCategory() throws IOException {
         Document document = TestUtils.getDocument(this, "run_from_category.html");
-        RunsHtmlParser parser = new RunsHtmlParser(RunsHtmlParser.Source.CATEGORIES);
-        List<Run> runs = parser.parse(document);
+        List<Run> runs = categoryParser.parse(document);
 
         assertEquals(317, runs.size());
 
@@ -119,8 +120,7 @@ public class RunsHtmlParserTest {
     @Test
     public void extractFromRunThatCameFromCategoryWithInGameTime() throws IOException {
         Document document = TestUtils.getDocument(this, "run_from_category_with_in_game_time.html");
-        RunsHtmlParser parser = new RunsHtmlParser(RunsHtmlParser.Source.CATEGORIES);
-        List<Run> runs = parser.parse(document);
+        List<Run> runs = categoryParser.parse(document);
 
         assertEquals(729, runs.size());
 
@@ -142,8 +142,7 @@ public class RunsHtmlParserTest {
     @Test
     public void extractFromRunThatCameFromCategoryWithLoadTimes() throws IOException {
         Document document = TestUtils.getDocument(this, "run_from_category_with_load_times.html");
-        RunsHtmlParser parser = new RunsHtmlParser(RunsHtmlParser.Source.CATEGORIES);
-        List<Run> runs = parser.parse(document);
+        List<Run> runs = categoryParser.parse(document);
 
         assertEquals(95, runs.size());
 
@@ -155,9 +154,17 @@ public class RunsHtmlParserTest {
     @Test
     public void extractNothingFromEmptyTable() {
         Document document = Jsoup.parse("<html><body><table><tbody><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr></tbody></table></body></html>");
-        RunsHtmlParser parser = new RunsHtmlParser(RunsHtmlParser.Source.CATEGORIES);
-        List<Run> runs = parser.parse(document);
+        List<Run> runs = categoryParser.parse(document);
         assertEquals(0, runs.size());
+    }
+
+    @Test
+    public void extractTheDateOfTheRunIfItDoesNotHavePlatform() throws IOException {
+        Document document = TestUtils.getDocument(this, "run_from_category_with_date_bug.html");
+        List<Run> runs = categoryParser.parse(document);
+
+        Run firstRun = runs.get(0);
+        assertEquals("6 Jul 2017", firstRun.getDate());
     }
 
 }

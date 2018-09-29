@@ -45,6 +45,7 @@ public class CategoryRunsHtmlParser implements Parser<List<Run>> {
 
         Elements headers = header.select("th");
         int currentIndex = 0;
+        boolean evaluatedTimes = false;
 
         //first pass through all the headers to find the index of the ones we need
         for (Element title : headers) {
@@ -71,11 +72,13 @@ public class CategoryRunsHtmlParser implements Parser<List<Run>> {
                 continue;
             }
 
-            if (title.text().equalsIgnoreCase("Platform")) {
-                //for some reason the last time column is always duplicated, so
-                //when we get here, we have to skip a column to get the true index
-                //for the platform column
+            //an index must be skipped due to a duplication in the last time column
+            if ((!realTimeIndex.equalsIgnoreCase(INVALID_SELECTOR_INDEX) || !inGameTimeIndex.equalsIgnoreCase(INVALID_SELECTOR_INDEX)) && !evaluatedTimes) {
+                evaluatedTimes = true;
                 currentIndex++;
+            }
+
+            if (title.text().equalsIgnoreCase("Platform")) {
                 platformIndex = String.valueOf(currentIndex);
                 continue;
             }

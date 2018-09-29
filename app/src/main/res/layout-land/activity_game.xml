@@ -99,6 +99,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="?android:attr/homeAsUpIndicator" />
 
+        <ImageView
+            android:id="@+id/game_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/colorPrimary"
+            android:scaleType="centerCrop"
+            android:alpha="0.2"/>
+
         <android.support.design.widget.TabLayout
             android:id="@+id/categories_tabs"
             android:layout_width="0dp"

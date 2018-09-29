@@ -32,10 +32,12 @@ public class GameHtmlParserTest {
 
     @Test
     public void extractGameDetails() {
+        assertEquals("sm64", fullGame.getId());
         assertEquals("Super Mario 64", fullGame.getTitle());
         assertEquals("https://www.speedrun.com/themes/sm64/cover-256.png", fullGame.getCover());
         assertEquals("1996", fullGame.getYear());
         assertEquals("N64, WiiVC, WiiUVC", fullGame.getPlatforms());
+        assertEquals("https://www.speedrun.com/themes/sm64/background.png", fullGame.getBackground());
     }
 
     @Test

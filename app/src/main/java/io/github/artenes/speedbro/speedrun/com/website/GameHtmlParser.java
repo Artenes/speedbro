@@ -54,6 +54,7 @@ public class GameHtmlParser implements Parser<Game> {
                 .withCover(Contract.asAbsolutePath(document.select("div#sidebar div.sidebar p img").attr("src")))
                 .withYear(document.select("div#sidebar small p:nth-child(" + indexForYear + ")").text())
                 .withPlatforms(document.select("div#sidebar small p:last-child").text())
+                .withBackground(Contract.gameBackgroundImage(gameId))
                 .withCategories(categories)
                 .build();
 

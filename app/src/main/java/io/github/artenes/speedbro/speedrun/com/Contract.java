@@ -121,7 +121,22 @@ public class Contract {
         if (id.isEmpty()) {
             return id;
         }
-        return AUTHORITY + id;
+        return AUTHORITY + id + "/full_game";
+    }
+
+    /**
+     * Get the absolute path to the game background image
+     * This always returns a path regardless if the game
+     * really has or not a background image
+     *
+     * @param id the id of the game (its abbreviation)
+     * @return the absolute path for the game background
+     */
+    public static String gameBackgroundImage(@NonNull String id) {
+        if (id.isEmpty()) {
+            return id;
+        }
+        return AUTHORITY + "themes/" + id + "/background.png";
     }
 
 }

@@ -16,6 +16,7 @@ public class Game {
     private final String year;
     private final String platforms;
     private final List<Category> categories;
+    private final String background;
 
     private Game(Builder builder) {
         this.id = builder.id;
@@ -24,6 +25,7 @@ public class Game {
         this.year = builder.year;
         this.platforms = builder.platforms;
         this.categories = builder.categories;
+        this.background = builder.background;
     }
 
     public String getId() {
@@ -50,6 +52,10 @@ public class Game {
         return categories;
     }
 
+    public String getBackground() {
+        return background;
+    }
+
     public static Builder build() {
         return Game.Builder.aGame();
     }
@@ -61,6 +67,7 @@ public class Game {
         private String year = "";
         private String platforms = "";
         private List<Category> categories = new ArrayList<>();
+        private String background = "";
 
         private Builder() {
         }
@@ -96,6 +103,11 @@ public class Game {
 
         public Builder withCategories(@NonNull List<Category> categories) {
             this.categories = categories;
+            return this;
+        }
+
+        public Builder withBackground(@NonNull String background) {
+            this.background = background;
             return this;
         }
 

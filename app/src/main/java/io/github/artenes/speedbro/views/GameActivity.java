@@ -37,6 +37,8 @@ public class GameActivity extends BaseActivity {
     private TextView mGameTitle;
     private TextView mGameYear;
     private TextView mGamePlatforms;
+    private ImageView mGameBackground;
+
     private GameViewModel mViewModel;
     private ImageLoader mImageLoader;
     private CategoriesAdapter mCategoriesAdapter;
@@ -57,6 +59,7 @@ public class GameActivity extends BaseActivity {
         mGameTitle = findViewById(R.id.game_title);
         mGameYear = findViewById(R.id.game_year);
         mGamePlatforms = findViewById(R.id.game_platforms);
+        mGameBackground = findViewById(R.id.game_background);
         mCategoriesPager = findViewById(R.id.categories_pager);
         mCategoriesTabs = findViewById(R.id.categories_tabs);
         initializeBaseView();
@@ -93,6 +96,7 @@ public class GameActivity extends BaseActivity {
         mGameTitle.setText(game.getTitle());
         mGameYear.setText(game.getYear());
         mGamePlatforms.setText(game.getPlatforms());
+        mImageLoader.load(game.getBackground(), R.color.colorPrimary, mGameBackground);
 
         for (Category category : game.getCategories()) {
             mCategoriesAdapter.add(LeaderBoardFragment.newInstance(category.getName(), category.getUrl()));

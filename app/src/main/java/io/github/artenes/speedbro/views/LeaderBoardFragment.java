@@ -84,6 +84,13 @@ public class LeaderBoardFragment extends BaseFragment implements LeaderBoardRuns
             return;
         }
 
+        List<Run> runs = runsState.getData();
+
+        if (runs.isEmpty()) {
+            showEmpty();
+            return;
+        }
+
         mAdapter.setData(runsState.getData());
         showContent();
     }

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import io.github.artenes.speedbro.R;
 import io.github.artenes.speedbro.models.State;
@@ -16,6 +17,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected ProgressBar mProgressBar;
     protected LinearLayout mErrorMessage;
+    protected TextView mEmptyView;
     private View mContainer;
 
     /**
@@ -26,6 +28,7 @@ public abstract class BaseFragment extends Fragment {
         mProgressBar = view.findViewById(R.id.progress_bar);
         mErrorMessage = view.findViewById(R.id.error_message);
         mContainer = view.findViewById(R.id.container);
+        mEmptyView = view.findViewById(R.id.empty);
     }
 
     /**
@@ -38,6 +41,7 @@ public abstract class BaseFragment extends Fragment {
         mProgressBar.setVisibility(View.VISIBLE);
         mErrorMessage.setVisibility(View.GONE);
         mContainer.setVisibility(View.GONE);
+        mEmptyView.setVisibility(View.GONE);
     }
 
     /**
@@ -50,6 +54,7 @@ public abstract class BaseFragment extends Fragment {
         mErrorMessage.setVisibility(View.VISIBLE);
         mProgressBar.setVisibility(View.GONE);
         mContainer.setVisibility(View.GONE);
+        mEmptyView.setVisibility(View.GONE);
     }
 
     /**
@@ -60,6 +65,20 @@ public abstract class BaseFragment extends Fragment {
             return;
         }
         mContainer.setVisibility(View.VISIBLE);
+        mErrorMessage.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.GONE);
+        mEmptyView.setVisibility(View.GONE);
+    }
+
+    /**
+     * Change the ui to empty state
+     */
+    protected void showEmpty() {
+        if (!areViewsInitialized()) {
+            return;
+        }
+        mEmptyView.setVisibility(View.VISIBLE);
+        mContainer.setVisibility(View.GONE);
         mErrorMessage.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.GONE);
     }
@@ -92,7 +111,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     private boolean areViewsInitialized() {
-        return mContainer != null && mErrorMessage != null && mProgressBar != null;
+        return mContainer != null && mErrorMessage != null && mProgressBar != null && mEmptyView != null;
     }
 
 }

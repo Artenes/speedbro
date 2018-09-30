@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.github.artenes.speedbro.api.Endpoints;
+import io.github.artenes.speedbro.speedrun.com.api.Endpoints;
 import io.github.artenes.speedbro.speedrun.com.models.Game;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.speedrun.com.models.Runner;

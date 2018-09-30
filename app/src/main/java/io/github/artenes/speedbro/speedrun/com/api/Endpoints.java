@@ -1,4 +1,4 @@
-package io.github.artenes.speedbro.api;
+package io.github.artenes.speedbro.speedrun.com.api;
 
 import android.support.annotation.NonNull;
 

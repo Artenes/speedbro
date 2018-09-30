@@ -7,10 +7,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -49,8 +47,6 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
         context.startActivity(intent);
     }
 
-    private ProgressBar mProgressBar;
-    private RecyclerView mContainer;
     private RunDetailsAdapter mAdapter;
     private TextView mTextVideoStatus;
     private YouTubePlayerSupportFragment mYoutubePlayerFragment;
@@ -69,13 +65,13 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
             finish();
         }
 
-        mProgressBar = findViewById(R.id.progressBar);
+        initializeBaseView();
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new RunDetailsAdapter(Dependencies.getImageLoader());
-        mContainer = findViewById(R.id.container);
-        mContainer.setLayoutManager(mLayoutManager);
-        mContainer.setAdapter(mAdapter);
+        RecyclerView runDetails = findViewById(R.id.run_details);
+        runDetails.setLayoutManager(mLayoutManager);
+        runDetails.setAdapter(mAdapter);
         mTextVideoStatus = findViewById(R.id.video_status);
         mYoutubePlayerFragment = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_player);
 
@@ -95,21 +91,18 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
         RunState runState = (RunState) state;
 
         if (runState.isLoadingRun()) {
-            mProgressBar.setVisibility(View.VISIBLE);
-            mContainer.setVisibility(View.INVISIBLE);
+            load();
             return;
         }
 
         if (runState.hasErrorOnRun()) {
-            mContainer.setVisibility(View.INVISIBLE);
-            mProgressBar.setVisibility(View.GONE);
+            showError();
             return;
         }
 
         Run run = runState.getRun();
         mAdapter.setData(run);
-        mContainer.setVisibility(View.VISIBLE);
-        mProgressBar.setVisibility(View.GONE);
+        showContent();
 
         Video video = run.getVideo();
 
@@ -130,7 +123,6 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
             mTextVideoStatus.setText(getString(R.string.no_video_available));
             mTextVideoStatus.setOnClickListener(null);
         }
-
     }
 
     @Override
@@ -159,6 +151,11 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
         if (view.getId() == R.id.video_status) {
             mRunViewModel.loadTwitchVideo(this);
         }
+    }
+
+    @Override
+    protected void onTryAgain() {
+        mRunViewModel.loadRun();
     }
 
 }

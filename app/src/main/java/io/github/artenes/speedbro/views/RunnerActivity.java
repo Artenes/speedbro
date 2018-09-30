@@ -46,6 +46,7 @@ public class RunnerActivity extends BaseActivity implements RunsAdapter.OnRunCli
     private ImageView mRunnerFlag;
     private SocialLinksAdapter mSocialLinksAdapter;
     private RunsAdapter mRunsAdapter;
+    private RecyclerView mRunsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +71,15 @@ public class RunnerActivity extends BaseActivity implements RunsAdapter.OnRunCli
         GridLayoutManager socialLinksLayoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.runner_social_links_grid_columns));
         mSocialLinksAdapter = new SocialLinksAdapter(mImageLoader);
 
-        RecyclerView runsRecyclerView = findViewById(R.id.runner_runs);
+        mRunsList = findViewById(R.id.runner_runs);
         GridLayoutManager runsLayoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.runner_runs_grid_columns));
         mRunsAdapter = new RunsAdapter(mImageLoader, this);
 
         socialLinksRecyclerView.setLayoutManager(socialLinksLayoutManager);
         socialLinksRecyclerView.setAdapter(mSocialLinksAdapter);
 
-        runsRecyclerView.setLayoutManager(runsLayoutManager);
-        runsRecyclerView.setAdapter(mRunsAdapter);
+        mRunsList.setLayoutManager(runsLayoutManager);
+        mRunsList.setAdapter(mRunsAdapter);
 
         RunnerViewModelFactory factory = new RunnerViewModelFactory(runnerId);
         mViewModel = ViewModelProviders.of(this, factory).get(RunnerViewModel.class);
@@ -110,9 +111,17 @@ public class RunnerActivity extends BaseActivity implements RunsAdapter.OnRunCli
         mRunnerCountry.setText(runner.getCountry());
         mImageLoader.load(runner.getFlag(), mRunnerFlag);
         mSocialLinksAdapter.setData(runner.getSocialMedias());
-        mRunsAdapter.setData(runner.getRuns());
-
         showContent();
+
+        if (runner.getRuns().isEmpty()) {
+            mRunsList.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            mEmptyView.setVisibility(View.GONE);
+            mRunsList.setVisibility(View.VISIBLE);
+            mRunsAdapter.setData(runner.getRuns());
+        }
+
     }
 
     @Override

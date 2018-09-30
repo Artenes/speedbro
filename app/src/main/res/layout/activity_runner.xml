@@ -146,6 +146,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="?android:attr/homeAsUpIndicator" />
 
+        <TextView
+            android:id="@+id/empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/nothing_here"
+            android:textSize="@dimen/title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
     </android.support.constraint.ConstraintLayout>
 
     <ProgressBar

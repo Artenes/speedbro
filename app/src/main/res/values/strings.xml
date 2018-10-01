@@ -15,4 +15,6 @@
     <string name="search_game_users">Search for games or users</string>
     <string name="action_search">Search</string>
     <string name="searching_by">Searching by: %s</string>
+    <string name="latest_runs">Latest runs</string>
+    <string name="favorites">Favorites</string>
 </resources>

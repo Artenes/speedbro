@@ -1,6 +1,8 @@
 package io.github.artenes.speedbro.views;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 
 import io.github.artenes.speedbro.R;
@@ -13,6 +15,17 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar(findViewById(R.id.toolbar));
+
+        ViewPager mSectionsViewPager = findViewById(R.id.sections_pager);
+        TabLayout mSectionsTabs = findViewById(R.id.sections_tabs);
+        MainSectionsAdapter mSectionsAdapter = new MainSectionsAdapter(getSupportFragmentManager());
+
+        //set up the tabs for the main screen
+        mSectionsAdapter.add(getString(R.string.latest_runs), new LatestRunsFragment());
+        mSectionsAdapter.add(getString(R.string.favorites), new FavoritesFragment());
+
+        mSectionsViewPager.setAdapter(mSectionsAdapter);
+        mSectionsTabs.setupWithViewPager(mSectionsViewPager);
     }
 
     /**

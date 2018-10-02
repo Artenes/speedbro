@@ -9,12 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.github.artenes.speedbro.R;
+import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 
 /**
  * Section with the title of the run
  */
 public class RunDetailTitleSection implements ScreenSection {
+
+    private final OnFavoriteClickedListener favoriteClickedListener;
+
+    public RunDetailTitleSection(OnFavoriteClickedListener favoriteClickedListener) {
+        this.favoriteClickedListener = favoriteClickedListener;
+    }
 
     @Override
     public RecyclerView.ViewHolder makeViewHolder(ViewGroup parent) {
@@ -24,11 +31,11 @@ public class RunDetailTitleSection implements ScreenSection {
 
     @Override
     public void bind(RecyclerView.ViewHolder viewHolder, Object data) {
-        Run run = (Run) data;
+        FavoriteRun run = (FavoriteRun) data;
         ((TitleViewHolder) viewHolder).bind(run);
     }
 
-    public class TitleViewHolder extends RecyclerView.ViewHolder {
+    public class TitleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView mTitle;
         private final ImageView mFavorite;
 
@@ -36,12 +43,29 @@ public class RunDetailTitleSection implements ScreenSection {
             super(itemView);
             mTitle = itemView.findViewById(R.id.title);
             mFavorite = itemView.findViewById(R.id.favorite);
+            mFavorite.setOnClickListener(this);
         }
 
-        void bind(Run run) {
+        void bind(FavoriteRun run) {
             Resources resources = itemView.getContext().getResources();
-            mTitle.setText(resources.getString(R.string.run_title, run.getCategory(), run.getTime()));
+            mTitle.setText(resources.getString(R.string.run_title, run.getRun().getCategory(), run.getRun().getTime()));
+            if (run.isFavorite()) {
+                mFavorite.setImageDrawable(itemView.getResources().getDrawable(android.R.drawable.star_big_on));
+            } else {
+                mFavorite.setImageDrawable(itemView.getResources().getDrawable(android.R.drawable.star_big_off));
+            }
         }
+
+        @Override
+        public void onClick(View v) {
+            favoriteClickedListener.onFavoriteClicked();
+        }
+
+    }
+
+    public interface OnFavoriteClickedListener {
+
+        void onFavoriteClicked();
 
     }
 

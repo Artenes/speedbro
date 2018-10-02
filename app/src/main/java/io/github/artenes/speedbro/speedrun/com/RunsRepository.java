@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.github.artenes.speedbro.speedrun.com.api.Endpoints;
+import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
 import io.github.artenes.speedbro.speedrun.com.models.Game;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.speedrun.com.models.Runner;
@@ -71,6 +72,19 @@ public class RunsRepository {
         Document document = Jsoup.connect(Contract.runUrl(gameId, runId)).get();
         RunHtmlParser parser = new RunHtmlParser();
         return parser.parse(document);
+    }
+
+    /**
+     * Get a run that can be favorite
+     *
+     * @param gameId the game id
+     * @param runId  the run id
+     * @return the Run
+     * @throws IOException if connection error occurs
+     */
+    public FavoriteRun getFavoriteableRun(String gameId, String runId) throws IOException {
+        Run run = getRun(gameId, runId);
+        return new FavoriteRun(run, true);
     }
 
     /**

@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.artenes.speedbro.speedrun.com.models.Game;
-import io.github.artenes.speedbro.speedrun.com.models.Run;
+import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
 import io.github.artenes.speedbro.utils.ImageLoader;
 
 /**
@@ -18,24 +17,26 @@ import io.github.artenes.speedbro.utils.ImageLoader;
  * so it becomes easier to manage each one individually or to add
  * new ones in the future
  */
-public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetailRunnerSection.OnRunnerClickListener, RunDetailGameSection.OnGameClickedListener {
+public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetailRunnerSection.OnRunnerClickListener, RunDetailGameSection.OnGameClickedListener, RunDetailTitleSection.OnFavoriteClickedListener {
 
     private final ImageLoader mImageLoader;
-    private Run mRun;
+    private FavoriteRun mRun;
     private List<ScreenSection> mSections = new ArrayList<>();
+    private final RunDetailTitleSection.OnFavoriteClickedListener mOnFavoriteClickListener;
 
-    RunDetailsAdapter(ImageLoader imageLoader) {
+    RunDetailsAdapter(ImageLoader imageLoader, RunDetailTitleSection.OnFavoriteClickedListener favoriteClickedListener) {
         mImageLoader = imageLoader;
+        mOnFavoriteClickListener = favoriteClickedListener;
     }
 
-    public void setData(@NonNull Run run) {
+    public void setData(@NonNull FavoriteRun run) {
         mRun = run;
 
         mSections.clear();
-        mSections.add(new RunDetailTitleSection());
+        mSections.add(new RunDetailTitleSection(this));
         mSections.add(new RunDetailRunnerSection(mImageLoader, this));
 
-        if (run.hasCommentary()) {
+        if (run.getRun().hasCommentary()) {
             mSections.add(new RunDetailCommentSection());
         }
 
@@ -75,12 +76,17 @@ public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetail
 
     @Override
     public void onRunnerClick(Context context) {
-        RunnerActivity.start(context, mRun.getFirstRunner().getId());
+        RunnerActivity.start(context, mRun.getRun().getFirstRunner().getId());
     }
 
     @Override
     public void onGameClicked(Context context) {
-        GameActivity.start(context, mRun.getGame().getId());
+        GameActivity.start(context, mRun.getRun().getGame().getId());
+    }
+
+    @Override
+    public void onFavoriteClicked() {
+        mOnFavoriteClickListener.onFavoriteClicked();
     }
 
 }

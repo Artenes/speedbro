@@ -17,10 +17,11 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import io.github.artenes.speedbro.BuildConfig;
 import io.github.artenes.speedbro.R;
-import io.github.artenes.speedbro.models.RunState;
+import io.github.artenes.speedbro.models.DataState;
 import io.github.artenes.speedbro.models.RunViewModel;
 import io.github.artenes.speedbro.models.RunViewModelFactory;
 import io.github.artenes.speedbro.models.State;
+import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.speedrun.com.models.Video;
 import io.github.artenes.speedbro.utils.Dependencies;
@@ -28,7 +29,7 @@ import io.github.artenes.speedbro.utils.Dependencies;
 /**
  * Display a run
  */
-public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitializedListener, View.OnClickListener {
+public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitializedListener, View.OnClickListener, RunDetailTitleSection.OnFavoriteClickedListener {
 
     private static final String EXTRA_RUN_ID = "run_id";
     private static final String EXTRA_GAME_ID = "game_id";
@@ -68,7 +69,7 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
         initializeBaseView();
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new RunDetailsAdapter(Dependencies.getImageLoader());
+        mAdapter = new RunDetailsAdapter(Dependencies.getImageLoader(), this);
         RecyclerView runDetails = findViewById(R.id.run_details);
         runDetails.setLayoutManager(mLayoutManager);
         runDetails.setAdapter(mAdapter);
@@ -88,24 +89,24 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
 
     @Override
     public void render(State state) {
-        RunState runState = (RunState) state;
+        //noinspection unchecked
+        DataState<FavoriteRun> runState = (DataState<FavoriteRun>) state;
 
-        if (runState.isLoadingRun()) {
+        if (runState.isLoading()) {
             load();
             return;
         }
 
-        if (runState.hasErrorOnRun()) {
+        if (runState.hasError()) {
             showError();
             return;
         }
 
-        Run run = runState.getRun();
-        mAdapter.setData(run);
+        Run run = runState.getData().getRun();
+        mAdapter.setData(runState.getData());
         showContent();
 
         Video video = run.getVideo();
-
         if (video.isFromYoutube()) {
             mYoutubePlayerFragment.initialize(BuildConfig.SPEEDBRO_YOUTUBE_API_KEY, this);
             return;
@@ -156,6 +157,11 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
     @Override
     protected void onTryAgain() {
         mRunViewModel.loadRun();
+    }
+
+    @Override
+    public void onFavoriteClicked() {
+        mRunViewModel.toggleFavorite();
     }
 
 }

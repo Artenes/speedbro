@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.google.android.youtube.player.YouTubePlayer;
 
+import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
 import io.github.artenes.speedbro.speedrun.com.models.Video;
 import io.github.artenes.speedbro.tasks.LoadRunTask;
 import io.github.artenes.speedbro.utils.Utils;
@@ -23,7 +24,7 @@ public class RunViewModel extends ViewModel {
 
     private final String mGameId;
     private final String mRunId;
-    private final RunState mState = new RunState();
+    private final DataState<FavoriteRun> mState = new DataState<>();
 
     RunViewModel(String gameId, String runId) {
         mRunId = runId;
@@ -35,7 +36,7 @@ public class RunViewModel extends ViewModel {
     }
 
     public void loadRun() {
-        if (mState.getRun() != null) {
+        if (mState.getData() != null) {
             return;
         }
         new LoadRunTask(mState).execute(mGameId, mRunId);
@@ -43,14 +44,14 @@ public class RunViewModel extends ViewModel {
 
     public void loadYoutubeVideo(@NonNull YouTubePlayer player) {
         player.addFullscreenControlFlag(YouTubePlayer.FULLSCREEN_FLAG_CUSTOM_LAYOUT);
-        player.cueVideo(mState.getRun().getVideo().getId());
+        player.cueVideo(mState.getData().getRun().getVideo().getId());
     }
 
     public void loadTwitchVideo(@NonNull Context context) {
         boolean isTwitchInstalled = Utils.isTwitchInstalled(context);
 
         Uri videoUri;
-        Video video = mState.getRun().getVideo();
+        Video video = mState.getData().getRun().getVideo();
         if (isTwitchInstalled) {
             videoUri = Uri.parse(video.getTwitchUrl());
         } else {
@@ -62,6 +63,12 @@ public class RunViewModel extends ViewModel {
         } else {
             Log.e(TAG, "Was not possible to play twitch video from: " + videoUri.toString());
         }
+    }
+
+    public void toggleFavorite() {
+        FavoriteRun run = mState.getData();
+        run.setFavorite(!run.isFavorite());
+        mState.update();
     }
 
 }

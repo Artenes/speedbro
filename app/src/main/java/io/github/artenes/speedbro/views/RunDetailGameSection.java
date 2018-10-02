@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.github.artenes.speedbro.R;
+import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.utils.ImageLoader;
 
@@ -33,8 +34,8 @@ public class RunDetailGameSection implements ScreenSection {
 
     @Override
     public void bind(RecyclerView.ViewHolder viewHolder, Object data) {
-        Run run = (Run) data;
-        ((GameViewHolder) viewHolder).bind(run);
+        FavoriteRun run = (FavoriteRun) data;
+        ((GameViewHolder) viewHolder).bind(run.getRun());
     }
 
     public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

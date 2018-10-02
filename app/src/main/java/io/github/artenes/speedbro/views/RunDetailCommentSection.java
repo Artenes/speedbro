@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import io.github.artenes.speedbro.R;
+import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 
 /**
@@ -22,8 +23,8 @@ public class RunDetailCommentSection implements ScreenSection {
 
     @Override
     public void bind(RecyclerView.ViewHolder viewHolder, Object data) {
-        Run run = (Run) data;
-        ((CommentViewHolder) viewHolder).bind(run);
+        FavoriteRun run = (FavoriteRun) data;
+        ((CommentViewHolder) viewHolder).bind(run.getRun());
     }
 
     public class CommentViewHolder extends RecyclerView.ViewHolder {

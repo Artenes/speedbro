@@ -4,9 +4,12 @@ import android.os.AsyncTask;
 
 import java.io.IOException;
 
+import io.github.artenes.speedbro.db.Database;
+import io.github.artenes.speedbro.db.FavoriteRunDao;
 import io.github.artenes.speedbro.models.DataState;
 import io.github.artenes.speedbro.speedrun.com.RunsRepository;
 import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
+import io.github.artenes.speedbro.speedrun.com.models.Run;
 
 /**
  * Loads a run in the background
@@ -16,10 +19,12 @@ public class LoadRunTask extends AsyncTask<String, Void, Void> {
 
     private final DataState<FavoriteRun> mState;
     private final RunsRepository mRepository;
+    private final FavoriteRunDao mFavoriteDao;
 
-    public LoadRunTask(DataState<FavoriteRun> state) {
+    public LoadRunTask(Database database, DataState<FavoriteRun> state) {
         mState = state;
         mRepository = new RunsRepository();
+        mFavoriteDao = database.favoriteRunDao();
     }
 
     @Override
@@ -40,8 +45,13 @@ public class LoadRunTask extends AsyncTask<String, Void, Void> {
         try {
             String gameId = ids[0];
             String runId = ids[1];
-            FavoriteRun run = mRepository.getFavoriteableRun(gameId, runId);
-            mState.setData(run).setHasError(false);
+
+            Run run = mRepository.getRun(gameId, runId);
+            //checks in the database if the run is favorite or not
+            io.github.artenes.speedbro.db.FavoriteRun favoriteRunFromDb = mFavoriteDao.getRun(runId);
+            FavoriteRun favoriteRun = new FavoriteRun(run, favoriteRunFromDb != null);
+
+            mState.setData(favoriteRun).setHasError(false);
         } catch (IOException exception) {
             mState.setHasError(true);
         }

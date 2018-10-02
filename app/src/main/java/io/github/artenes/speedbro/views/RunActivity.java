@@ -17,6 +17,7 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import io.github.artenes.speedbro.BuildConfig;
 import io.github.artenes.speedbro.R;
+import io.github.artenes.speedbro.db.Database;
 import io.github.artenes.speedbro.models.DataState;
 import io.github.artenes.speedbro.models.RunViewModel;
 import io.github.artenes.speedbro.models.RunViewModelFactory;
@@ -76,7 +77,7 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
         mTextVideoStatus = findViewById(R.id.video_status);
         mYoutubePlayerFragment = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_player);
 
-        RunViewModelFactory factory = new RunViewModelFactory(gameId, runId);
+        RunViewModelFactory factory = new RunViewModelFactory(gameId, runId, Database.getDatabase(this));
         mRunViewModel = ViewModelProviders.of(this, factory).get(RunViewModel.class);
         mRunViewModel.getState().observe(this, this::render);
         mRunViewModel.loadRun();

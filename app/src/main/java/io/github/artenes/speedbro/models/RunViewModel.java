@@ -10,8 +10,10 @@ import android.util.Log;
 
 import com.google.android.youtube.player.YouTubePlayer;
 
+import io.github.artenes.speedbro.db.Database;
 import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
 import io.github.artenes.speedbro.speedrun.com.models.Video;
+import io.github.artenes.speedbro.tasks.FavoriteRunTask;
 import io.github.artenes.speedbro.tasks.LoadRunTask;
 import io.github.artenes.speedbro.utils.Utils;
 
@@ -24,11 +26,13 @@ public class RunViewModel extends ViewModel {
 
     private final String mGameId;
     private final String mRunId;
+    private final Database mDatabase;
     private final DataState<FavoriteRun> mState = new DataState<>();
 
-    RunViewModel(String gameId, String runId) {
+    RunViewModel(String gameId, String runId, Database database) {
         mRunId = runId;
         mGameId = gameId;
+        mDatabase = database;
     }
 
     public LiveData<State> getState() {
@@ -39,7 +43,7 @@ public class RunViewModel extends ViewModel {
         if (mState.getData() != null) {
             return;
         }
-        new LoadRunTask(mState).execute(mGameId, mRunId);
+        new LoadRunTask(mDatabase, mState).execute(mGameId, mRunId);
     }
 
     public void loadYoutubeVideo(@NonNull YouTubePlayer player) {
@@ -69,6 +73,7 @@ public class RunViewModel extends ViewModel {
         FavoriteRun run = mState.getData();
         run.setFavorite(!run.isFavorite());
         mState.update();
+        new FavoriteRunTask(mDatabase).execute(run.getRun());
     }
 
 }

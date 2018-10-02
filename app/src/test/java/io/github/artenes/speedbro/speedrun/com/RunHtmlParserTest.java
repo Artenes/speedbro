@@ -25,7 +25,8 @@ public class RunHtmlParserTest {
 
     @Before
     public void setUp() throws IOException {
-        parser = new RunHtmlParser();
+        String runId = "w98fem";
+        parser = new RunHtmlParser(runId);
         File file = TestUtils.getFile(this, "run.html");
         Document fullDocument = Jsoup.parse(file, "UTF-8");
         fullRun = parser.parse(fullDocument);
@@ -33,6 +34,7 @@ public class RunHtmlParserTest {
 
     @Test
     public void extractGameDetails() {
+        assertEquals("w98fem", fullRun.getId());
         assertEquals("To_The_Top", fullRun.getGame().getId());
         assertEquals("To The Top", fullRun.getGame().getTitle());
         assertEquals("https://www.speedrun.com/themes/To_The_Top/cover-256.png", fullRun.getGame().getCover());

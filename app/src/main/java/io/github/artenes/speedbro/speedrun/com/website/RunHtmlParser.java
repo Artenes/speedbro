@@ -18,12 +18,14 @@ import io.github.artenes.speedbro.speedrun.com.models.Video;
 /**
  * Parser that extracts run information from a HTML page
  */
-public class RunHtmlParser {
+public class RunHtmlParser implements Parser<Run> {
 
+    private final String runId;
     private GameHtmlParser gameParser;
 
-    public RunHtmlParser() {
+    public RunHtmlParser(String runId) {
         gameParser = new GameHtmlParser();
+        this.runId = runId;
     }
 
     /**
@@ -32,6 +34,7 @@ public class RunHtmlParser {
      * @param document the HTML page
      * @return the run found in the page. If nothing was found, a run with empty attributes will be returned
      */
+    @Override
     public Run parse(Document document) {
 
         //search for the game info
@@ -64,6 +67,7 @@ public class RunHtmlParser {
         //build the run
         //also search for its category, time and commentary
         return Run.Builder.aRun()
+                .withId(runId)
                 .withCommentary(document.select("div[title='Description from the player']").text())
                 .withCategory(document.select("div#main div.maincontent div.panel p:nth-child(2) a:nth-child(1) strong:nth-child(1)").text())
                 .withTime(document.select("div#main div.maincontent div.panel p:nth-child(2) strong:nth-child(2)").text())

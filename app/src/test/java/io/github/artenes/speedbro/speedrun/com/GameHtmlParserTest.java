@@ -82,12 +82,14 @@ public class GameHtmlParserTest {
         File file = TestUtils.getFile(this, "game_with_miscellaneous_categories.html");
         Document document = Jsoup.parse(file, "UTF-8");
         Game game = parser.parse(document);
-        assertEquals(5, game.getCategories().size());
+        assertEquals(7, game.getCategories().size());
         assertEquals("Any%", game.getCategories().get(0).getName());
         assertEquals("All Levels", game.getCategories().get(1).getName());
         assertEquals("All Spirit Birds", game.getCategories().get(2).getName());
         assertEquals("The Forest Kingdom", game.getCategories().get(3).getName());
         assertEquals("The Lake Kingdom", game.getCategories().get(4).getName());
+        assertEquals("The Sky Kingdom", game.getCategories().get(5).getName());
+        assertEquals("Assist% no-CpS", game.getCategories().get(6).getName());
     }
 
 }

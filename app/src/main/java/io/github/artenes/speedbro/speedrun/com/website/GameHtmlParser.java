@@ -30,10 +30,6 @@ public class GameHtmlParser implements Parser<Game> {
         Elements categoryListItems = document.select("ul.nav.nav-tabs li.category");
         String categoryBaseArguments = getCategoryBaseArguments(document);
         for (Element listItem : categoryListItems) {
-            //ignore empty categories
-            if (listItem.selectFirst("a.empty") != null) {
-                continue;
-            }
             String id = listItem.attr("id");
             categories.add(new Category(
                     listItem.select("a").text(),

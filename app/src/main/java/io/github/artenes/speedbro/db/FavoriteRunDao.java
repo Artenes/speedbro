@@ -1,5 +1,6 @@
 package io.github.artenes.speedbro.db;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -13,8 +14,8 @@ import java.util.List;
 @Dao
 public interface FavoriteRunDao {
 
-    @Query("SELECT * FROM favoriterun")
-    List<FavoriteRun> getAll();
+    @Query("SELECT * FROM favoriterun ORDER BY rowid DESC")
+    LiveData<List<FavoriteRun>> getAllAsync();
 
     @Query("SELECT * FROM favoriterun WHERE id = :id")
     FavoriteRun getRun(String id);

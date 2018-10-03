@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import io.github.artenes.speedbro.R;
 import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
-import io.github.artenes.speedbro.speedrun.com.models.Run;
 
 /**
  * Section with the title of the run

@@ -128,10 +128,12 @@ public class RunsAdapter extends RecyclerView.Adapter<RunsAdapter.LatestRunViewH
             if (!runner.getId().isEmpty()) {
                 mRunnerIcon.setVisibility(View.VISIBLE);
                 mRunner.setVisibility(View.VISIBLE);
+                mCountryIcon.setVisibility(View.VISIBLE);
                 mTopGuideline.setGuidelinePercent(0.15f);
             } else {
                 mRunnerIcon.setVisibility(View.GONE);
                 mRunner.setVisibility(View.GONE);
+                mCountryIcon.setVisibility(View.GONE);
                 mTopGuideline.setGuidelinePercent(0);
             }
 

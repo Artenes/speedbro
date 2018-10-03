@@ -107,10 +107,9 @@ public class CategoryRunsHtmlParser implements Parser<List<Run>> {
             //was found and that we have to extract data from this column
             if (!rankIndex.equals(INVALID_SELECTOR_INDEX)) {
                 Elements td = runRow.select("td:nth-child(" + rankIndex + ")");
-                Placement placement = Placement.Builder.aPlacement()
-                        .withPlace(td.text())
-                        .withIcon(Contract.asAbsolutePath(td.select("img.trophy").attr("src")))
-                        .build();
+                Placement placement = new Placement(
+                        td.text(),
+                        Contract.asAbsolutePath(td.select("img.trophy").attr("src")));
                 currentRun.withPlacement(placement);
             }
 

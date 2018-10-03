@@ -102,7 +102,7 @@ public class Run {
         private String category = "";
         private String time = "";
         private List<Runner> runners = new ArrayList<>();
-        private Placement placement = Placement.Builder.aPlacement().build();
+        private Placement placement = new Placement("", "");
         private String commentary = "";
         private String inGameTime = "";
         private Platform platform = new Platform("", "", "");

@@ -69,10 +69,9 @@ public class SimpleRunsHtmlParser implements Parser<List<Run>> {
                     //this checks if the table has data from the homepage or not
                     String runTimeIndex = isFromHomePage ? "4" : "3";
 
-                    Placement placement = Placement.Builder.aPlacement()
-                            .withPlace(runRow.select("td:nth-child(2)").text())
-                            .withIcon(Contract.asAbsolutePath(runRow.select("td:nth-child(2) img").attr("src")))
-                            .build();
+                    Placement placement = new Placement(
+                            runRow.select("td:nth-child(2)").text(),
+                            Contract.asAbsolutePath(runRow.select("td:nth-child(2) img").attr("src")));
 
                     Runner runner;
                     if (isFromHomePage) {

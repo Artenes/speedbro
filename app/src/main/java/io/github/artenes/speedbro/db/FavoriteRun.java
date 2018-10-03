@@ -17,6 +17,9 @@ public class FavoriteRun {
     @NonNull
     private String game_id;
 
+    @NonNull
+    private String runner_id;
+
     private String runner_icon;
     private String runner_name;
     private String runner_flag;
@@ -72,6 +75,11 @@ public class FavoriteRun {
         return game_id;
     }
 
+    @NonNull
+    public String getRunner_id() {
+        return runner_id;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -114,6 +122,10 @@ public class FavoriteRun {
 
     public void setGame_id(@NonNull String game_id) {
         this.game_id = game_id;
+    }
+
+    public void setRunner_id(@NonNull String runner_id) {
+        this.runner_id = runner_id;
     }
 
 }

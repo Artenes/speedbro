@@ -59,10 +59,9 @@ public class RunHtmlParser implements Parser<Run> {
         }
 
         //search for the placement info
-        Placement placement = Placement.Builder.aPlacement()
-                .withPlace(Utils.getFirstWordOfSentence(document.select("div#main div.maincontent div.panel p:nth-child(2) span.nobr").text()))
-                .withIcon(Contract.asAbsolutePath(document.select("div#main div.maincontent div.panel p:nth-child(2) span.nobr img").attr("src")))
-                .build();
+        Placement placement = new Placement(
+                Utils.getFirstWordOfSentence(document.select("div#main div.maincontent div.panel p:nth-child(2) span.nobr").text()),
+                Contract.asAbsolutePath(document.select("div#main div.maincontent div.panel p:nth-child(2) span.nobr img").attr("src")));
 
         //build the run
         //also search for its category, time and commentary

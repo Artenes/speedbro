@@ -45,6 +45,7 @@ public class FavoriteRunTask extends AsyncTask<Run, Void, Void> {
         FavoriteRun favoriteRun = new FavoriteRun();
         favoriteRun.setId(run.getId());
         favoriteRun.setGame_id(run.getGame().getId());
+        favoriteRun.setRunner_id(run.getFirstRunner().getId());
         favoriteRun.setRunner_icon(run.getFirstRunner().getIcon());
         favoriteRun.setRunner_name(run.getFirstRunner().getName());
         favoriteRun.setRunner_flag(run.getFirstRunner().getFlag());

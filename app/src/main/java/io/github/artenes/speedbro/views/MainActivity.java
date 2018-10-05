@@ -21,7 +21,7 @@ public class MainActivity extends BaseActivity {
         MainSectionsAdapter mSectionsAdapter = new MainSectionsAdapter(getSupportFragmentManager());
 
         //set up the tabs for the main screen
-        mSectionsAdapter.add(getString(R.string.latest_runs), new LatestRunsFragment());
+        mSectionsAdapter.add(getString(R.string.latest_runs), new RunsListWithMapFragment());
         mSectionsAdapter.add(getString(R.string.favorites), new FavoritesFragment());
 
         mSectionsViewPager.setAdapter(mSectionsAdapter);

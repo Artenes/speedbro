@@ -1,35 +1,53 @@
 package io.github.artenes.speedbro.views;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import io.github.artenes.speedbro.R;
-import io.github.artenes.speedbro.models.LatestRunsState;
-import io.github.artenes.speedbro.models.LatestRunsViewModel;
-import io.github.artenes.speedbro.models.State;
+import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.utils.Dependencies;
 
 /**
  * Displays a list with the latest runs
  */
-public class LatestRunsFragment extends BaseFragment implements RunsAdapter.OnRunClickListener {
+public class LatestRunsFragment extends Fragment implements RunsAdapter.OnRunClickListener {
 
     private RecyclerView mLatestRuns;
-    private RunsAdapter mAdapter;
-    private LatestRunsViewModel mViewModel;
+    private GridLayoutManager mLayoutManager;
+    private OnScrollPositionSave mOnScrollPositionSave;
+
+    private List<Run> mRuns;
+    private int mLatestScrollPosition;
+
+    /**
+     * Set the current state of the fragment.
+     * <p>
+     * If this is not called before the fragment is initialized
+     * a NullPointerException will be thrown
+     *
+     * @param runs                 the list of runs
+     * @param latestScrollPosition the last scroll position of the list
+     * @param onScrollPositionSave the listener to watch for changes in the scroll position
+     */
+    public void setState(@NonNull List<Run> runs, int latestScrollPosition, @NonNull OnScrollPositionSave onScrollPositionSave) {
+        mRuns = runs;
+        mLatestScrollPosition = latestScrollPosition;
+        mOnScrollPositionSave = onScrollPositionSave;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.latest_runs, container, false);
-        initializeBaseView(view);
         mLatestRuns = view.findViewById(R.id.container);
         return view;
     }
@@ -37,31 +55,12 @@ public class LatestRunsFragment extends BaseFragment implements RunsAdapter.OnRu
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mAdapter = new RunsAdapter(Dependencies.getImageLoader(), this);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.latest_runs_grid_columns));
-        mLatestRuns.setLayoutManager(layoutManager);
+        RunsAdapter mAdapter = new RunsAdapter(Dependencies.getImageLoader(), this);
+        mLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.latest_runs_grid_columns));
+        mLatestRuns.setLayoutManager(mLayoutManager);
         mLatestRuns.setAdapter(mAdapter);
-        mViewModel = ViewModelProviders.of(this).get(LatestRunsViewModel.class);
-        //the only thing we observe for its for changes in the state
-        mViewModel.getState().observe(this, this::render);
-    }
-
-    @Override
-    public void render(State state) {
-        LatestRunsState latestRunsState = (LatestRunsState) state;
-
-        if (latestRunsState.isLoading()) {
-            load();
-            return;
-        }
-
-        if (latestRunsState.hasError()) {
-            showError();
-            return;
-        }
-
-        showContent();
-        mAdapter.setData(latestRunsState.getRuns());
+        mAdapter.setData(mRuns);
+        mLatestRuns.scrollToPosition(mLatestScrollPosition);
     }
 
     @Override
@@ -75,8 +74,17 @@ public class LatestRunsFragment extends BaseFragment implements RunsAdapter.OnRu
     }
 
     @Override
-    protected void onTryAgain() {
-        mViewModel.load();
+    public void onPause() {
+        super.onPause();
+        mOnScrollPositionSave.onScrollPositionSave(mLayoutManager.findFirstVisibleItemPosition());
+    }
+
+    /**
+     * Interface to notify a watcher when this fragment pauses
+     * and its scroll position needs to be saved
+     */
+    public interface OnScrollPositionSave {
+        void onScrollPositionSave(int position);
     }
 
 }

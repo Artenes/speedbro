@@ -5,13 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.android.gms.maps.SupportMapFragment;
 
 import java.util.List;
 
@@ -27,13 +24,13 @@ import io.github.artenes.speedbro.speedrun.com.models.Run;
 public class RunsListWithMapFragment extends BaseFragment implements View.OnClickListener, LatestRunsFragment.OnScrollPositionSave {
 
     private LatestRunsFragment mLatestRunsFragment;
-    private Fragment mMapFragment;
+    private RunsMapFragment mMapFragment;
     private RunsListWithMapViewModel mViewModel;
     private FloatingActionButton mFloatSwapButton;
 
     public RunsListWithMapFragment() {
         mLatestRunsFragment = new LatestRunsFragment();
-        mMapFragment = new SupportMapFragment();
+        mMapFragment = new RunsMapFragment();
     }
 
     @Nullable
@@ -77,6 +74,7 @@ public class RunsListWithMapFragment extends BaseFragment implements View.OnClic
 
         FragmentManager manager = getChildFragmentManager();
         if (viewState.isShowingMap()) {
+            mMapFragment.setClusters(viewState.getMapClusters());
             manager.beginTransaction().replace(R.id.container, mMapFragment).commit();
             mFloatSwapButton.setImageDrawable(getActivity().getResources().getDrawable(android.R.drawable.ic_menu_sort_by_size));
         } else {

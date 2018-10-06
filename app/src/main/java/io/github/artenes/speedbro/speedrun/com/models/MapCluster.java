@@ -8,11 +8,11 @@ import java.util.List;
 public class MapCluster {
 
     private String country;
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
     private List<Run> runs;
 
-    public MapCluster(String country, long latitude, long longitude, List<Run> runs) {
+    public MapCluster(String country, double latitude, double longitude, List<Run> runs) {
         this.country = country;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -23,11 +23,11 @@ public class MapCluster {
         return country;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 

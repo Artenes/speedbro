@@ -17,4 +17,5 @@
     <string name="searching_by">Searching by: %s</string>
     <string name="latest_runs">Latest runs</string>
     <string name="favorites">Favorites</string>
+    <string name="latest_runs_in">Latest runs in %s</string>
 </resources>

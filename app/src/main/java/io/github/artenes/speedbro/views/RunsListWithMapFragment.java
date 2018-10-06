@@ -47,6 +47,9 @@ public class RunsListWithMapFragment extends BaseFragment implements View.OnClic
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(RunsListWithMapViewModel.class);
+
+        mMapFragment.setViewModel(mViewModel);
+
         mViewModel.getState().observe(this, this::render);
         mViewModel.load();
     }

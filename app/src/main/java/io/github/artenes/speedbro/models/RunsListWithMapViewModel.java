@@ -38,4 +38,16 @@ public class RunsListWithMapViewModel extends ViewModel {
         new LoadLatestRunsWithMapTask(mData).execute();
     }
 
+    public void setVisibleCluster(int index) {
+        mData.setVisibleClusterIndex(index);
+    }
+
+    public int getVisibleClusterIndex() {
+        return mData.getVisibleClusterIndex();
+    }
+
+    public boolean isShowingCluster() {
+        return mData.isShowingCluster();
+    }
+
 }

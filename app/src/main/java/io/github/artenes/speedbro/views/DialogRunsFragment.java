@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -22,8 +24,6 @@ import io.github.artenes.speedbro.utils.Dependencies;
 public class DialogRunsFragment extends DialogFragment implements RunsAdapter.OnRunClickListener {
 
     private RecyclerView mLatestRuns;
-    private GridLayoutManager mLayoutManager;
-    private OnScrollPositionSave mOnScrollPositionSave;
 
     private List<Run> mRuns;
     private int mLatestScrollPosition;
@@ -42,11 +42,24 @@ public class DialogRunsFragment extends DialogFragment implements RunsAdapter.On
         mLatestScrollPosition = latestScrollPosition;
     }
 
+    public String getCountry() {
+        //all runs should be of the same country, so just get the first one
+        if (mRuns == null) {
+            return "";
+        }
+        Run firstRun = mRuns.get(0);
+        return firstRun.getFirstRunner().getCountry();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.latest_runs, container, false);
-        mLatestRuns = view.findViewById(R.id.container);
+        View view = inflater.inflate(R.layout.run_dialog, container, false);
+
+        TextView textView = view.findViewById(R.id.dialog_title);
+        textView.setText(getResources().getString(R.string.latest_runs_in, getCountry()));
+
+        mLatestRuns = view.findViewById(R.id.myrecycler);
         return view;
     }
 
@@ -54,7 +67,7 @@ public class DialogRunsFragment extends DialogFragment implements RunsAdapter.On
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         RunsAdapter mAdapter = new RunsAdapter(Dependencies.getImageLoader(), this);
-        mLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.latest_runs_grid_columns));
+        GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.latest_runs_grid_columns));
         mLatestRuns.setLayoutManager(mLayoutManager);
         mLatestRuns.setAdapter(mAdapter);
         mAdapter.setData(mRuns);
@@ -72,17 +85,16 @@ public class DialogRunsFragment extends DialogFragment implements RunsAdapter.On
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        //mOnScrollPositionSave.onScrollPositionSave(mLayoutManager.findFirstVisibleItemPosition());
-    }
+    public void onResume() {
+        // Get existing layout params for the window
+        ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
+        // Assign window properties to fill the parent
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.MATCH_PARENT;
+        getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+        // Call super onResume after sizing
+        super.onResume();
 
-    /**
-     * Interface to notify a watcher when this fragment pauses
-     * and its scroll position needs to be saved
-     */
-    public interface OnScrollPositionSave {
-        void onScrollPositionSave(int position);
     }
 
 }

@@ -16,6 +16,7 @@ public class RunsListWithMapState extends DataState<List<Run>> {
     private boolean isShowingMap;
     private List<MapCluster> mapClusters = new ArrayList<>();
     private int latestScrollPosition;
+    private int visibleClusterIndex = -1;
 
     public boolean isShowingMap() {
         return isShowingMap;
@@ -44,4 +45,16 @@ public class RunsListWithMapState extends DataState<List<Run>> {
         return this;
     }
 
+    public boolean isShowingCluster() {
+        return visibleClusterIndex != -1;
+    }
+
+    public RunsListWithMapState setVisibleClusterIndex(int visibleClusterIndex) {
+        this.visibleClusterIndex = visibleClusterIndex;
+        return this;
+    }
+
+    public int getVisibleClusterIndex() {
+        return visibleClusterIndex;
+    }
 }

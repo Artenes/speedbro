@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
+import io.github.artenes.speedbro.models.RunsListWithMapViewModel;
 import io.github.artenes.speedbro.speedrun.com.models.MapCluster;
 
 /**
@@ -20,10 +21,15 @@ import io.github.artenes.speedbro.speedrun.com.models.MapCluster;
 public class RunsMapFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private List<MapCluster> mClusters;
+    private RunsListWithMapViewModel mViewModel;
 
     public void setClusters(List<MapCluster> cluster) {
         mClusters = cluster;
         getMapAsync(this);
+    }
+
+    public void setViewModel(RunsListWithMapViewModel viewModel) {
+        mViewModel = viewModel;
     }
 
     @Override
@@ -42,7 +48,11 @@ public class RunsMapFragment extends SupportMapFragment implements OnMapReadyCal
     @Override
     public boolean onMarkerClick(Marker marker) {
         MapCluster cluster = (MapCluster) marker.getTag();
+        openCluster(cluster);
+        return true;
+    }
 
+    public void openCluster(MapCluster cluster) {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         Fragment prev = getChildFragmentManager().findFragmentByTag("dialog");
         if (prev != null) {
@@ -54,7 +64,7 @@ public class RunsMapFragment extends SupportMapFragment implements OnMapReadyCal
         DialogRunsFragment newFragment = new DialogRunsFragment();
         newFragment.setState(cluster.getRuns(), 0);
         newFragment.show(ft, "dialog");
-        return true;
+        mViewModel.setVisibleCluster(mClusters.indexOf(cluster));
     }
 
 }

@@ -3,6 +3,7 @@
     <string name="try_again">Try again</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="run_title">%s in %s</string>
+    <string name="run_title_with_game">%s: %s in %s</string>
     <string name="game">Game</string>
     <string name="no_video">No video available</string>
     <string name="error_loading_video">Error loading video</string>
@@ -18,4 +19,5 @@
     <string name="latest_runs">Latest runs</string>
     <string name="favorites">Favorites</string>
     <string name="latest_runs_in">Latest runs in %s</string>
+    <string name="loading">Loading…</string>
 </resources>

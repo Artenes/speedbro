@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- relying on a big title to make width of the widget item match the width of the widget -->
+<!-- by putting match_parent in the view of the item, it does not matches the parent -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget_item"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/game_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/run_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/caption"
+        tools:text="Super Mario 64 - Any% in 23m12s"
+        android:paddingBottom="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:background="#CC2C2C2C"/>
+
+</FrameLayout>
+

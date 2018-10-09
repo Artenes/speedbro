@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -40,6 +41,7 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation "android.arch.persistence.room:runtime:$room_version"
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
 
     //third party libraries
@@ -53,3 +55,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+apply plugin: 'com.google.gms.google-services'

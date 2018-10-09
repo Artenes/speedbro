@@ -29,6 +29,11 @@ public abstract class BaseFragment extends Fragment {
         mErrorMessage = view.findViewById(R.id.error_message);
         mContainer = view.findViewById(R.id.container);
         mEmptyView = view.findViewById(R.id.empty);
+
+        View tryAgainButton = view.findViewById(R.id.try_again_button);
+        if (tryAgainButton != null) {
+            tryAgainButton.setOnClickListener(this::onTryAgainAfterError);
+        }
     }
 
     /**

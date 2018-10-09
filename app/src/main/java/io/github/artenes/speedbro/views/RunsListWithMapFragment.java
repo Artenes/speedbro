@@ -105,4 +105,9 @@ public class RunsListWithMapFragment extends BaseFragment implements View.OnClic
         mViewModel.setScrollPosition(position);
     }
 
+    @Override
+    protected void onTryAgain() {
+        mViewModel.load();
+    }
+
 }

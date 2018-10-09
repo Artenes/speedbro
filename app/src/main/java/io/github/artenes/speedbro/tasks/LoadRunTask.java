@@ -10,6 +10,7 @@ import io.github.artenes.speedbro.models.DataState;
 import io.github.artenes.speedbro.speedrun.com.RunsRepository;
 import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
+import io.github.artenes.speedbro.utils.SpeedBroApplication;
 
 /**
  * Loads a run in the background
@@ -23,7 +24,7 @@ public class LoadRunTask extends AsyncTask<String, Void, Void> {
 
     public LoadRunTask(Database database, DataState<FavoriteRun> state) {
         mState = state;
-        mRepository = new RunsRepository();
+        mRepository = SpeedBroApplication.getRunsRepository();
         mFavoriteDao = database.favoriteRunDao();
     }
 

@@ -14,6 +14,7 @@ import io.github.artenes.speedbro.speedrun.com.RunsRepository;
 import io.github.artenes.speedbro.speedrun.com.models.MapCluster;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.utils.CountriesCenters;
+import io.github.artenes.speedbro.utils.SpeedBroApplication;
 
 /**
  * Loads a list of latest runs in the background
@@ -27,7 +28,7 @@ public class LoadLatestRunsWithMapTask extends AsyncTask<Void, Void, Void> {
 
     public LoadLatestRunsWithMapTask(RunsListWithMapState state) {
         mState = state;
-        mRepository = new RunsRepository();
+        mRepository = SpeedBroApplication.getRunsRepository();
     }
 
     @Override

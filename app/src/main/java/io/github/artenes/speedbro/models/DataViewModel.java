@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 
 /**
  * A ViewModel to load a piece of data
+ *
  * @param <T> the type of the data to load
  */
 public abstract class DataViewModel<T> extends ViewModel {
@@ -18,7 +19,7 @@ public abstract class DataViewModel<T> extends ViewModel {
     }
 
     public void load() {
-        if (mData.getData() != null){
+        if (mData.getData() != null) {
             return;
         }
         runLoadTask();

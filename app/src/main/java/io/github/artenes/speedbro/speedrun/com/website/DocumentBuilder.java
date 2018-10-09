@@ -29,7 +29,7 @@ public class DocumentBuilder {
      * @throws IOException in case of a network error
      */
     public Document buildRunnerDocument(String id) throws IOException {
-        Document runnerDocument = fetcher.fromUrl(Contract.runnerUrl(id));
+        Document runnerDocument = fetcher.asHtml(Contract.runnerUrl(id));
 
         //regex to get the id of the user (e.g. user=1982371)
         Pattern userIdPattern = Pattern.compile("(?<=user=)\\d*");
@@ -37,7 +37,7 @@ public class DocumentBuilder {
         //if none is found, return a zero, that is an invalid user
         String userId = matcher.find() ? matcher.group(0) : "0";
 
-        Document runsDocument = fetcher.fromUrl(Contract.runnerRunsUrl(userId));
+        Document runsDocument = fetcher.asHtml(Contract.runnerRunsUrl(userId));
 
         //inject the runs in the runner document
         runnerDocument.select("div.loadingbox").after(runsDocument.toString());

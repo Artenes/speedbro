@@ -7,7 +7,7 @@ import android.content.Context;
 /**
  * Local database to store favorite runs and cached data
  */
-@android.arch.persistence.room.Database(entities = {FavoriteRun.class}, version = 1, exportSchema = false)
+@android.arch.persistence.room.Database(entities = {FavoriteRun.class, CachedResponse.class}, version = 3, exportSchema = false)
 public abstract class Database extends RoomDatabase {
 
     private static final String DATABASE_NAME = "speedbro.db";
@@ -21,5 +21,7 @@ public abstract class Database extends RoomDatabase {
     }
 
     public abstract FavoriteRunDao favoriteRunDao();
+
+    public abstract CachedRequestDAO cachedRequestDAO();
 
 }

@@ -17,7 +17,7 @@ import io.github.artenes.speedbro.models.RunnerViewModel;
 import io.github.artenes.speedbro.models.RunnerViewModelFactory;
 import io.github.artenes.speedbro.models.State;
 import io.github.artenes.speedbro.speedrun.com.models.Runner;
-import io.github.artenes.speedbro.utils.Dependencies;
+import io.github.artenes.speedbro.utils.SpeedBroApplication;
 import io.github.artenes.speedbro.utils.ImageLoader;
 
 /**
@@ -59,7 +59,7 @@ public class RunnerActivity extends BaseActivity implements RunsAdapter.OnRunCli
             finish();
         }
 
-        mImageLoader = Dependencies.getImageLoader();
+        mImageLoader = SpeedBroApplication.getImageLoader();
 
         initializeBaseView();
         mRunnerImage = findViewById(R.id.runner_image);

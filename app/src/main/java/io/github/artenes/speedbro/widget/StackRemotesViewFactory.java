@@ -14,7 +14,7 @@ import java.util.List;
 import io.github.artenes.speedbro.R;
 import io.github.artenes.speedbro.speedrun.com.RunsRepository;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
-import io.github.artenes.speedbro.utils.Dependencies;
+import io.github.artenes.speedbro.utils.SpeedBroApplication;
 import io.github.artenes.speedbro.utils.ImageLoader;
 
 /**
@@ -29,9 +29,9 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     private ImageLoader mImageLoader;
 
     StackRemoteViewsFactory(Context context) {
-        mRepository = new RunsRepository();
+        mRepository = SpeedBroApplication.getRunsRepository();
         mContext = context;
-        mImageLoader = Dependencies.getImageLoader();
+        mImageLoader = SpeedBroApplication.getImageLoader();
     }
 
     @Override

@@ -9,8 +9,8 @@ import java.util.List;
 import io.github.artenes.speedbro.models.LatestRunsState;
 import io.github.artenes.speedbro.models.State;
 import io.github.artenes.speedbro.speedrun.com.RunsRepository;
-import io.github.artenes.speedbro.speedrun.com.models.LatestRun;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
+import io.github.artenes.speedbro.utils.SpeedBroApplication;
 
 /**
  * Loads a list of latest runs in the background
@@ -23,7 +23,7 @@ public class LoadLatestRunsTask extends AsyncTask<Void, Void, LatestRunsState> {
 
     public LoadLatestRunsTask(MutableLiveData<State> state) {
         mState = state;
-        mRepository = new RunsRepository();
+        mRepository = SpeedBroApplication.getRunsRepository();
     }
 
     @Override

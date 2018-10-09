@@ -36,8 +36,8 @@ public class DocumentBuilderTest {
         Document runnerDocument = Jsoup.parse(runner, "UTF-8");
         Document runsDocument = Jsoup.parse(runs, "UTF-8");
 
-        Mockito.when(fetcher.fromUrl("https://www.speedrun.com/user/SolidSpiderZnake")).thenReturn(runnerDocument);
-        Mockito.when(fetcher.fromUrl("https://www.speedrun.com/ajax_userleaderboard.php?user=4269")).thenReturn(runsDocument);
+        Mockito.when(fetcher.asHtml("https://www.speedrun.com/user/SolidSpiderZnake")).thenReturn(runnerDocument);
+        Mockito.when(fetcher.asHtml("https://www.speedrun.com/ajax_userleaderboard.php?user=4269")).thenReturn(runsDocument);
 
         Document fullDocument = builder.buildRunnerDocument("SolidSpiderZnake");
         assertEquals(75, fullDocument.select("table tbody tr").size());
@@ -52,8 +52,8 @@ public class DocumentBuilderTest {
         Document runnerDocument = Jsoup.parse(runner, "UTF-8");
         Document runsDocument = Jsoup.parse("invalid user");
 
-        Mockito.when(fetcher.fromUrl("https://www.speedrun.com/user/SolidSpiderZnake")).thenReturn(runnerDocument);
-        Mockito.when(fetcher.fromUrl("https://www.speedrun.com/ajax_userleaderboard.php?user=0")).thenReturn(runsDocument);
+        Mockito.when(fetcher.asHtml("https://www.speedrun.com/user/SolidSpiderZnake")).thenReturn(runnerDocument);
+        Mockito.when(fetcher.asHtml("https://www.speedrun.com/ajax_userleaderboard.php?user=0")).thenReturn(runsDocument);
 
         Document fullDocument = builder.buildRunnerDocument("SolidSpiderZnake");
         assertEquals(0, fullDocument.select("table tbody tr").size());

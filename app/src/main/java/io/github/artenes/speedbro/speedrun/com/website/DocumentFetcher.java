@@ -18,7 +18,7 @@ public class DocumentFetcher {
      * @return the document
      * @throws IOException in case of a connection error
      */
-    public Document fromUrl(String url) throws IOException {
+    public Document asHtml(String url) throws IOException {
         return Jsoup.connect(url).get();
     }
 

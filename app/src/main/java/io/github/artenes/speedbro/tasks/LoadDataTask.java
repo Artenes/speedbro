@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import io.github.artenes.speedbro.models.DataState;
 import io.github.artenes.speedbro.speedrun.com.RunsRepository;
+import io.github.artenes.speedbro.utils.SpeedBroApplication;
 
 /**
  * An AsyncTask to load a piece of data
@@ -17,7 +18,7 @@ public abstract class LoadDataTask<T> extends AsyncTask<String, Void, Void> {
     protected final DataState<T> mState;
 
     public LoadDataTask(DataState<T> state) {
-        mRepository = new RunsRepository();
+        mRepository = SpeedBroApplication.getRunsRepository();
         mState = state;
     }
 

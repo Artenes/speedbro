@@ -16,7 +16,7 @@ import java.util.List;
 
 import io.github.artenes.speedbro.R;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
-import io.github.artenes.speedbro.utils.Dependencies;
+import io.github.artenes.speedbro.utils.SpeedBroApplication;
 
 /**
  * Displays a list with the latest runs
@@ -66,7 +66,7 @@ public class DialogRunsFragment extends DialogFragment implements RunsAdapter.On
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        RunsAdapter mAdapter = new RunsAdapter(Dependencies.getImageLoader(), this);
+        RunsAdapter mAdapter = new RunsAdapter(SpeedBroApplication.getImageLoader(), this);
         GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.latest_runs_grid_columns));
         mLatestRuns.setLayoutManager(mLayoutManager);
         mLatestRuns.setAdapter(mAdapter);

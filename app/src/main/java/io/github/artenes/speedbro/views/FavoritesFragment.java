@@ -17,7 +17,7 @@ import io.github.artenes.speedbro.models.DataState;
 import io.github.artenes.speedbro.models.FavoritesViewModel;
 import io.github.artenes.speedbro.models.State;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
-import io.github.artenes.speedbro.utils.Dependencies;
+import io.github.artenes.speedbro.utils.SpeedBroApplication;
 
 /**
  * Displays a list of favorite runs
@@ -41,7 +41,7 @@ public class FavoritesFragment extends BaseFragment implements RunsAdapter.OnRun
         super.onActivityCreated(savedInstanceState);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.latest_runs_grid_columns));
-        mAdapter = new RunsAdapter(Dependencies.getImageLoader(), this);
+        mAdapter = new RunsAdapter(SpeedBroApplication.getImageLoader(), this);
         mFavoriteList.setLayoutManager(gridLayoutManager);
         mFavoriteList.setAdapter(mAdapter);
 

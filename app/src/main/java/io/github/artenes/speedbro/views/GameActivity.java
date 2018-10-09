@@ -17,7 +17,7 @@ import io.github.artenes.speedbro.models.GameViewModelFactory;
 import io.github.artenes.speedbro.models.State;
 import io.github.artenes.speedbro.speedrun.com.models.Category;
 import io.github.artenes.speedbro.speedrun.com.models.Game;
-import io.github.artenes.speedbro.utils.Dependencies;
+import io.github.artenes.speedbro.utils.SpeedBroApplication;
 import io.github.artenes.speedbro.utils.ImageLoader;
 
 /**
@@ -66,7 +66,7 @@ public class GameActivity extends BaseActivity {
 
         GameViewModelFactory factory = new GameViewModelFactory(gameId);
         mViewModel = ViewModelProviders.of(this, factory).get(GameViewModel.class);
-        mImageLoader = Dependencies.getImageLoader();
+        mImageLoader = SpeedBroApplication.getImageLoader();
 
         mCategoriesAdapter = new CategoriesAdapter(getSupportFragmentManager());
 

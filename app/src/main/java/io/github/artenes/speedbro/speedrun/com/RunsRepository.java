@@ -1,6 +1,5 @@
 package io.github.artenes.speedbro.speedrun.com;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
@@ -28,11 +27,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RunsRepository {
 
+    private final DocumentFetcher documentFetcher;
     private final DocumentBuilder builder;
     private final Endpoints endpoints;
 
-    public RunsRepository() {
-        builder = new DocumentBuilder(new DocumentFetcher());
+    public RunsRepository(DocumentFetcher documentFetcher) {
+        this.documentFetcher = documentFetcher;
+        builder = new DocumentBuilder(documentFetcher);
 
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .readTimeout(120, TimeUnit.SECONDS)
@@ -54,7 +55,7 @@ public class RunsRepository {
      * @throws IOException if connection error occurs
      */
     public List<Run> getLatestRuns() throws IOException {
-        Document document = Jsoup.connect(Contract.LATEST_RUNS).get();
+        Document document = documentFetcher.asHtml(Contract.LATEST_RUNS);
         RunsHtmlParser parser = new RunsHtmlParser(RunsHtmlParser.Source.HOME_PAGE);
         return parser.parse(document);
     }
@@ -68,7 +69,7 @@ public class RunsRepository {
      * @throws IOException if connection error occurs
      */
     public Run getRun(String gameId, String runId) throws IOException {
-        Document document = Jsoup.connect(Contract.runUrl(gameId, runId)).get();
+        Document document = documentFetcher.asHtml(Contract.runUrl(gameId, runId));
         RunHtmlParser parser = new RunHtmlParser(runId);
         return parser.parse(document);
     }
@@ -94,7 +95,7 @@ public class RunsRepository {
      * @throws IOException if connection error occurs
      */
     public Game getGameWithoutLeaderBoards(String id) throws IOException {
-        Document document = Jsoup.connect(Contract.gameUrl(id)).get();
+        Document document = documentFetcher.asHtml(Contract.gameUrl(id));
         GameHtmlParser parser = new GameHtmlParser();
         return parser.parse(document);
     }
@@ -107,7 +108,7 @@ public class RunsRepository {
      * @throws IOException if connection error occurs
      */
     public List<Run> getLeaderBoardDirectly(String url) throws IOException {
-        Document document = Jsoup.connect(url).get();
+        Document document = documentFetcher.asHtml(url);
         RunsHtmlParser parser = new RunsHtmlParser(RunsHtmlParser.Source.CATEGORIES);
         return parser.parse(document);
     }

@@ -18,7 +18,7 @@ import io.github.artenes.speedbro.models.LeaderBoardViewModel;
 import io.github.artenes.speedbro.models.LeaderBoardViewModelFactory;
 import io.github.artenes.speedbro.models.State;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
-import io.github.artenes.speedbro.utils.Dependencies;
+import io.github.artenes.speedbro.utils.SpeedBroApplication;
 
 /**
  * Fragment that displays a list of runs
@@ -54,7 +54,7 @@ public class LeaderBoardFragment extends BaseFragment implements LeaderBoardRuns
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), getActivity().getResources().getInteger(R.integer.category_runs_grid_columns));
-        mAdapter = new LeaderBoardRunsAdapter(Dependencies.getImageLoader(), this);
+        mAdapter = new LeaderBoardRunsAdapter(SpeedBroApplication.getImageLoader(), this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 

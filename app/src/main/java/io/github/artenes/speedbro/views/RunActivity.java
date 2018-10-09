@@ -26,7 +26,7 @@ import io.github.artenes.speedbro.models.State;
 import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
 import io.github.artenes.speedbro.speedrun.com.models.Run;
 import io.github.artenes.speedbro.speedrun.com.models.Video;
-import io.github.artenes.speedbro.utils.Dependencies;
+import io.github.artenes.speedbro.utils.SpeedBroApplication;
 
 /**
  * Display a run
@@ -72,7 +72,7 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
         initializeBaseView();
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new RunDetailsAdapter(Dependencies.getImageLoader(), this);
+        mAdapter = new RunDetailsAdapter(SpeedBroApplication.getImageLoader(), this);
         RecyclerView runDetails = findViewById(R.id.run_details);
         runDetails.setLayoutManager(mLayoutManager);
         runDetails.setAdapter(mAdapter);

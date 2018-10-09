@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 
 
 android {
+    signingConfigs {
+        signReleaseConfiguration {
+            keyAlias 'speedbro-release-key'
+            keyPassword 'SpeedBroKeyPassword'
+            storeFile file('./../keystore.jks')
+            storePassword 'SpeedBroKeyStorePassword'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "io.github.artenes.speedbro"
@@ -10,12 +18,13 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [googleMapApiKey:SpeddBro_MapsAPIKey]
+        manifestPlaceholders = [googleMapApiKey: SpeddBro_MapsAPIKey]
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signReleaseConfiguration
         }
     }
     buildTypes.each {
@@ -29,29 +38,25 @@ android {
 
 dependencies {
     def room_version = "1.1.1"
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-
     //first party libraries
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation "android.arch.persistence.room:runtime:$room_version"
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.firebase:firebase-core:16.0.4'
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
-
     //third party libraries
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'org.jsoup:jsoup:1.11.3'
-
     testImplementation 'junit:junit:4.12'
-    testImplementation "org.mockito:mockito-core:2.22.0"
+    testImplementation 'org.mockito:mockito-core:2.22.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

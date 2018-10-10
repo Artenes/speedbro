@@ -76,7 +76,6 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:text="TextView"
             android:textSize="@dimen/title"
             app:layout_constraintBottom_toTopOf="@+id/runner_country"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -88,7 +87,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:text="TextView"
             android:textSize="@dimen/subtitle"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline4" />

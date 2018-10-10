@@ -3,12 +3,17 @@ package io.github.artenes.speedbro.views;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -31,7 +36,10 @@ import io.github.artenes.speedbro.utils.SpeedBroApplication;
 /**
  * Display a run
  */
-public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitializedListener, View.OnClickListener, RunDetailTitleSection.OnFavoriteClickedListener {
+public class RunActivity extends BaseActivity implements
+        YouTubePlayer.OnInitializedListener,
+        View.OnClickListener,
+        RunDetailTitleSection.OnFavoriteClickedListener {
 
     private static final String EXTRA_RUN_ID = "run_id";
     private static final String EXTRA_GAME_ID = "game_id";
@@ -54,8 +62,11 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
     private RunDetailsAdapter mAdapter;
     private TextView mTextVideoStatus;
     private YouTubePlayerSupportFragment mYoutubePlayerFragment;
+    private FrameLayout mVideoContainer;
+    private RecyclerView mRecyclerViewLayout;
 
     private RunViewModel mRunViewModel;
+    private boolean fullscreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +84,11 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new RunDetailsAdapter(SpeedBroApplication.getImageLoader(), this);
-        RecyclerView runDetails = findViewById(R.id.run_details);
-        runDetails.setLayoutManager(mLayoutManager);
-        runDetails.setAdapter(mAdapter);
+        mRecyclerViewLayout = findViewById(R.id.run_details);
+        mRecyclerViewLayout.setLayoutManager(mLayoutManager);
+        mRecyclerViewLayout.setAdapter(mAdapter);
         mTextVideoStatus = findViewById(R.id.video_status);
+        mVideoContainer = findViewById(R.id.video_container);
         mYoutubePlayerFragment = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_player);
 
         RunViewModelFactory factory = new RunViewModelFactory(gameId, runId, Database.getDatabase(this));
@@ -169,6 +181,28 @@ public class RunActivity extends BaseActivity implements YouTubePlayer.OnInitial
         mRunViewModel.toggleFavorite();
         //log favorite action to analytics
         mFirebaseAnalytics.logEvent("FAVORITE_RUN", mRunViewModel.getBundleForAnalytics());
+    }
+
+    private void doLayout() {
+        ConstraintLayout.LayoutParams playerParams = (ConstraintLayout.LayoutParams) mVideoContainer.getLayoutParams();
+        if (fullscreen) {
+            playerParams.height = LinearLayout.LayoutParams.MATCH_PARENT;
+            mRecyclerViewLayout.setVisibility(View.GONE);
+        } else {
+            playerParams.height = getResources().getDimensionPixelSize(R.dimen.video_height);
+            mRecyclerViewLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        fullscreen = isLandscape();
+        doLayout();
+    }
+
+    public boolean isLandscape() {
+        return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
 }

@@ -8,14 +8,14 @@ import java.util.Map;
  */
 public abstract class CountriesCenters {
 
-    private static Map<String, Coordinates> countries = new HashMap<>();
+    private static final Map<String, Coordinates> countries = new HashMap<>();
 
     /**
      * A coordinate composed of latitude and longitude
      */
     public static class Coordinates {
-        public double latitude;
-        public double longitude;
+        public final double latitude;
+        public final double longitude;
 
         Coordinates(double latitude, double longitude) {
             this.latitude = latitude;

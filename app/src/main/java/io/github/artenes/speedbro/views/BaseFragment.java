@@ -15,16 +15,16 @@ import io.github.artenes.speedbro.models.State;
  */
 public abstract class BaseFragment extends Fragment {
 
-    protected ProgressBar mProgressBar;
-    protected LinearLayout mErrorMessage;
-    protected TextView mEmptyView;
+    private ProgressBar mProgressBar;
+    private LinearLayout mErrorMessage;
+    private TextView mEmptyView;
     private View mContainer;
 
     /**
      * Initialize the views to display content, loading and error
      * Should be called after setContentView if it will be used
      */
-    protected void initializeBaseView(View view) {
+    void initializeBaseView(View view) {
         mProgressBar = view.findViewById(R.id.progress_bar);
         mErrorMessage = view.findViewById(R.id.error_message);
         mContainer = view.findViewById(R.id.container);
@@ -39,7 +39,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * Change the ui to loading state
      */
-    protected void load() {
+    void load() {
         if (!areViewsInitialized()) {
             return;
         }
@@ -52,7 +52,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * Change the ui to error state
      */
-    protected void showError() {
+    void showError() {
         if (!areViewsInitialized()) {
             return;
         }
@@ -65,7 +65,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * Show the content of the ui
      */
-    protected void showContent() {
+    void showContent() {
         if (!areViewsInitialized()) {
             return;
         }
@@ -78,7 +78,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * Change the ui to empty state
      */
-    protected void showEmpty() {
+    void showEmpty() {
         if (!areViewsInitialized()) {
             return;
         }
@@ -92,7 +92,7 @@ public abstract class BaseFragment extends Fragment {
      * Method called when the button "Try Again"
      * os pressed in the error view
      */
-    protected void onTryAgain() {
+    void onTryAgain() {
         //expect the child to override this
     }
 
@@ -103,7 +103,7 @@ public abstract class BaseFragment extends Fragment {
      */
     public abstract void render(State state);
 
-    protected String getArgument(String argument) {
+    String getArgument(String argument) {
         Bundle bundle = getArguments();
         if (bundle == null) {
             return "";
@@ -111,7 +111,7 @@ public abstract class BaseFragment extends Fragment {
         return bundle.getString(argument, "");
     }
 
-    public void onTryAgainAfterError(View view) {
+    private void onTryAgainAfterError(View view) {
         onTryAgain();
     }
 

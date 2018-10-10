@@ -38,7 +38,7 @@ public class RunDetailGameSection implements ScreenSection {
         ((GameViewHolder) viewHolder).bind(run.getRun());
     }
 
-    public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView mGameCover;
         private final TextView mGameTitle;

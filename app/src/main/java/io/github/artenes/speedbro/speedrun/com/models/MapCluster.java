@@ -7,10 +7,10 @@ import java.util.List;
  */
 public class MapCluster {
 
-    private String country;
-    private double latitude;
-    private double longitude;
-    private List<Run> runs;
+    private final String country;
+    private final double latitude;
+    private final double longitude;
+    private final List<Run> runs;
 
     public MapCluster(String country, double latitude, double longitude, List<Run> runs) {
         this.country = country;

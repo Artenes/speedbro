@@ -15,12 +15,12 @@ import io.github.artenes.speedbro.views.RunActivity;
  */
 public class LatestRunsWidgetProvider extends AppWidgetProvider {
 
-    public static final String OPEN_RUN_ACTION = "io.github.artenes.speedbro.OPEN_RUN_ACTION";
+    private static final String OPEN_RUN_ACTION = "io.github.artenes.speedbro.OPEN_RUN_ACTION";
     public static final String EXTRA_GAME_ID = "io.github.artenes.speedbro.EXTRA_GAME_ID";
     public static final String EXTRA_RUN_ID = "io.github.artenes.speedbro.EXTRA_RUN_ID";
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+    private static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                                        int appWidgetId) {
 
         // Here we setup the intent which points to the StackViewService which will
         // provide the views for this collection.

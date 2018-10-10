@@ -201,7 +201,7 @@ public class RunActivity extends BaseActivity implements
         doLayout();
     }
 
-    public boolean isLandscape() {
+    private boolean isLandscape() {
         return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 

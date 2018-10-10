@@ -34,7 +34,7 @@ public class RunDetailTitleSection implements ScreenSection {
         ((TitleViewHolder) viewHolder).bind(run);
     }
 
-    public class TitleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class TitleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView mTitle;
         private final ImageView mFavorite;
 

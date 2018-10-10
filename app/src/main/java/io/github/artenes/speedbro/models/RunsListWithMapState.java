@@ -11,6 +11,7 @@ import io.github.artenes.speedbro.speedrun.com.models.Run;
 /**
  * A list of runs with a map
  */
+@SuppressWarnings("UnusedReturnValue")
 public class RunsListWithMapState extends DataState<List<Run>> {
 
     private boolean isShowingMap;

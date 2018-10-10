@@ -23,10 +23,10 @@ import io.github.artenes.speedbro.utils.ImageLoader;
 class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private static final String TAG = StackRemoteViewsFactory.class.getSimpleName();
-    private List<Run> mRuns = new ArrayList<>();
-    private Context mContext;
-    private RunsRepository mRepository;
-    private ImageLoader mImageLoader;
+    private final List<Run> mRuns = new ArrayList<>();
+    private final Context mContext;
+    private final RunsRepository mRepository;
+    private final ImageLoader mImageLoader;
 
     StackRemoteViewsFactory(Context context) {
         mRepository = SpeedBroApplication.getRunsRepository();

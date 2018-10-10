@@ -39,7 +39,7 @@ public class RunDetailRunnerSection implements ScreenSection {
         ((RunnerViewHolder) viewHolder).bind(run.getRun());
     }
 
-    public class RunnerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class RunnerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final ImageView mRunnerIcon;
         private final TextView mRunnerName;
         private final ImageView mFlag;

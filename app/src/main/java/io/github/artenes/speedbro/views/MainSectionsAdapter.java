@@ -11,10 +11,10 @@ import java.util.List;
 /**
  * Adapter used in the main screen
  */
-public class MainSectionsAdapter extends FragmentPagerAdapter {
+class MainSectionsAdapter extends FragmentPagerAdapter {
 
-    private List<Fragment> mFragments = new ArrayList<>();
-    private List<String> mTitles = new ArrayList<>();
+    private final List<Fragment> mFragments = new ArrayList<>();
+    private final List<String> mTitles = new ArrayList<>();
 
     MainSectionsAdapter(FragmentManager fm) {
         super(fm);

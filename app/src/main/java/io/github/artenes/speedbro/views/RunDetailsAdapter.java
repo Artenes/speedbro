@@ -21,7 +21,7 @@ public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetail
 
     private final ImageLoader mImageLoader;
     private FavoriteRun mRun;
-    private List<ScreenSection> mSections = new ArrayList<>();
+    private final List<ScreenSection> mSections = new ArrayList<>();
     private final RunDetailTitleSection.OnFavoriteClickedListener mOnFavoriteClickListener;
 
     RunDetailsAdapter(ImageLoader imageLoader, RunDetailTitleSection.OnFavoriteClickedListener favoriteClickedListener) {

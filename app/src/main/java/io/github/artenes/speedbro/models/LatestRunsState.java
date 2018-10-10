@@ -29,7 +29,7 @@ public class LatestRunsState extends State {
         return new LatestRunsState(false, false, runs);
     }
 
-    public LatestRunsState(boolean isLoading, boolean hasError, List<Run> runs) {
+    private LatestRunsState(boolean isLoading, boolean hasError, List<Run> runs) {
         this.isLoading = isLoading;
         this.hasError = hasError;
         this.runs = runs;

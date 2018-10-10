@@ -10,7 +10,7 @@ import android.arch.lifecycle.ViewModel;
  */
 public abstract class DataViewModel<T> extends ViewModel {
 
-    protected DataState<T> mData = new DataState<>();
+    DataState<T> mData = new DataState<>();
 
     protected abstract void runLoadTask();
 

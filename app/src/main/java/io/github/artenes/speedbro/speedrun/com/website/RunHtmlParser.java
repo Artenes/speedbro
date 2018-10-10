@@ -21,7 +21,7 @@ import io.github.artenes.speedbro.speedrun.com.models.Video;
 public class RunHtmlParser implements Parser<Run> {
 
     private final String runId;
-    private GameHtmlParser gameParser;
+    private final GameHtmlParser gameParser;
 
     public RunHtmlParser(String runId) {
         gameParser = new GameHtmlParser();

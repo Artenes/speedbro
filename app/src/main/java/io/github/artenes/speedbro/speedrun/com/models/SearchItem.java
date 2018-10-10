@@ -20,7 +20,7 @@ public class SearchItem {
         return new SearchItem(label, CATEGORY_SECTION, "");
     }
 
-    public SearchItem(String label, String category, String url) {
+    private SearchItem(String label, String category, String url) {
         this.label = label;
         this.url = url;
         this.category = category;

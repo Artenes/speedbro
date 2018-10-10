@@ -43,7 +43,7 @@ public class Utils {
      * @param context     the context of the app
      * @return either if the app is installed or not
      */
-    public static boolean isPackageInstalled(String packagename, Context context) {
+    private static boolean isPackageInstalled(String packagename, Context context) {
         PackageManager pm = context.getPackageManager();
         try {
             pm.getPackageInfo(packagename, PackageManager.GET_ACTIVITIES);

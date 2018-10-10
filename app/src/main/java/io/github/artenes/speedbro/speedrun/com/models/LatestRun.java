@@ -10,7 +10,7 @@ package io.github.artenes.speedbro.speedrun.com.models;
  * up to 20 seconds to respond (2018-09-11).
  *
  */
-public class LatestRun {
+class LatestRun {
 
     private String id;
     private String gameId;

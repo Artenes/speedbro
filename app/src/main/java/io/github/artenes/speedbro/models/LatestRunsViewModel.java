@@ -9,7 +9,7 @@ import io.github.artenes.speedbro.tasks.LoadLatestRunsTask;
 /**
  * View model for latest runs
  */
-public class LatestRunsViewModel extends ViewModel {
+class LatestRunsViewModel extends ViewModel {
 
     private final MutableLiveData<State> mState = new MutableLiveData<>();
 
@@ -21,7 +21,7 @@ public class LatestRunsViewModel extends ViewModel {
         return mState;
     }
 
-    public void load() {
+    private void load() {
         new LoadLatestRunsTask(mState).execute();
     }
 

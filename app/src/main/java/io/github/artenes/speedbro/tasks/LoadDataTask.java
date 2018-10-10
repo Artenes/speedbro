@@ -12,12 +12,12 @@ import io.github.artenes.speedbro.utils.SpeedBroApplication;
  *
  * @param <T> the type of the data to load
  */
-public abstract class LoadDataTask<T> extends AsyncTask<String, Void, Void> {
+abstract class LoadDataTask<T> extends AsyncTask<String, Void, Void> {
 
-    protected final RunsRepository mRepository;
-    protected final DataState<T> mState;
+    final RunsRepository mRepository;
+    final DataState<T> mState;
 
-    public LoadDataTask(DataState<T> state) {
+    LoadDataTask(DataState<T> state) {
         mRepository = SpeedBroApplication.getRunsRepository();
         mState = state;
     }
@@ -40,7 +40,7 @@ public abstract class LoadDataTask<T> extends AsyncTask<String, Void, Void> {
         mState.setLoading(false).update();
     }
 
-    protected boolean hasArguments(String[] arguments) {
+    boolean hasArguments(String[] arguments) {
         return arguments != null && arguments.length > 0;
     }
 

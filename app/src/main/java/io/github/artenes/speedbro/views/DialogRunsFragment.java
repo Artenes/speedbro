@@ -42,7 +42,7 @@ public class DialogRunsFragment extends DialogFragment implements RunsAdapter.On
         mLatestScrollPosition = latestScrollPosition;
     }
 
-    public String getCountry() {
+    private String getCountry() {
         //all runs should be of the same country, so just get the first one
         if (mRuns == null) {
             return "";

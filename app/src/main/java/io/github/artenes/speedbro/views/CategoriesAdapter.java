@@ -11,9 +11,9 @@ import java.util.List;
 /**
  * Adapter to display list of categories
  */
-public class CategoriesAdapter extends FragmentPagerAdapter {
+class CategoriesAdapter extends FragmentPagerAdapter {
 
-    private List<LeaderBoardFragment> fragments = new ArrayList<>();
+    private final List<LeaderBoardFragment> fragments = new ArrayList<>();
 
     CategoriesAdapter(FragmentManager fm) {
         super(fm);

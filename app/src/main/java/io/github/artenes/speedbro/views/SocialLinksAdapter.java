@@ -51,14 +51,14 @@ public class SocialLinksAdapter extends RecyclerView.Adapter<SocialLinksAdapter.
 
     public class SocialLinkViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private ImageView mIcon;
+        private final ImageView mIcon;
 
-        public SocialLinkViewHolder(View itemView) {
+        SocialLinkViewHolder(View itemView) {
             super(itemView);
             mIcon = itemView.findViewById(R.id.social_icon);
         }
 
-        public void bind(SocialMedia socialMedia) {
+        void bind(SocialMedia socialMedia) {
             mImageLoader.load(socialMedia.getIcon(), mIcon);
             mIcon.setOnClickListener(this);
         }

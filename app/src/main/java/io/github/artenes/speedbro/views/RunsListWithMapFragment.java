@@ -23,8 +23,8 @@ import io.github.artenes.speedbro.speedrun.com.models.Run;
  */
 public class RunsListWithMapFragment extends BaseFragment implements View.OnClickListener, LatestRunsFragment.OnScrollPositionSave {
 
-    private LatestRunsFragment mLatestRunsFragment;
-    private RunsMapFragment mMapFragment;
+    private final LatestRunsFragment mLatestRunsFragment;
+    private final RunsMapFragment mMapFragment;
     private RunsListWithMapViewModel mViewModel;
     private FloatingActionButton mFloatSwapButton;
 
@@ -87,12 +87,6 @@ public class RunsListWithMapFragment extends BaseFragment implements View.OnClic
         }
 
         showContent();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
     }
 
     @Override

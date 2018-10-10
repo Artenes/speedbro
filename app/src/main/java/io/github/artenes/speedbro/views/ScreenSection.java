@@ -10,7 +10,7 @@ import android.view.ViewGroup;
  * this is useful to better separate each part of a complex screen
  * this helps with code maintainability
  */
-public interface ScreenSection {
+interface ScreenSection {
 
     RecyclerView.ViewHolder makeViewHolder(ViewGroup parent);
 

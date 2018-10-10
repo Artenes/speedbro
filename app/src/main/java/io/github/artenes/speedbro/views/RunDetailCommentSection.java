@@ -27,7 +27,7 @@ public class RunDetailCommentSection implements ScreenSection {
         ((CommentViewHolder) viewHolder).bind(run.getRun());
     }
 
-    public class CommentViewHolder extends RecyclerView.ViewHolder {
+    class CommentViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView mComment;
 

@@ -52,7 +52,7 @@ public class RunsMapFragment extends SupportMapFragment implements OnMapReadyCal
         return true;
     }
 
-    public void openCluster(MapCluster cluster) {
+    private void openCluster(MapCluster cluster) {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         Fragment prev = getChildFragmentManager().findFragmentByTag("dialog");
         if (prev != null) {

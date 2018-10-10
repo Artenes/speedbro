@@ -20,16 +20,16 @@ import io.github.artenes.speedbro.models.State;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected ProgressBar mProgressBar;
-    protected LinearLayout mErrorMessage;
-    protected TextView mEmptyView;
+    private ProgressBar mProgressBar;
+    private LinearLayout mErrorMessage;
+    TextView mEmptyView;
     private View mContainer;
 
     /**
      * Initialize the views to display content, loading and error
      * Should be called after setContentView if it will be used
      */
-    protected void initializeBaseView() {
+    void initializeBaseView() {
         mProgressBar = findViewById(R.id.progress_bar);
         mErrorMessage = findViewById(R.id.error_message);
         mContainer = findViewById(R.id.container);
@@ -39,7 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * Change the ui to loading state
      */
-    protected void load() {
+    void load() {
         if (mProgressBar != null) {
             mProgressBar.setVisibility(View.VISIBLE);
         }
@@ -57,7 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * Change the ui to error state
      */
-    protected void showError() {
+    void showError() {
         if (mErrorMessage != null) {
             mErrorMessage.setVisibility(View.VISIBLE);
         }
@@ -75,7 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * Change the ui to empty state
      */
-    protected void showEmpty() {
+    void showEmpty() {
         if (mEmptyView != null) {
             mEmptyView.setVisibility(View.VISIBLE);
         }
@@ -93,7 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * Show the content of the ui
      */
-    protected void showContent() {
+    void showContent() {
         if (mContainer != null) {
             mContainer.setVisibility(View.VISIBLE);
         }
@@ -112,7 +112,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * Method called when the button "Try Again"
      * os pressed in the error view
      */
-    protected void onTryAgain() {
+    void onTryAgain() {
         //expect the child to override this
     }
 
@@ -130,7 +130,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param defaultValue the default value if nothing is found
      * @return the value from the intent
      */
-    protected Object getExtra(String key, Object defaultValue) {
+    Object getExtra(String key, @SuppressWarnings("SameParameterValue") Object defaultValue) {
         Intent intent = getIntent();
         if (intent == null) {
             return defaultValue;
@@ -162,7 +162,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return mContainer != null && mErrorMessage != null && mProgressBar != null && mEmptyView != null;
     }
 
-    protected void setupSearchAction(Menu menu) {
+    void setupSearchAction(Menu menu) {
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 

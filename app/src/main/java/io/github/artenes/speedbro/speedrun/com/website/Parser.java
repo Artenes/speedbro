@@ -7,7 +7,7 @@ import org.jsoup.nodes.Document;
  *
  * @param <T> the type of the POJO
  */
-public interface Parser<T> {
+interface Parser<T> {
 
     T parse(Document document);
 

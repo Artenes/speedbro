@@ -12,7 +12,7 @@ import io.github.artenes.speedbro.tasks.LoadLatestRunsWithMapTask;
  */
 public class RunsListWithMapViewModel extends ViewModel {
 
-    private RunsListWithMapState mData = new RunsListWithMapState();
+    private final RunsListWithMapState mData = new RunsListWithMapState();
 
     public LiveData<State> getState() {
         return mData;

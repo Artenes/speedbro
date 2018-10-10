@@ -95,6 +95,7 @@ public class Run {
         return Run.Builder.aRun();
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static final class Builder {
         private String id = "";
         private Game game = Game.Builder.aGame().build();

@@ -7,6 +7,7 @@ import io.github.artenes.speedbro.speedrun.com.models.SearchItem;
 /**
  * State for the search view
  */
+@SuppressWarnings("UnusedReturnValue")
 public class SearchState extends DataState<List<SearchItem>> {
 
     private String query;

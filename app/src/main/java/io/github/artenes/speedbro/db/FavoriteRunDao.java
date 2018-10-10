@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * DAO to fetch favorite runs from the database
  */
+@SuppressWarnings("SyntaxError")
 @Dao
 public interface FavoriteRunDao {
 

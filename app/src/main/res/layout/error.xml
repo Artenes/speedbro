@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableTop="@drawable/ic_error"
-        android:drawableTint="@android:color/white"
         android:text="@string/something_went_wrong"
         android:textAlignment="center"
         android:textSize="@dimen/title"

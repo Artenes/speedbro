@@ -8,12 +8,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
 import io.github.artenes.speedbro.utils.ImageLoader;
 
 @RunWith(MockitoJUnitRunner.class)

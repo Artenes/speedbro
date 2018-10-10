@@ -18,11 +18,11 @@ public class LatestRunsState extends State {
     private final List<Run> runs;
 
     public static LatestRunsState displayError() {
-        return new LatestRunsState(false, true, new ArrayList<Run>());
+        return new LatestRunsState(false, true, new ArrayList<>());
     }
 
     public static LatestRunsState displayLoading() {
-        return new LatestRunsState(true, false, new ArrayList<Run>());
+        return new LatestRunsState(true, false, new ArrayList<>());
     }
 
     public static LatestRunsState displayRuns(List<Run> runs) {

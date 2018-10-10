@@ -84,21 +84,16 @@ public class FavoritesViewModel extends AndroidViewModel {
     /**
      * Observer that will notify the state of changes in the list of favorite runs
      */
-    private final Observer<List<FavoriteRun>> mObserver = new Observer<List<FavoriteRun>>() {
+    private final Observer<List<FavoriteRun>> mObserver = favoriteRuns -> {
+        mState.setLoading(true).update();
+        List<Run> runs = new ArrayList<>(favoriteRuns.size());
 
-        @Override
-        public void onChanged(@Nullable List<FavoriteRun> favoriteRuns) {
-            mState.setLoading(true).update();
-            List<Run> runs = new ArrayList<>(favoriteRuns.size());
-
-            for (FavoriteRun favoriteRun : favoriteRuns) {
-                runs.add(parseFavoriteToRun(favoriteRun));
-            }
-
-            mState.setData(runs).setHasError(false);
-            mState.setLoading(false).update();
+        for (FavoriteRun favoriteRun : favoriteRuns) {
+            runs.add(parseFavoriteToRun(favoriteRun));
         }
 
+        mState.setData(runs).setHasError(false);
+        mState.setLoading(false).update();
     };
 
 }

@@ -27,7 +27,8 @@
         app:layout_constraintStart_toEndOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toBottomOf="@+id/position"
-        app:srcCompat="@drawable/default_runner" />
+        app:srcCompat="@drawable/default_runner"
+        android:contentDescription="@string/placement"/>
 
     <ImageView
         android:id="@+id/runner_icon"
@@ -39,7 +40,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/default_runner" />
+        app:srcCompat="@drawable/default_runner"
+        android:contentDescription="@string/runner"/>
 
     <TextView
         android:id="@+id/runner_name"
@@ -60,7 +62,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/runner_name"
         app:layout_constraintStart_toEndOf="@+id/runner_name"
         app:layout_constraintTop_toTopOf="@+id/runner_name"
-        app:srcCompat="@android:drawable/ic_lock_lock" />
+        app:srcCompat="@android:drawable/ic_lock_lock"
+        android:contentDescription="@string/country"/>
 
     <TextView
         android:id="@+id/position"

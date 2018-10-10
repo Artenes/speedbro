@@ -9,6 +9,7 @@
         android:layout_width="@dimen/social_icon"
         android:layout_height="@dimen/social_icon"
         app:srcCompat="@android:drawable/star_big_on"
-        android:padding="3dp"/>
+        android:padding="3dp"
+        android:contentDescription="@string/social_icon"/>
 
 </FrameLayout>

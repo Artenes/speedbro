@@ -22,7 +22,8 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_mapmode" />
+        app:srcCompat="@android:drawable/ic_menu_mapmode"
+        android:focusable="true" />
 
     <include
         android:id="@+id/include"

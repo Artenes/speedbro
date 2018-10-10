@@ -103,7 +103,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/runner"
                 app:layout_constraintStart_toEndOf="@+id/runner"
                 app:layout_constraintTop_toBottomOf="@+id/runner"
-                app:srcCompat="@android:drawable/ic_lock_lock" />
+                app:srcCompat="@android:drawable/ic_lock_lock"
+                android:contentDescription="@string/country"/>
 
             <ImageView
                 android:id="@+id/position_icon"
@@ -113,7 +114,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/position"
                 app:layout_constraintEnd_toStartOf="@+id/position"
                 app:layout_constraintTop_toBottomOf="@+id/position"
-                app:srcCompat="@android:drawable/presence_away"/>
+                app:srcCompat="@android:drawable/presence_away"
+                android:contentDescription="@string/placement"/>
 
             <TextView
                 android:id="@+id/ingametime_label"
@@ -158,7 +160,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/platform"
                 app:layout_constraintStart_toEndOf="@+id/platform"
                 app:layout_constraintTop_toBottomOf="@+id/platform"
-                app:srcCompat="@android:drawable/ic_lock_lock" />
+                app:srcCompat="@android:drawable/ic_lock_lock"
+                android:contentDescription=""/>
 
             <TextView
                 android:id="@+id/date"

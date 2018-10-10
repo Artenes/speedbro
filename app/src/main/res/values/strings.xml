@@ -20,4 +20,11 @@
     <string name="favorites">Favorites</string>
     <string name="latest_runs_in">Latest runs in %s</string>
     <string name="loading">Loading…</string>
+    <string name="game_cover">Game cover</string>
+    <string name="up_navigation">Up navigation</string>
+    <string name="background">Background</string>
+    <string name="country">Country</string>
+    <string name="placement">Placement</string>
+    <string name="runner">Runner</string>
+    <string name="social_icon">Social Icon</string>
 </resources>

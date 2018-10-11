@@ -70,6 +70,8 @@ public class RunActivity extends BaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        animate();
         setContentView(R.layout.activity_run);
 
         String runId = (String) getExtra(EXTRA_RUN_ID, "");

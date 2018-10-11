@@ -25,6 +25,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     TextView mEmptyView;
     private View mContainer;
 
+    void animate() {
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
+
+
     /**
      * Initialize the views to display content, loading and error
      * Should be called after setContentView if it will be used

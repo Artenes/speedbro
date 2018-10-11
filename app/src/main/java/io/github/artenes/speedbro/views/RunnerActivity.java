@@ -51,6 +51,9 @@ public class RunnerActivity extends BaseActivity implements RunsAdapter.OnRunCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        animate();
+
         setContentView(R.layout.activity_runner);
 
         String runnerId = (String) getExtra(EXTRA_RUNNER_ID, "");

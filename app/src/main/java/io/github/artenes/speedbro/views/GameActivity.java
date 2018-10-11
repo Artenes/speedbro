@@ -48,6 +48,9 @@ public class GameActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        animate();
+
         setContentView(R.layout.activity_game);
 
         String gameId = (String) getExtra(EXTRA_GAME_ID, "");

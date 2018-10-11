@@ -103,6 +103,11 @@ public class RunActivity extends BaseActivity implements
         }
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        if (isLandscape()) {
+            fullscreen = true;
+            doLayout();
+        }
     }
 
     @Override

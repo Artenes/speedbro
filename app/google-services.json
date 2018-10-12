@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "",
-    "firebase_url": "",
-    "project_id": "",
-    "storage_bucket": ""
+    "project_number": "330703208183",
+    "firebase_url": "https://speedbro-136ee.firebaseio.com",
+    "project_id": "speedbro-136ee",
+    "storage_bucket": "speedbro-136ee.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "",
+        "mobilesdk_app_id": "1:330703208183:android:7414b4cef9751183",
         "android_client_info": {
           "package_name": "io.github.artenes.speedbro"
         }
       },
       "oauth_client": [
         {
-          "client_id": "",
+          "client_id": "330703208183-0s02vcuc0ing2t44c5mpdb68jg35gqj8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "io.github.artenes.speedbro",
-            "certificate_hash": ""
+            "certificate_hash": "aaac339c58f3120ebcf8808c311ff04627b15fc3"
           }
         },
         {
-          "client_id": "",
+          "client_id": "330703208183-2gblr2m3au6r9frbs5iipih7vcavp0o9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": ""
+          "current_key": "AIzaSyBqXh3DPIabJ1Evs9gUMmyxn7NvLJPghXk"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "",
+              "client_id": "330703208183-2gblr2m3au6r9frbs5iipih7vcavp0o9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

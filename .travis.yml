@@ -16,4 +16,4 @@ android:
     - addon-google_apis-google-26
 
 before_install:
-  openssl aes-256-cbc -K $encrypted_221c2446dd84_key -iv $encrypted_221c2446dd84_iv -in google-services.json.enc -out app/google-services.json -d
+  echo $GOOGLE_SERVICES_JSON > app/google-services.json

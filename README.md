@@ -1,5 +1,7 @@
 # Speed Bro - Unofficial Speedrun.com browser
 
+[![Build Status](https://www.travis-ci.org/Artenes/speedbro.svg?branch=master)](https://www.travis-ci.org/Artenes/speedbro)
+
 Browsing application that allows the user to navigate through games, speed runs and users available at [https://www.speedrun.com](https://www.speedrun.com).
 
 # Set up

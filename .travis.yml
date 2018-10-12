@@ -1,4 +1,7 @@
 language: android
+sudo: required
+jdk: oraclejdk8
+
 android:
   components:
     # Uncomment the lines below if you want to
@@ -14,6 +17,14 @@ android:
     - extra-google-m2repository
     - extra-android-m2repository
     - addon-google_apis-google-26
+  licenses:
+      - 'android-sdk-preview-license-.+'
+      - 'android-sdk-license-.+'
+      - 'google-gdk-license-.+'
+      - '.+'
 
 before_install:
-  echo $GOOGLE_SERVICES_JSON > app/google-services.json
+  - echo $GOOGLE_SERVICES_JSON > app/google-services.json
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"

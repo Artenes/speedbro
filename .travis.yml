@@ -24,7 +24,7 @@ android:
 before_script:
   - mkdir -p "$ANDROID_HOME/licenses"
   - cp ./android-licenses/* "$ANDROID_HOME/licenses"
-  - echo $GOOGLE_SERVICES_JSON > app/google-services.json
+  - mv app/google-services.json.sample app/google-services.json
 
 script:
   - ./gradlew build check

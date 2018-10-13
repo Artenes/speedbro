@@ -37,9 +37,11 @@ public class RunsAdapter extends RecyclerView.Adapter<RunsAdapter.LatestRunViewH
      *
      * @param runs the list of latest runs
      */
-    public void setData(@NonNull List<Run> runs) {
-        mRuns = runs;
-        notifyDataSetChanged();
+    public void setData(List<Run> runs) {
+        if (runs != null) {
+            mRuns = runs;
+            notifyDataSetChanged();
+        }
     }
 
     @NonNull

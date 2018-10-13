@@ -3,14 +3,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
-    signingConfigs {
-        signReleaseConfiguration {
-            keyAlias 'speedbro-release-key'
-            keyPassword 'SpeedBroKeyPassword'
-            storeFile file('./../keystore.jks')
-            storePassword 'SpeedBroKeyStorePassword'
-        }
-    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "io.github.artenes.speedbro"
@@ -25,7 +17,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.signReleaseConfiguration
         }
     }
     buildTypes.each {

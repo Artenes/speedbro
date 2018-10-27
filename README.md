@@ -38,11 +38,6 @@ Browsing application that allows the user to navigate through games, speed runs 
   <img src="images/Screenshot_1540673606.png" width="300px" /> 
 </p>
 
-<p float="left" align="center">
-  <img src="images/step_video_fullscreen.png" width="300px" />
-  <img src="images/homescreen_widget.png" width="300px" /> 
-</p>
-
 # Set up
 
 Requirements

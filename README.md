@@ -1,8 +1,47 @@
 # Speed Bro - Unofficial Speedrun.com browser
 
+![Cover image](images/banner.png)
+
 [![Build Status](https://www.travis-ci.org/Artenes/speedbro.svg?branch=master)](https://www.travis-ci.org/Artenes/speedbro)
 
+<a href='https://play.google.com/store/apps/details?id=io.github.artenes.speedbro&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="200px" /></a>
+
 Browsing application that allows the user to navigate through games, speed runs and users available at [https://www.speedrun.com](https://www.speedrun.com).
+
+# Features
+
+- Browse through the latest runs
+- Favorite runs
+- See the latest runs in a map view
+- Browse the runs of a game
+- Browse the runs of a runner
+- What the runs directly on the app (if the run is hosted on youtube)
+- Search for games and runners
+
+# Notes
+
+- The apps scraps the speedrun.com website, it does not make use of its API
+- It plays videos hosted on Youtube using the Youtube API. If the video is hosted on Twitch the Twitch app is opened to play the video.
+- It uses the Google Maps library to display runs around the world
+- It uses FireBase Crashlytics and Events Analytics
+- It is configured to run on [travis-ci.org](https://travis-ci.org/) 
+
+# Screenshots
+
+<p float="left" align="center">
+  <img src="images/Screenshot_1540673486.png" width="300px" />
+  <img src="images/Screenshot_1540673535.png" width="300px" /> 
+</p>
+
+<p float="left" align="center">
+  <img src="images/Screenshot_1540673576.png" width="300px" />
+  <img src="images/Screenshot_1540673606.png" width="300px" /> 
+</p>
+
+<p float="left" align="center">
+  <img src="images/step_video_fullscreen.png" width="300px" />
+  <img src="images/homescreen_widget.png" width="300px" /> 
+</p>
 
 # Set up
 

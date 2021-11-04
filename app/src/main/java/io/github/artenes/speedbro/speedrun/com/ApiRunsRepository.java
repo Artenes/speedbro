@@ -8,6 +8,8 @@ import java.util.List;
 import io.github.artenes.speedbro.speedrun.com.api.ApiEndpoints;
 import io.github.artenes.speedbro.speedrun.com.api.models.Datum;
 import io.github.artenes.speedbro.speedrun.com.api.models.Datum__1;
+import io.github.artenes.speedbro.speedrun.com.api.models.GameData;
+import io.github.artenes.speedbro.speedrun.com.api.models.GameInfo;
 import io.github.artenes.speedbro.speedrun.com.api.models.LatestRunsResponse;
 import io.github.artenes.speedbro.speedrun.com.api.models.RunResponse;
 import io.github.artenes.speedbro.speedrun.com.models.Game;
@@ -62,7 +64,26 @@ public class ApiRunsRepository implements RunsRepository {
 
     @Override
     public Game getGameWithoutLeaderBoards(String id) throws IOException {
-        return null;
+
+        GameInfo response = endpoints.getGame(id).execute().body();
+
+        if (response == null) {
+            return null;
+        }
+
+        GameData gameData = response.data;
+
+        String platforms = Converters.toSimplePlatformList(gameData.platforms.data);
+
+        Game.Builder gameBuilder = Game.build()
+                .withId(gameData.id)
+                .withCover(gameData.assets.coverMedium.uri)
+                .withTitle(gameData.names.international)
+                .withYear(gameData.released.toString())
+                .withPlatforms(platforms);
+
+        return gameBuilder.build();
+
     }
 
     @Override

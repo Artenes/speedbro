@@ -4,6 +4,7 @@ import android.app.Application;
 
 import io.github.artenes.speedbro.db.Database;
 import io.github.artenes.speedbro.models.CachedDocumentFetcher;
+import io.github.artenes.speedbro.speedrun.com.HtmlRunsRepository;
 import io.github.artenes.speedbro.speedrun.com.RunsRepository;
 
 /**
@@ -24,7 +25,7 @@ public class SpeedBroApplication extends Application {
     }
 
     public static RunsRepository getRunsRepository() {
-        return new RunsRepository(new CachedDocumentFetcher(mDatabaseInstance));
+        return new HtmlRunsRepository(new CachedDocumentFetcher(mDatabaseInstance));
     }
 
 }

@@ -10,15 +10,17 @@ import io.github.artenes.speedbro.tasks.LoadLeaderBoardTask;
  */
 public class LeaderBoardViewModel extends DataViewModel<List<Run>> {
 
-    private final String mLeaderBoardUrl;
+    private final String mGameId;
+    private final String mCategoryId;
 
-    public LeaderBoardViewModel(String leaderBoardUrl) {
-        mLeaderBoardUrl = leaderBoardUrl;
+    public LeaderBoardViewModel(String gameId, String categoryId) {
+        mGameId = gameId;
+        mCategoryId = categoryId;
     }
 
     @Override
     protected void runLoadTask() {
-        new LoadLeaderBoardTask(mData).execute(mLeaderBoardUrl);
+        new LoadLeaderBoardTask(mData).execute(mGameId, mCategoryId);
     }
 
 }

@@ -112,8 +112,8 @@ public class HtmlRunsRepository implements RunsRepository {
      * @throws IOException if connection error occurs
      */
     @Override
-    public List<Run> getLeaderBoardDirectly(String url) throws IOException {
-        Document document = documentFetcher.asHtml(url);
+    public List<Run> getLeaderBoard(String gameId, String categoryId) throws IOException {
+        Document document = documentFetcher.asHtml(gameId);//this will brake
         RunsHtmlParser parser = new RunsHtmlParser(RunsHtmlParser.Source.CATEGORIES);
         return parser.parse(document);
     }

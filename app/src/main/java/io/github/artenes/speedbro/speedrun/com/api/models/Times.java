@@ -15,4 +15,12 @@ public class Times {
     @SerializedName("primary_t")
     @Expose
     public String primary_t;
+
+    @SerializedName("realtime_t")
+    @Expose
+    public String realtime_t;
+
+    @SerializedName("ingame_t")
+    @Expose
+    public String ingame_t;
 }

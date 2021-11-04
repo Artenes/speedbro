@@ -17,7 +17,7 @@ public interface RunsRepository {
 
     Game getGameWithoutLeaderBoards(String id) throws IOException;
 
-    List<Run> getLeaderBoardDirectly(String url) throws IOException;
+    List<Run> getLeaderBoard(String gameId, String categoryId) throws IOException;
 
     List<SearchItem> search(String query) throws IOException;
 }

@@ -7,10 +7,14 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Generated;
 
 @Generated("jsonschema2pojo")
-public class RunResponse {
+public class LeaderboardRun {
 
-    @SerializedName("data")
+    @SerializedName("place")
     @Expose
-    public Run data = null;
+    public Integer place;
+
+    @SerializedName("run")
+    @Expose
+    public SimpleRun run;
 
 }

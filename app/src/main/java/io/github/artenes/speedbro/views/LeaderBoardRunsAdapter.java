@@ -132,7 +132,7 @@ public class LeaderBoardRunsAdapter extends RecyclerView.Adapter<LeaderBoardRuns
             //load the platform flag if available
             mImageLoader.load(run.getPlatform().getFlag(), mPlatformFlag);
 
-            if (!runner.getId().isEmpty()) {
+            if (runner.getId() != null && !runner.getId().isEmpty()) {
                 mRunner.setVisibility(View.VISIBLE);
             } else {
                 mRunner.setVisibility(View.GONE);

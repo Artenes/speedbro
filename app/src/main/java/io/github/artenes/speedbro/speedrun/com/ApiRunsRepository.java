@@ -110,7 +110,7 @@ public class ApiRunsRepository implements RunsRepository {
 
             io.github.artenes.speedbro.speedrun.com.models.Run.Builder runBuilder = io.github.artenes.speedbro.speedrun.com.models.Run.build();
 
-            List<Runner> runners = convertToRunners(runData.run.players);
+            List<Runner> runners = convertToRunners(runData.run.players, false);
             Placement placement = new Placement(runData.place.toString(), "");
             String realTime = Converters.toReadableTime(runData.run.times.realtime_t);
             String inGameTime = Converters.toReadableTime(runData.run.times.ingame_t);
@@ -177,13 +177,13 @@ public class ApiRunsRepository implements RunsRepository {
             runBuilder.withVideo(new Video(runData.videos.links.get(0).uri));
         }
 
-        runBuilder.withRunners(convertToRunners(runData.players.data));
+        runBuilder.withRunners(convertToRunners(runData.players.data, true));
 
         return runBuilder.build();
 
     }
 
-    private List<Runner> convertToRunners(List<Datum__1> runnersList) {
+    private List<Runner> convertToRunners(List<Datum__1> runnersList, boolean withDetails) {
 
         if (runnersList == null || runnersList.isEmpty()) {
             return Collections.emptyList();
@@ -193,6 +193,13 @@ public class ApiRunsRepository implements RunsRepository {
 
         Runner.Builder runnerBuilder = Runner.build()
                 .withId(runnerData.id);
+
+        if (withDetails) {
+            runnerBuilder
+                    .withIcon(runnerData.assets.image.uri != null ? runnerData.assets.image.uri : "")
+                    .withName(runnerData.names.international);
+        }
+
 
         if (runnerData.location != null) {
 

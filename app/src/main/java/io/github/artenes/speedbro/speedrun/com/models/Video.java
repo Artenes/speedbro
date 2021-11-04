@@ -32,7 +32,7 @@ public class Video {
             return;
         }
 
-        if (url.host().contains("youtube")) {
+        if (url.host().contains("youtu")) {
             id = url.pathSegments().get(url.pathSegments().size() - 1);
             isFromYoutube = true;
             isFromTwitch = false;

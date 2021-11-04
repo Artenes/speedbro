@@ -11,11 +11,13 @@ import io.github.artenes.speedbro.speedrun.com.api.models.Data__1;
 import io.github.artenes.speedbro.speedrun.com.api.models.LeaderboardData;
 import io.github.artenes.speedbro.speedrun.com.api.models.LeaderboardRun;
 import io.github.artenes.speedbro.speedrun.com.api.models.PlayerData;
+import io.github.artenes.speedbro.speedrun.com.api.models.PlayerRun;
+import io.github.artenes.speedbro.speedrun.com.api.models.PlayerRunsData;
 import io.github.artenes.speedbro.speedrun.com.api.models.Run;
 import io.github.artenes.speedbro.speedrun.com.api.models.Player;
 import io.github.artenes.speedbro.speedrun.com.api.models.GameData;
 import io.github.artenes.speedbro.speedrun.com.api.models.GameInfo;
-import io.github.artenes.speedbro.speedrun.com.api.models.LatestRunsResponse;
+import io.github.artenes.speedbro.speedrun.com.api.models.RunsData;
 import io.github.artenes.speedbro.speedrun.com.api.models.RunResponse;
 import io.github.artenes.speedbro.speedrun.com.models.Category;
 import io.github.artenes.speedbro.speedrun.com.models.Game;
@@ -36,7 +38,7 @@ public class ApiRunsRepository implements RunsRepository {
     @Override
     public List<io.github.artenes.speedbro.speedrun.com.models.Run> getLatestRuns() throws IOException {
         List<io.github.artenes.speedbro.speedrun.com.models.Run> runs = new ArrayList<>();
-        LatestRunsResponse response = endpoints.getLatestRuns().execute().body();
+        RunsData response = endpoints.getLatestRuns().execute().body();
 
         if (response == null) {
             return runs;
@@ -68,15 +70,18 @@ public class ApiRunsRepository implements RunsRepository {
     public Runner getRunner(String id) throws IOException {
 
         PlayerData response = endpoints.getRunner(id).execute().body();
+        PlayerRunsData runsResponse = endpoints.getRunnerRuns(id).execute().body();
 
-        if (response == null) {
+        if (response == null || runsResponse == null) {
             return null;
         }
 
         Player playerData = response.data;
+        List<PlayerRun> runsData = runsResponse.data;
 
         Runner.Builder runnerBuilder = Runner.build();
         List<SocialMedia> socialList = new ArrayList<>();
+        List<io.github.artenes.speedbro.speedrun.com.models.Run> runs = new ArrayList<>();
 
         if (playerData.twitch != null) {
             socialList.add(new SocialMedia(Contract.socialIcon("twitch"), playerData.twitch.uri));
@@ -93,13 +98,18 @@ public class ApiRunsRepository implements RunsRepository {
         String icon = playerData.assets.image.uri != null ? playerData.assets.image.uri : "";
         String flagIcon = Contract.flagIcon(playerData.location.country.code);
 
+        for (PlayerRun runData : runsData) {
+            runs.add(convertToRun(runData));
+        }
+
         runnerBuilder
                 .withId(playerData.id)
                 .withName(playerData.names.international)
                 .withCountry(playerData.location.country.names.international)
                 .withFlag(flagIcon)
                 .withSocialMedia(socialList)
-                .withIcon(icon);
+                .withIcon(icon)
+                .withRuns(runs);
 
         return runnerBuilder.build();
     }
@@ -215,6 +225,31 @@ public class ApiRunsRepository implements RunsRepository {
         }
 
         runBuilder.withRunners(convertToRunners(runData.players.data, true));
+
+        return runBuilder.build();
+
+    }
+
+    private io.github.artenes.speedbro.speedrun.com.models.Run convertToRun(PlayerRun runData) {
+
+        Game game = Game.build()
+                .withId(runData.game.data.id)
+                .withCover(runData.game.data.assets.coverMedium.uri)
+                .withTitle(runData.game.data.names.international)
+                .build();
+
+        String time = Converters.toReadableTime(runData.times.primary_t);
+
+        io.github.artenes.speedbro.speedrun.com.models.Run.Builder runBuilder = io.github.artenes.speedbro.speedrun.com.models.Run.build()
+                .withId(runData.id)
+                .withGame(game)
+                .withCommentary(runData.comment)
+                .withCategory(runData.category.data.name)
+                .withTime(time);
+
+        if (runData.videos != null && runData.videos.links != null && !runData.videos.links.isEmpty()) {
+            runBuilder.withVideo(new Video(runData.videos.links.get(0).uri));
+        }
 
         return runBuilder.build();
 

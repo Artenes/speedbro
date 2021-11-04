@@ -57,8 +57,5 @@ public class Datum {
     @SerializedName("links")
     @Expose
     public List<Link__4> links = null;
-    @SerializedName("platform")
-    @Expose
-    public Platform platform;
 
 }

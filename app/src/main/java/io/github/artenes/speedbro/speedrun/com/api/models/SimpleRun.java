@@ -37,7 +37,7 @@ public class SimpleRun {
     public Status status;
     @SerializedName("players")
     @Expose
-    public List<Datum__1> players;
+    public List<Player> players;
     @SerializedName("date")
     @Expose
     public String date;

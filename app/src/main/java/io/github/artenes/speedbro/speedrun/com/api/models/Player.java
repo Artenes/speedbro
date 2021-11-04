@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Generated("jsonschema2pojo")
-public class Datum__1 {
+public class Player {
 
     @SerializedName("rel")
     @Expose
@@ -38,16 +38,16 @@ public class Datum__1 {
     public Location location;
     @SerializedName("twitch")
     @Expose
-    public Object twitch;
+    public SocialLink twitch;
     @SerializedName("hitbox")
     @Expose
     public Object hitbox;
     @SerializedName("youtube")
     @Expose
-    public Youtube youtube;
+    public SocialLink youtube;
     @SerializedName("twitter")
     @Expose
-    public Object twitter;
+    public SocialLink twitter;
     @SerializedName("speedrunslive")
     @Expose
     public Object speedrunslive;

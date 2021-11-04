@@ -10,8 +10,9 @@ import io.github.artenes.speedbro.speedrun.com.api.models.CategoryData;
 import io.github.artenes.speedbro.speedrun.com.api.models.Data__1;
 import io.github.artenes.speedbro.speedrun.com.api.models.LeaderboardData;
 import io.github.artenes.speedbro.speedrun.com.api.models.LeaderboardRun;
+import io.github.artenes.speedbro.speedrun.com.api.models.PlayerData;
 import io.github.artenes.speedbro.speedrun.com.api.models.Run;
-import io.github.artenes.speedbro.speedrun.com.api.models.Datum__1;
+import io.github.artenes.speedbro.speedrun.com.api.models.Player;
 import io.github.artenes.speedbro.speedrun.com.api.models.GameData;
 import io.github.artenes.speedbro.speedrun.com.api.models.GameInfo;
 import io.github.artenes.speedbro.speedrun.com.api.models.LatestRunsResponse;
@@ -21,6 +22,7 @@ import io.github.artenes.speedbro.speedrun.com.models.Game;
 import io.github.artenes.speedbro.speedrun.com.models.Placement;
 import io.github.artenes.speedbro.speedrun.com.models.Runner;
 import io.github.artenes.speedbro.speedrun.com.models.SearchItem;
+import io.github.artenes.speedbro.speedrun.com.models.SocialMedia;
 import io.github.artenes.speedbro.speedrun.com.models.Video;
 
 public class ApiRunsRepository implements RunsRepository {
@@ -64,7 +66,42 @@ public class ApiRunsRepository implements RunsRepository {
 
     @Override
     public Runner getRunner(String id) throws IOException {
-        return null;
+
+        PlayerData response = endpoints.getRunner(id).execute().body();
+
+        if (response == null) {
+            return null;
+        }
+
+        Player playerData = response.data;
+
+        Runner.Builder runnerBuilder = Runner.build();
+        List<SocialMedia> socialList = new ArrayList<>();
+
+        if (playerData.twitch != null) {
+            socialList.add(new SocialMedia(Contract.socialIcon("twitch"), playerData.twitch.uri));
+        }
+
+        if (playerData.youtube != null) {
+            socialList.add(new SocialMedia(Contract.socialIcon("youtube"), playerData.youtube.uri));
+        }
+
+        if (playerData.twitter != null) {
+            socialList.add(new SocialMedia(Contract.socialIcon("twitter"), playerData.twitter.uri));
+        }
+
+        String icon = playerData.assets.image.uri != null ? playerData.assets.image.uri : "";
+        String flagIcon = Contract.flagIcon(playerData.location.country.code);
+
+        runnerBuilder
+                .withId(playerData.id)
+                .withName(playerData.names.international)
+                .withCountry(playerData.location.country.names.international)
+                .withFlag(flagIcon)
+                .withSocialMedia(socialList)
+                .withIcon(icon);
+
+        return runnerBuilder.build();
     }
 
     @Override
@@ -183,13 +220,13 @@ public class ApiRunsRepository implements RunsRepository {
 
     }
 
-    private List<Runner> convertToRunners(List<Datum__1> runnersList, boolean withDetails) {
+    private List<Runner> convertToRunners(List<Player> runnersList, boolean withDetails) {
 
         if (runnersList == null || runnersList.isEmpty()) {
             return Collections.emptyList();
         }
 
-        Datum__1 runnerData = runnersList.get(0);
+        Player runnerData = runnersList.get(0);
 
         Runner.Builder runnerBuilder = Runner.build()
                 .withId(runnerData.id);

@@ -1,15 +1,16 @@
 
 package io.github.artenes.speedbro.speedrun.com.api.models;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("jsonschema2pojo")
-public class Youtube {
+import javax.annotation.Generated;
 
-    @SerializedName("uri")
+@Generated("jsonschema2pojo")
+public class PlayerData {
+
+    @SerializedName("data")
     @Expose
-    public String uri;
+    public Player data = null;
 
 }

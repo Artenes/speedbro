@@ -4,6 +4,7 @@ import io.github.artenes.speedbro.speedrun.com.api.models.CategoryData;
 import io.github.artenes.speedbro.speedrun.com.api.models.GameInfo;
 import io.github.artenes.speedbro.speedrun.com.api.models.LatestRunsResponse;
 import io.github.artenes.speedbro.speedrun.com.api.models.LeaderboardData;
+import io.github.artenes.speedbro.speedrun.com.api.models.PlayerData;
 import io.github.artenes.speedbro.speedrun.com.api.models.RunResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -25,5 +26,8 @@ public interface ApiEndpoints {
 
     @GET("leaderboards/{game}/category/{category}?embed=platform,players")
     Call<LeaderboardData> getLeaderboards(@Path("game") String game, @Path("category") String category);
+
+    @GET("users/{runner}")
+    Call<PlayerData> getRunner(@Path("runner") String runner);
 
 }

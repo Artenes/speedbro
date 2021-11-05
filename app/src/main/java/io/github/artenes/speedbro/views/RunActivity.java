@@ -75,7 +75,7 @@ public class RunActivity extends BaseActivity implements
         String runId = (String) getExtra(EXTRA_RUN_ID, "");
         String gameId = (String) getExtra(EXTRA_GAME_ID, "");
 
-        if (runId.isEmpty() || gameId.isEmpty()) {
+        if (runId.isEmpty()) {
             finish();
         }
 

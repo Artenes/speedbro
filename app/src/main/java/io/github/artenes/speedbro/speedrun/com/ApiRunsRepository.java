@@ -173,6 +173,7 @@ public class ApiRunsRepository implements RunsRepository {
             String inGameTime = Converters.toReadableTime(runData.run.times.ingame_t);
 
             runBuilder
+                    .withId(runData.run.id)
                     .withPlacement(placement)
                     .withTime(realTime)
                     .withInGameTime(inGameTime)

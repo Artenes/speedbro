@@ -8,6 +8,7 @@ import java.util.List;
 import io.github.artenes.speedbro.speedrun.com.api.ApiEndpoints;
 import io.github.artenes.speedbro.speedrun.com.api.models.CategoryData;
 import io.github.artenes.speedbro.speedrun.com.api.models.Data__1;
+import io.github.artenes.speedbro.speedrun.com.api.models.Data__2;
 import io.github.artenes.speedbro.speedrun.com.api.models.GameSearchData;
 import io.github.artenes.speedbro.speedrun.com.api.models.GameSearchResultData;
 import io.github.artenes.speedbro.speedrun.com.api.models.LeaderboardData;
@@ -24,6 +25,7 @@ import io.github.artenes.speedbro.speedrun.com.api.models.RunResponse;
 import io.github.artenes.speedbro.speedrun.com.models.Category;
 import io.github.artenes.speedbro.speedrun.com.models.Game;
 import io.github.artenes.speedbro.speedrun.com.models.Placement;
+import io.github.artenes.speedbro.speedrun.com.models.Platform;
 import io.github.artenes.speedbro.speedrun.com.models.Runner;
 import io.github.artenes.speedbro.speedrun.com.models.SearchItem;
 import io.github.artenes.speedbro.speedrun.com.models.SocialMedia;
@@ -158,6 +160,7 @@ public class ApiRunsRepository implements RunsRepository {
         }
 
         List<Player> players = response.data.players.data;
+        List<Data__2> platforms = response.data.platforms.data;
         List<LeaderboardRun> runsList = response.data.runs;
         List<io.github.artenes.speedbro.speedrun.com.models.Run> runs = new ArrayList<>();
 
@@ -189,6 +192,23 @@ public class ApiRunsRepository implements RunsRepository {
                 if (playerData != null) {
                     List<Runner> runners = convertToRunners(Collections.singletonList(playerData), true);
                     runBuilder.withRunners(runners);
+                }
+            }
+
+            //get platform
+            if (runData.run.system != null) {
+
+                String platformId = runData.run.system.platform;
+                Data__2 platform = null;
+                for (Data__2 p : platforms) {
+                    if (p.id != null && p.id.equals(platformId)) {
+                        platform = p;
+                        break;
+                    }
+                }
+
+                if (platform != null) {
+                    runBuilder.withPlatform(new Platform(platform.name, "", ""));
                 }
             }
 

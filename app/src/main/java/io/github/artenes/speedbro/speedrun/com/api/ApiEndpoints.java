@@ -30,7 +30,7 @@ public interface ApiEndpoints {
     @GET("games/{game}/categories")
     Call<CategoryData> getCategories(@Path("game") String game);
 
-    @GET("leaderboards/{game}/category/{category}?embed=platform,players")
+    @GET("leaderboards/{game}/category/{category}?embed=platforms,players")
     Call<LeaderboardData> getLeaderboards(@Path("game") String game, @Path("category") String category);
 
     @GET("users/{runner}")

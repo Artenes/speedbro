@@ -20,6 +20,10 @@ public class SearchItem {
         return new SearchItem(label, CATEGORY_SECTION, "");
     }
 
+    public static SearchItem makeGameItem(String name, String id) {
+        return new SearchItem(name, CATEGORY_GAME, id);
+    }
+
     private SearchItem(String label, String category, String url) {
         this.label = label;
         this.url = url;

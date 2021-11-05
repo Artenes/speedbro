@@ -8,6 +8,8 @@ import java.util.List;
 import io.github.artenes.speedbro.speedrun.com.api.ApiEndpoints;
 import io.github.artenes.speedbro.speedrun.com.api.models.CategoryData;
 import io.github.artenes.speedbro.speedrun.com.api.models.Data__1;
+import io.github.artenes.speedbro.speedrun.com.api.models.GameSearchData;
+import io.github.artenes.speedbro.speedrun.com.api.models.GameSearchResultData;
 import io.github.artenes.speedbro.speedrun.com.api.models.LeaderboardData;
 import io.github.artenes.speedbro.speedrun.com.api.models.LeaderboardRun;
 import io.github.artenes.speedbro.speedrun.com.api.models.PlayerData;
@@ -178,7 +180,19 @@ public class ApiRunsRepository implements RunsRepository {
 
     @Override
     public List<SearchItem> search(String query) throws IOException {
-        return null;
+        List<SearchItem> results = new ArrayList<>();
+        GameSearchData response = endpoints.searchGames(query).execute().body();
+
+        if (response == null) {
+            return results;
+        }
+
+        for (GameSearchResultData item : response.data) {
+            SearchItem searchItem = SearchItem.makeGameItem(item.names.international, item.id);
+            results.add(searchItem);
+        }
+
+        return results;
     }
 
     private List<Category> convertToCategories(List<Data__1> categoriesList) {

@@ -2,6 +2,7 @@ package io.github.artenes.speedbro.speedrun.com.api;
 
 import io.github.artenes.speedbro.speedrun.com.api.models.CategoryData;
 import io.github.artenes.speedbro.speedrun.com.api.models.GameInfo;
+import io.github.artenes.speedbro.speedrun.com.api.models.GameSearchData;
 import io.github.artenes.speedbro.speedrun.com.api.models.PlayerRunsData;
 import io.github.artenes.speedbro.speedrun.com.api.models.RunsData;
 import io.github.artenes.speedbro.speedrun.com.api.models.LeaderboardData;
@@ -13,6 +14,9 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiEndpoints {
+
+    @GET("games")
+    Call<GameSearchData> searchGames(@Query("name") String game);
 
     @GET("runs?status=new&orderby=submitted&direction=desc&embed=game,platform,category,players")
     Call<RunsData> getLatestRuns();

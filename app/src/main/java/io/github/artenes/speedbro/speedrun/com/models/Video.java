@@ -1,6 +1,7 @@
 package io.github.artenes.speedbro.speedrun.com.models;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import okhttp3.HttpUrl;
 
@@ -8,6 +9,8 @@ import okhttp3.HttpUrl;
  * A video of a run
  */
 public class Video {
+
+    private static final String LOG = Video.class.getSimpleName();
 
     private final String id;
     private final boolean isFromYoutube;
@@ -33,10 +36,16 @@ public class Video {
         }
 
         if (url.host().contains("youtu")) {
-            id = url.pathSegments().get(url.pathSize() - 1);
+            Log.i(LOG, "Parsing youtube url: " + videoUrl);
+            String videoId = url.queryParameter("v");
+            if (videoId == null || videoId.isEmpty()) {
+                videoId = url.pathSegments().get(url.pathSize() - 1);
+            }
+            id = videoId;
             isFromYoutube = true;
             isFromTwitch = false;
         } else if (url.host().contains("twitch")) {
+            Log.i(LOG, "Parsing twitch url: " + videoUrl);
             String videoId = url.queryParameter("video");
             videoId = videoId == null || videoId.isEmpty() ? "" : videoId.substring(1);
             //in case url has new schema where id is a path segment not a query parameter

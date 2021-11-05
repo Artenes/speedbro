@@ -49,9 +49,9 @@ public class RunDetailTitleSection implements ScreenSection {
             Resources resources = itemView.getContext().getResources();
             mTitle.setText(resources.getString(R.string.run_title, run.getRun().getCategory(), run.getRun().getTime()));
             if (run.isFavorite()) {
-                mFavorite.setImageDrawable(itemView.getResources().getDrawable(android.R.drawable.star_big_on));
+                mFavorite.setImageDrawable(itemView.getResources().getDrawable(R.drawable.icon_favorite_on));
             } else {
-                mFavorite.setImageDrawable(itemView.getResources().getDrawable(android.R.drawable.star_big_off));
+                mFavorite.setImageDrawable(itemView.getResources().getDrawable(R.drawable.icon_favorite_off));
             }
         }
 

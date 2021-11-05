@@ -43,22 +43,16 @@ public class RunDetailRunnerSection implements ScreenSection {
         private final ImageView mRunnerIcon;
         private final TextView mRunnerName;
         private final ImageView mFlag;
-        private final TextView mPlacement;
-        private final ImageView mPlacementIcon;
 
         RunnerViewHolder(View itemView) {
             super(itemView);
             mRunnerIcon = itemView.findViewById(R.id.runner_icon);
             mRunnerName = itemView.findViewById(R.id.runner_name);
             mFlag = itemView.findViewById(R.id.country_icon);
-            mPlacement = itemView.findViewById(R.id.position);
-            mPlacementIcon = itemView.findViewById(R.id.placement_icon);
         }
 
         void bind(Run run) {
             Runner runner = run.getFirstRunner();
-            mPlacement.setText(run.getPlacement().getPlace());
-            imageLoader.load(run.getPlacement().getIcon(), mPlacementIcon);
 
             imageLoader.load(runner.getIcon(), R.drawable.default_runner, mRunnerIcon);
             mRunnerName.setText(runner.getName());

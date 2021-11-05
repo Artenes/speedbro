@@ -16,21 +16,6 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:id="@+id/placement_icon"
-        android:layout_width="@dimen/placement_icon"
-        android:layout_height="@dimen/placement_icon"
-        android:layout_marginStart="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/position"
-        app:layout_constraintEnd_toStartOf="@+id/position"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toBottomOf="@+id/position"
-        app:srcCompat="@drawable/default_runner"
-        android:contentDescription="@string/placement"/>
-
-    <ImageView
         android:id="@+id/runner_icon"
         android:layout_width="@dimen/runner_icon_big"
         android:layout_height="@dimen/runner_icon_big"
@@ -65,38 +50,11 @@
         app:srcCompat="@android:drawable/ic_lock_lock"
         android:contentDescription="@string/country"/>
 
-    <TextView
-        android:id="@+id/position"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:textAlignment="viewStart"
-        android:textSize="@dimen/subtitle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/placement_icon"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="1st place" />
-
     <android.support.constraint.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.7" />
-
-    <View
-        android:id="@+id/view5"
-        android:layout_width="0.1dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

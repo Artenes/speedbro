@@ -277,6 +277,7 @@ public class ApiRunsRepository implements RunsRepository {
 
             String flagUrl = Contract.flagIcon(runnerData.location.country.code);
             runnerBuilder.withFlag(flagUrl);
+            runnerBuilder.withCountry(runnerData.location.country.names.international);
 
         }
 

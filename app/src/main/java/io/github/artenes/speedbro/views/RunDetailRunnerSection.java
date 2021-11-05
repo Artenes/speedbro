@@ -57,11 +57,13 @@ public class RunDetailRunnerSection implements ScreenSection {
         void bind(Run run) {
             Runner runner = run.getFirstRunner();
 
-            imageLoader.load(runner.getIcon(), R.drawable.default_runner, mRunnerIcon);
-            mRunnerName.setText(runner.getName());
-            imageLoader.load(runner.getFlag(), mFlag);
+            if (runner != null) {
+                imageLoader.load(runner.getIcon(), R.drawable.default_runner, mRunnerIcon);
+                mRunnerName.setText(runner.getName());
+                imageLoader.load(runner.getFlag(), mFlag);
+            }
 
-            if (!runner.getId().isEmpty()) {
+            if (runner != null && runner.getId() != null && !runner.getId().isEmpty()) {
                 mRunnerIcon.setOnClickListener(this);
                 mRunnerName.setOnClickListener(this);
                 mFlag.setOnClickListener(this);

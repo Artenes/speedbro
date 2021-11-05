@@ -34,7 +34,10 @@ public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetail
 
         mSections.clear();
         mSections.add(new RunDetailTitleSection(this));
-        mSections.add(new RunDetailRunnerSection(mImageLoader, this));
+
+        if (run.getRun().getFirstRunner() != null && run.getRun().getFirstRunner().getId() != null) {
+            mSections.add(new RunDetailRunnerSection(mImageLoader, this));
+        }
 
         if (run.getRun().hasCommentary()) {
             mSections.add(new RunDetailCommentSection());

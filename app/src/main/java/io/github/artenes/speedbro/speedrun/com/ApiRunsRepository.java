@@ -323,11 +323,13 @@ public class ApiRunsRepository implements RunsRepository {
                 .withId(runnerData.id);
 
         if (withDetails) {
-            runnerBuilder
-                    .withIcon(runnerData.assets.image.uri != null ? runnerData.assets.image.uri : "")
-                    .withName(runnerData.names.international);
+            if (runnerData.assets != null && runnerData.assets.image != null) {
+                runnerBuilder.withIcon(runnerData.assets.image.uri != null ? runnerData.assets.image.uri : "");
+            }
+            if (runnerData.names != null) {
+                runnerBuilder.withName(runnerData.names.international);
+            }
         }
-
 
         if (runnerData.location != null) {
 

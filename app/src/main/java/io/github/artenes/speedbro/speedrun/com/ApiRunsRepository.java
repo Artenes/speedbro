@@ -98,7 +98,7 @@ public class ApiRunsRepository implements RunsRepository {
         }
 
         String icon = playerData.assets.image.uri != null ? playerData.assets.image.uri : "";
-        String flagIcon = Contract.flagIcon(playerData.location.country.code);
+
 
         for (PlayerRun runData : runsData) {
             runs.add(convertToRun(runData));
@@ -107,11 +107,16 @@ public class ApiRunsRepository implements RunsRepository {
         runnerBuilder
                 .withId(playerData.id)
                 .withName(playerData.names.international)
-                .withCountry(playerData.location.country.names.international)
-                .withFlag(flagIcon)
                 .withSocialMedia(socialList)
                 .withIcon(icon)
                 .withRuns(runs);
+
+        if (playerData.location != null) {
+            String flagIcon = Contract.flagIcon(playerData.location.country.code);
+            runnerBuilder.
+                    withCountry(playerData.location.country.names.international)
+                    .withFlag(flagIcon);
+        }
 
         return runnerBuilder.build();
     }

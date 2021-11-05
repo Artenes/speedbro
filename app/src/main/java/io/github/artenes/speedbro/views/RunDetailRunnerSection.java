@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,12 +44,14 @@ public class RunDetailRunnerSection implements ScreenSection {
         private final ImageView mRunnerIcon;
         private final TextView mRunnerName;
         private final ImageView mFlag;
+        private final Button mDetailsButton;
 
         RunnerViewHolder(View itemView) {
             super(itemView);
             mRunnerIcon = itemView.findViewById(R.id.runner_icon);
             mRunnerName = itemView.findViewById(R.id.runner_name);
             mFlag = itemView.findViewById(R.id.country_icon);
+            mDetailsButton = itemView.findViewById(R.id.runner_details_button);
         }
 
         void bind(Run run) {
@@ -62,6 +65,7 @@ public class RunDetailRunnerSection implements ScreenSection {
                 mRunnerIcon.setOnClickListener(this);
                 mRunnerName.setOnClickListener(this);
                 mFlag.setOnClickListener(this);
+                mDetailsButton.setOnClickListener(this);
             }
         }
 

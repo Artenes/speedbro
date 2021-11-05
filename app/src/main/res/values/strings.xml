@@ -33,6 +33,8 @@
     <string name="runner">Runner</string>
     <string name="social_icon">Social Icon</string>
     <string name="about">About</string>
+    <string name="game_details">Game details</string>
+    <string name="runner_details">Runner details</string>
 
     <string name="website_url" translatable="false">http://artenes.github.io/</string>
     <string name="repo_url" translatable="false">https://github.com/Artenes/speedbro</string>

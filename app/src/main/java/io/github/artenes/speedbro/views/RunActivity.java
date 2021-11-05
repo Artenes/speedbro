@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import io.github.artenes.speedbro.BuildConfig;
 import io.github.artenes.speedbro.R;
@@ -57,7 +56,6 @@ public class RunActivity extends BaseActivity implements
         context.startActivity(intent);
     }
 
-    private FirebaseAnalytics mFirebaseAnalytics;
     private RunDetailsAdapter mAdapter;
     private TextView mTextVideoStatus;
     private YouTubePlayerSupportFragment mYoutubePlayerFragment;
@@ -101,8 +99,6 @@ public class RunActivity extends BaseActivity implements
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         if (isLandscape()) {
             fullscreen = true;
@@ -185,8 +181,6 @@ public class RunActivity extends BaseActivity implements
     @Override
     public void onFavoriteClicked() {
         mRunViewModel.toggleFavorite();
-        //log favorite action to analytics
-        mFirebaseAnalytics.logEvent("FAVORITE_RUN", mRunViewModel.getBundleForAnalytics());
     }
 
     private void doLayout() {

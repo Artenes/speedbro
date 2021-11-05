@@ -9,6 +9,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -39,6 +40,7 @@ public class RunActivity extends BaseActivity implements
         View.OnClickListener,
         RunDetailTitleSection.OnFavoriteClickedListener {
 
+    private static final String TAG = RunActivity.class.getSimpleName();
     private static final String EXTRA_RUN_ID = "run_id";
     private static final String EXTRA_GAME_ID = "game_id";
 
@@ -53,6 +55,7 @@ public class RunActivity extends BaseActivity implements
         Intent intent = new Intent(context, RunActivity.class);
         intent.putExtra(EXTRA_RUN_ID, runId);
         intent.putExtra(EXTRA_GAME_ID, gameId);
+        Log.i(TAG, "Starting run id: " + runId);
         context.startActivity(intent);
     }
 

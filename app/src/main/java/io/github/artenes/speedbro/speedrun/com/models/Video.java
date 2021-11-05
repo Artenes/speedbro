@@ -33,12 +33,17 @@ public class Video {
         }
 
         if (url.host().contains("youtu")) {
-            id = url.pathSegments().get(url.pathSegments().size() - 1);
+            id = url.pathSegments().get(url.pathSize() - 1);
             isFromYoutube = true;
             isFromTwitch = false;
         } else if (url.host().contains("twitch")) {
             String videoId = url.queryParameter("video");
-            id = videoId == null || videoId.isEmpty() ? "" : videoId.substring(1);
+            videoId = videoId == null || videoId.isEmpty() ? "" : videoId.substring(1);
+            //in case url has new schema where id is a path segment not a query parameter
+            if (videoId.isEmpty()) {
+                videoId = url.pathSegments().get(url.pathSize() - 1);
+            }
+            id = videoId;
             isFromTwitch = true;
             isFromYoutube = false;
         } else {

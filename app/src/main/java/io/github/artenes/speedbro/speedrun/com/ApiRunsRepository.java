@@ -319,8 +319,9 @@ public class ApiRunsRepository implements RunsRepository {
 
         Player runnerData = runnersList.get(0);
 
+        String id = runnerData.id == null || runnerData.id.isEmpty() ? "guest" : runnerData.id;
         Runner.Builder runnerBuilder = Runner.build()
-                .withId(runnerData.id);
+                .withId(id);
 
         if (withDetails) {
             if (runnerData.assets != null && runnerData.assets.image != null) {

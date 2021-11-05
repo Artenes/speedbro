@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.artenes.speedbro.speedrun.com.models.FavoriteRun;
+import io.github.artenes.speedbro.speedrun.com.models.Runner;
 import io.github.artenes.speedbro.utils.ImageLoader;
 
 /**
@@ -35,7 +36,8 @@ public class RunDetailsAdapter extends RecyclerView.Adapter implements RunDetail
         mSections.clear();
         mSections.add(new RunDetailTitleSection(this));
 
-        if (run.getRun().getFirstRunner() != null && run.getRun().getFirstRunner().getId() != null) {
+        Runner firstRunner = run.getRun().getFirstRunner();
+        if (firstRunner != null && firstRunner.isUser()) {
             mSections.add(new RunDetailRunnerSection(mImageLoader, this));
         }
 

@@ -104,7 +104,7 @@ public class RunsAdapter extends RecyclerView.Adapter<RunsAdapter.LatestRunViewH
 
             mGameTitle.setText(run.getGame().getTitle());
             mCategory.setText(run.getCategory());
-            mRunner.setText(runner.getName());
+            mRunner.setText(runner.isUser() ? runner.getName() : itemView.getContext().getString(R.string.guest));
             mTime.setText(run.getTime());
 
             //load the game cover
@@ -114,17 +114,20 @@ public class RunsAdapter extends RecyclerView.Adapter<RunsAdapter.LatestRunViewH
             mImageLoader.load(runner.getIcon(), R.drawable.default_runner, mRunnerIcon);
 
             //load the country icon if available
-            mImageLoader.load(runner.getFlag(), mCountryIcon);
+            if (runner.getFlag() != null && !runner.getFlag().isEmpty()) {
+                mCountryIcon.setVisibility(View.VISIBLE);
+                mImageLoader.load(runner.getFlag(), mCountryIcon);
+            } else {
+                mCountryIcon.setVisibility(View.GONE);
+            }
 
-            if (!runner.getId().isEmpty()) {
+            if (runner.isUser()) {
                 mRunnerIcon.setVisibility(View.VISIBLE);
                 mRunner.setVisibility(View.VISIBLE);
-                mCountryIcon.setVisibility(View.VISIBLE);
                 mTopGuideline.setGuidelinePercent(0.15f);
             } else {
                 mRunnerIcon.setVisibility(View.GONE);
                 mRunner.setVisibility(View.GONE);
-                mCountryIcon.setVisibility(View.GONE);
                 mTopGuideline.setGuidelinePercent(0);
             }
 

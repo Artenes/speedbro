@@ -157,6 +157,7 @@ public class ApiRunsRepository implements RunsRepository {
             return null;
         }
 
+        List<Player> players = response.data.players.data;
         List<LeaderboardRun> runsList = response.data.runs;
         List<io.github.artenes.speedbro.speedrun.com.models.Run> runs = new ArrayList<>();
 
@@ -164,17 +165,32 @@ public class ApiRunsRepository implements RunsRepository {
 
             io.github.artenes.speedbro.speedrun.com.models.Run.Builder runBuilder = io.github.artenes.speedbro.speedrun.com.models.Run.build();
 
-            List<Runner> runners = convertToRunners(runData.run.players, false);
             Placement placement = new Placement(runData.place.toString(), "");
             String realTime = Converters.toReadableTime(runData.run.times.realtime_t);
             String inGameTime = Converters.toReadableTime(runData.run.times.ingame_t);
 
             runBuilder
-                    .withRunners(runners)
                     .withPlacement(placement)
                     .withTime(realTime)
                     .withInGameTime(inGameTime)
                     .withDate(runData.run.date);
+
+            //get player
+            if (runData.run.players != null && !runData.run.players.isEmpty()) {
+                String playerId = runData.run.players.get(0).id;
+                Player playerData = null;
+                for (Player p : players) {
+                    if (p.id != null && p.id.equals(playerId)) {
+                        playerData = p;
+                        break;
+                    }
+                }
+
+                if (playerData != null) {
+                    List<Runner> runners = convertToRunners(Collections.singletonList(playerData), true);
+                    runBuilder.withRunners(runners);
+                }
+            }
 
             runs.add(runBuilder.build());
 

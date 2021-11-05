@@ -9,13 +9,10 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("jsonschema2pojo")
-public class Leaderboard {
+public class PlayerListData {
 
-    @SerializedName("runs")
+    @SerializedName("data")
     @Expose
-    public List<LeaderboardRun> runs;
-    @SerializedName("players")
-    @Expose
-    public PlayerListData players;
+    public List<Player> data = null;
 
 }

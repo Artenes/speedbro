@@ -8,9 +8,11 @@
 
 Browsing application that allows the user to navigate through games, speed runs and users available at [https://www.speedrun.com](https://www.speedrun.com).
 
-# Demo
+# Video Demo
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/lhVu-wm54So" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Click on image below to watch it.
+
+[![Video](images/thumb.png)](https://www.youtube.com/watch?v=lhVu-wm54So)
 
 # Features
 

@@ -6,19 +6,20 @@ package io.github.artenes.speedbro.speedrun.com.models;
 public class Category {
 
     private final String name;
-    private final String url;
+    private final String id;
 
-    public Category(String name, String url) {
+
+    public Category(String id, String name) {
         this.name = name;
-        this.url = url;
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getUrl() {
-        return url;
+    public String getId() {
+        return id;
     }
 
 }

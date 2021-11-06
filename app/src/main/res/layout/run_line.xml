@@ -43,24 +43,24 @@
                 android:id="@+id/cover"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/game_cover"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/top_guideline"
-                android:contentDescription="@string/game_cover"/>
+                app:layout_constraintTop_toTopOf="@+id/top_guideline" />
 
             <TextView
                 android:id="@+id/game_title"
                 style="@style/Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:maxLines="10"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toTopOf="@+id/category"
@@ -68,19 +68,19 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toTopOf="@+id/top_guideline"
-                app:layout_constraintVertical_chainStyle="spread"
+                app:layout_constraintVertical_chainStyle="packed"
                 tools:text="Resident Evil (Remake)" />
 
             <TextView
                 android:id="@+id/category"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:textAlignment="center"
                 android:textSize="@dimen/caption"
-                app:layout_constraintBottom_toTopOf="@+id/position"
+                app:layout_constraintBottom_toTopOf="@+id/time"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/game_title"
@@ -90,9 +90,9 @@
                 android:id="@+id/runner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:textSize="@dimen/caption"
                 app:layout_constraintBottom_toTopOf="@+id/top_guideline"
                 app:layout_constraintStart_toEndOf="@+id/runner_icon"
@@ -103,74 +103,43 @@
                 android:id="@+id/time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:textAlignment="center"
                 android:textSize="@dimen/subtitle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/position"
-                tools:text="1h 35m 30s" />
-
-            <TextView
-                android:id="@+id/position"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
-                android:textAlignment="center"
-                android:textSize="@dimen/caption"
-                app:layout_constraintBottom_toTopOf="@+id/time"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/position_icon"
                 app:layout_constraintTop_toBottomOf="@+id/category"
-                tools:text="77th" />
+                tools:text="1h 35m 30s" />
 
             <ImageView
                 android:id="@+id/runner_icon"
                 android:layout_width="@dimen/runner_icon"
                 android:layout_height="@dimen/runner_icon"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/runner"
                 app:layout_constraintBottom_toTopOf="@+id/top_guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/ic_launcher_round"
-                android:contentDescription="@string/runner"/>
+                app:srcCompat="@mipmap/ic_launcher_round" />
 
             <ImageView
                 android:id="@+id/country_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/flag_icon"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/country"
                 app:layout_constraintBottom_toTopOf="@+id/top_guideline"
                 app:layout_constraintStart_toEndOf="@+id/runner"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_lock_lock"
-                android:contentDescription="@string/country"/>
-
-            <ImageView
-                android:id="@+id/position_icon"
-                android:layout_width="@dimen/placement_icon"
-                android:layout_height="@dimen/placement_icon"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/position"
-                app:layout_constraintEnd_toStartOf="@+id/position"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toEndOf="@+id/guideline"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="@+id/position"
-                app:srcCompat="@android:drawable/presence_away"
-                android:contentDescription="@string/placement"/>
+                app:srcCompat="@android:drawable/ic_lock_lock" />
 
         </android.support.constraint.ConstraintLayout>
 

@@ -48,8 +48,10 @@ public class RunViewModel extends ViewModel {
     }
 
     public void loadYoutubeVideo(@NonNull YouTubePlayer player) {
-        player.addFullscreenControlFlag(YouTubePlayer.FULLSCREEN_FLAG_CUSTOM_LAYOUT | YouTubePlayer.FULLSCREEN_FLAG_CONTROL_SYSTEM_UI | YouTubePlayer.FULLSCREEN_FLAG_ALWAYS_FULLSCREEN_IN_LANDSCAPE);
-        player.cueVideo(mState.getData().getRun().getVideo().getId());
+        String videoId = mState.getData().getRun().getVideo().getId();
+        player.addFullscreenControlFlag(YouTubePlayer.FULLSCREEN_FLAG_CONTROL_SYSTEM_UI);
+        Log.i(TAG, "Loading youtube video: " + videoId);
+        player.cueVideo(videoId);
     }
 
     public void loadTwitchVideo(@NonNull Context context) {

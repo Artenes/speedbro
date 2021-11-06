@@ -139,4 +139,8 @@ public class Contract {
         return AUTHORITY + "themes/" + id + "/background.png";
     }
 
+    public static String socialIcon(String platform) {
+        return AUTHORITY + "images/socialmedia/" + platform + ".png";
+    }
+
 }

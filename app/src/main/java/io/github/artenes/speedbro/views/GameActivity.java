@@ -102,7 +102,7 @@ public class GameActivity extends BaseActivity {
         mImageLoader.load(game.getBackground(), R.color.colorPrimary, mGameBackground);
 
         for (Category category : game.getCategories()) {
-            mCategoriesAdapter.add(LeaderBoardFragment.newInstance(category.getName(), category.getUrl()));
+            mCategoriesAdapter.add(LeaderBoardFragment.newInstance(category.getName(), game.getId(), category.getId()));
         }
         mCategoriesPager.setAdapter(mCategoriesAdapter);
         mCategoriesTabs.setupWithViewPager(mCategoriesPager);

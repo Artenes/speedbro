@@ -30,7 +30,7 @@
         app:layout_constraintBottom_toTopOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:srcCompat="@android:drawable/btn_star"
+        app:srcCompat="@drawable/icon_favorite_off"
         android:contentDescription="@string/favorites"/>
 
     <View

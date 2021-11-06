@@ -73,8 +73,6 @@ public class RunsAdapter extends RecyclerView.Adapter<RunsAdapter.LatestRunViewH
         private final ImageView mGameCover;
         private final TextView mGameTitle;
         private final TextView mCategory;
-        private final ImageView mPositionIcon;
-        private final TextView mRankPosition;
         private final TextView mTime;
         private final CardView mCardView;
         private final Guideline mTopGuideline;
@@ -87,8 +85,6 @@ public class RunsAdapter extends RecyclerView.Adapter<RunsAdapter.LatestRunViewH
             mGameCover = itemView.findViewById(R.id.cover);
             mGameTitle = itemView.findViewById(R.id.game_title);
             mCategory = itemView.findViewById(R.id.category);
-            mPositionIcon = itemView.findViewById(R.id.position_icon);
-            mRankPosition = itemView.findViewById(R.id.position);
             mTime = itemView.findViewById(R.id.time);
             mCardView = itemView.findViewById(R.id.cv_contents);
             mTopGuideline = itemView.findViewById(R.id.top_guideline);
@@ -100,8 +96,6 @@ public class RunsAdapter extends RecyclerView.Adapter<RunsAdapter.LatestRunViewH
             mGameCover.setOnClickListener(this);
             mGameTitle.setOnClickListener(this);
             mCategory.setOnClickListener(this);
-            mPositionIcon.setOnClickListener(this);
-            mRankPosition.setOnClickListener(this);
             mTime.setOnClickListener(this);
         }
 
@@ -110,9 +104,8 @@ public class RunsAdapter extends RecyclerView.Adapter<RunsAdapter.LatestRunViewH
 
             mGameTitle.setText(run.getGame().getTitle());
             mCategory.setText(run.getCategory());
-            mRunner.setText(runner.getName());
+            mRunner.setText(runner.isUser() ? runner.getName() : itemView.getContext().getString(R.string.guest));
             mTime.setText(run.getTime());
-            mRankPosition.setText(run.getPlacement().getPlace());
 
             //load the game cover
             mImageLoader.load(run.getGame().getCover(), R.drawable.placeholder, mGameCover);
@@ -121,21 +114,20 @@ public class RunsAdapter extends RecyclerView.Adapter<RunsAdapter.LatestRunViewH
             mImageLoader.load(runner.getIcon(), R.drawable.default_runner, mRunnerIcon);
 
             //load the country icon if available
-            mImageLoader.load(runner.getFlag(), mCountryIcon);
+            if (runner.getFlag() != null && !runner.getFlag().isEmpty()) {
+                mCountryIcon.setVisibility(View.VISIBLE);
+                mImageLoader.load(runner.getFlag(), mCountryIcon);
+            } else {
+                mCountryIcon.setVisibility(View.GONE);
+            }
 
-            //load the position icon if available
-            mPositionIcon.setVisibility(View.VISIBLE);
-            mImageLoader.load(run.getPlacement().getIcon(), mPositionIcon);
-
-            if (!runner.getId().isEmpty()) {
+            if (runner.isUser()) {
                 mRunnerIcon.setVisibility(View.VISIBLE);
                 mRunner.setVisibility(View.VISIBLE);
-                mCountryIcon.setVisibility(View.VISIBLE);
                 mTopGuideline.setGuidelinePercent(0.15f);
             } else {
                 mRunnerIcon.setVisibility(View.GONE);
                 mRunner.setVisibility(View.GONE);
-                mCountryIcon.setVisibility(View.GONE);
                 mTopGuideline.setGuidelinePercent(0);
             }
 

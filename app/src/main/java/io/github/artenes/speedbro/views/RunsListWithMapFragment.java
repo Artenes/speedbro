@@ -79,11 +79,11 @@ public class RunsListWithMapFragment extends BaseFragment implements View.OnClic
         if (viewState.isShowingMap()) {
             mMapFragment.setClusters(viewState.getMapClusters());
             manager.beginTransaction().replace(R.id.container, mMapFragment).commit();
-            mFloatSwapButton.setImageDrawable(getActivity().getResources().getDrawable(android.R.drawable.ic_menu_sort_by_size));
+            mFloatSwapButton.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.icon_list));
         } else {
             mLatestRunsFragment.setState(runs, viewState.getLatestScrollPosition(), this);
             manager.beginTransaction().replace(R.id.container, mLatestRunsFragment).commit();
-            mFloatSwapButton.setImageDrawable(getActivity().getResources().getDrawable(android.R.drawable.ic_menu_mapmode));
+            mFloatSwapButton.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.icon_location));
         }
 
         showContent();

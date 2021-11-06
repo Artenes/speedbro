@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,17 +43,20 @@ public class RunDetailGameSection implements ScreenSection {
 
         private final ImageView mGameCover;
         private final TextView mGameTitle;
+        private final Button mDetailsButton;
 
         GameViewHolder(View itemView) {
             super(itemView);
             mGameCover = itemView.findViewById(R.id.game_cover);
             mGameTitle = itemView.findViewById(R.id.game_title);
+            mDetailsButton = itemView.findViewById(R.id.game_details_button);
         }
 
         void bind(Run run) {
             imageLoader.load(run.getGame().getCover(), R.drawable.placeholder, mGameCover);
             mGameTitle.setText(run.getGame().getTitle());
             mGameCover.setOnClickListener(this);
+            mDetailsButton.setOnClickListener(this);
         }
 
         @Override

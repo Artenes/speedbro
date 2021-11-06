@@ -25,16 +25,18 @@ import io.github.artenes.speedbro.utils.SpeedBroApplication;
  */
 public class LeaderBoardFragment extends BaseFragment implements LeaderBoardRunsAdapter.OnRunClickListener {
 
-    private static final String KEY_CATEGORY_URL = "CATEGORY_URL";
+    private static final String KEY_CATEGORY_GAME_ID = "CATEGORY_GAME_ID";
+    private static final String KEY_CATEGORY_ID = "CATEGORY_ID";
     private static final String KEY_CATEGORY_NAME = "CATEGORY_NAME";
 
     private RecyclerView mRecyclerView;
     private LeaderBoardRunsAdapter mAdapter;
     private LeaderBoardViewModel mViewModel;
 
-    public static LeaderBoardFragment newInstance(String categoryName, String categoryUrl) {
+    public static LeaderBoardFragment newInstance(String categoryName, String gameId, String categoryId) {
         Bundle bundle = new Bundle();
-        bundle.putString(KEY_CATEGORY_URL, categoryUrl);
+        bundle.putString(KEY_CATEGORY_GAME_ID, gameId);
+        bundle.putString(KEY_CATEGORY_ID, categoryId);
         bundle.putString(KEY_CATEGORY_NAME, categoryName);
         LeaderBoardFragment fragment = new LeaderBoardFragment();
         fragment.setArguments(bundle);
@@ -58,7 +60,7 @@ public class LeaderBoardFragment extends BaseFragment implements LeaderBoardRuns
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        LeaderBoardViewModelFactory factory = new LeaderBoardViewModelFactory(getArgument(KEY_CATEGORY_URL));
+        LeaderBoardViewModelFactory factory = new LeaderBoardViewModelFactory(getArgument(KEY_CATEGORY_GAME_ID), getArgument(KEY_CATEGORY_ID));
         mViewModel = ViewModelProviders.of(this, factory).get(LeaderBoardViewModel.class);
 
         mViewModel.getState().observe(this, this::render);
@@ -86,7 +88,7 @@ public class LeaderBoardFragment extends BaseFragment implements LeaderBoardRuns
 
         List<Run> runs = runsState.getData();
 
-        if (runs.isEmpty()) {
+        if (runs == null || runs.isEmpty()) {
             showEmpty();
             return;
         }

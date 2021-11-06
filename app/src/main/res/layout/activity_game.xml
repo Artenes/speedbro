@@ -37,46 +37,55 @@
             android:id="@+id/game_cover"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:scaleType="centerCrop"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/game_cover"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline7"
-            app:srcCompat="@drawable/default_runner"
-            android:contentDescription="@string/game_cover"/>
+            app:srcCompat="@drawable/default_runner" />
 
         <TextView
             android:id="@+id/game_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:textSize="@dimen/title"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/game_year"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/game_cover" />
+            app:layout_constraintTop_toTopOf="@+id/guideline7"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Super Mario 64" />
 
         <TextView
             android:id="@+id/game_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="@dimen/subtitle"
+            android:layout_marginBottom="8dp"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/game_platforms"
             app:layout_constraintStart_toStartOf="@+id/game_title"
-            app:layout_constraintTop_toBottomOf="@+id/game_title" />
+            app:layout_constraintTop_toBottomOf="@+id/game_title"
+            tools:text="1994" />
 
         <TextView
             android:id="@+id/game_platforms"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="12sp"
+            android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -98,26 +107,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:contentDescription="@string/up_navigation"
             android:onClick="onUpNavigationPressed"
             android:tint="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/guideline7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="?android:attr/homeAsUpIndicator"
-            android:contentDescription="@string/up_navigation"/>
+            app:srcCompat="?android:attr/homeAsUpIndicator" />
 
         <ImageView
             android:id="@+id/game_background"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:alpha="0.2"
+            android:contentDescription="@string/background"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline2"
-            app:srcCompat="@color/colorPrimary"
-            android:scaleType="centerCrop"
-            android:alpha="0.2"
-            android:contentDescription="@string/background"/>
+            app:srcCompat="@color/colorPrimary" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/categories_tabs"

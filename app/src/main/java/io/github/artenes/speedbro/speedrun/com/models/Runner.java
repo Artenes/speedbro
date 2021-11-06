@@ -56,6 +56,10 @@ public class Runner {
         return runs;
     }
 
+    public boolean isUser() {
+        return id != null && !id.isEmpty() && !id.equals("guest");
+    }
+
     public static Builder build() {
         return Runner.Builder.aRunner();
     }

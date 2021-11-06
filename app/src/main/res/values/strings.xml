@@ -16,6 +16,8 @@
     <string name="no_video_available">No video available</string>
     <string name="runs">Runs</string>
     <string name="real_time">Real Time</string>
+    <string name="time">Time</string>
+    <string name="guest">Guest</string>
     <string name="game_time">In-game Time</string>
     <string name="nothing_here">Nothing here</string>
     <string name="search_game_users">Search for games or users</string>
@@ -33,6 +35,8 @@
     <string name="runner">Runner</string>
     <string name="social_icon">Social Icon</string>
     <string name="about">About</string>
+    <string name="game_details">Game details</string>
+    <string name="runner_details">Runner details</string>
 
     <string name="website_url" translatable="false">http://artenes.github.io/</string>
     <string name="repo_url" translatable="false">https://github.com/Artenes/speedbro</string>

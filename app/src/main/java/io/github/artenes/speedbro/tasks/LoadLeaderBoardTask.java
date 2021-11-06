@@ -22,10 +22,11 @@ public class LoadLeaderBoardTask extends LoadDataTask<List<Run>> {
             return;
         }
 
-        String url = ids[0];
+        String gameId = ids[0];
+        String categoryId = ids[1];
 
         try {
-            List<Run> runs = mRepository.getLeaderBoardDirectly(url);
+            List<Run> runs = mRepository.getLeaderBoard(gameId, categoryId);
             mState.setData(runs).setHasError(false);
         } catch (IOException exception) {
             mState.setHasError(true);

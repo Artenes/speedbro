@@ -9,17 +9,19 @@ import android.support.annotation.NonNull;
  */
 public class LeaderBoardViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private final String mLeaderBoardUrl;
+    private final String mGameId;
+    private final String mCategoryId;
 
-    public LeaderBoardViewModelFactory(String leaderBoardUrl) {
-        mLeaderBoardUrl = leaderBoardUrl;
+    public LeaderBoardViewModelFactory(String gameId, String categoryId) {
+        mGameId = gameId;
+        mCategoryId = categoryId;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         //noinspection unchecked
-        return (T) new LeaderBoardViewModel(mLeaderBoardUrl);
+        return (T) new LeaderBoardViewModel(mGameId, mCategoryId);
     }
 
 }

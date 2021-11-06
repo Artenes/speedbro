@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,31 +44,30 @@ public class RunDetailRunnerSection implements ScreenSection {
         private final ImageView mRunnerIcon;
         private final TextView mRunnerName;
         private final ImageView mFlag;
-        private final TextView mPlacement;
-        private final ImageView mPlacementIcon;
+        private final Button mDetailsButton;
 
         RunnerViewHolder(View itemView) {
             super(itemView);
             mRunnerIcon = itemView.findViewById(R.id.runner_icon);
             mRunnerName = itemView.findViewById(R.id.runner_name);
             mFlag = itemView.findViewById(R.id.country_icon);
-            mPlacement = itemView.findViewById(R.id.position);
-            mPlacementIcon = itemView.findViewById(R.id.placement_icon);
+            mDetailsButton = itemView.findViewById(R.id.runner_details_button);
         }
 
         void bind(Run run) {
             Runner runner = run.getFirstRunner();
-            mPlacement.setText(run.getPlacement().getPlace());
-            imageLoader.load(run.getPlacement().getIcon(), mPlacementIcon);
 
-            imageLoader.load(runner.getIcon(), R.drawable.default_runner, mRunnerIcon);
-            mRunnerName.setText(runner.getName());
-            imageLoader.load(runner.getFlag(), mFlag);
+            if (runner != null) {
+                imageLoader.load(runner.getIcon(), R.drawable.default_runner, mRunnerIcon);
+                mRunnerName.setText(runner.getName());
+                imageLoader.load(runner.getFlag(), mFlag);
+            }
 
-            if (!runner.getId().isEmpty()) {
+            if (runner != null && runner.getId() != null && !runner.getId().isEmpty()) {
                 mRunnerIcon.setOnClickListener(this);
                 mRunnerName.setOnClickListener(this);
                 mFlag.setOnClickListener(this);
+                mDetailsButton.setOnClickListener(this);
             }
         }
 

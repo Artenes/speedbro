@@ -80,6 +80,8 @@
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+
     </application>
 
     <queries>
